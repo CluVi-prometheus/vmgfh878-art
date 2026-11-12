@@ -1,0 +1,61 @@
+Amazon India customer complaint ($domain).
+Title: $title
+Review: $review
+
+The customer attached $n_images photo(s), shown above as Picture 1 to Picture $n_images.
+
+Find the main complaint, check it against the pictures, and fill in the ANSWER FORM at the end.
+
+CATEGORY LIST (the code is the text before the colon):
+damage/tear_hole: torn, ripped, a hole
+damage/crush_break: crushed, broken, cracked (incl. a cracked screen), dented
+damage/scratch: scratched, scuffed
+damage/opened_tampered: opened or tampered with before it arrived
+contamination/pest: insects, worms
+contamination/mold_spoil: mold, rotten or spoiled food
+contamination/foreign_object: a foreign object (metal piece, staple pin, hair)
+contamination/stain_dirt: stains, dirt
+manufacturing/material: thin or cheap fabric, poor paper, pilling, dirty material
+manufacturing/stitching: bad or loose stitching
+manufacturing/print: smudged, faded or wrong print
+manufacturing/color: colour defect (faded, uneven, bleeding)
+manufacturing/display: display defect (backlight bleed, dead pixels)
+manufacturing/assembly: badly assembled or glued
+not_as_described/counterfeit_wrong: fake / not original, or a different product, size, colour or model than ordered
+not_as_described/missing: a piece or item is missing
+not_as_described/used: already used
+not_as_described/label_expiry: expired
+function/malfunction: does not work, stopped working, shows wrong output
+function/performance: works badly (slow, weak, overheating)
+function/fit_size: arrived as ordered but does not fit
+function/design_usability: awkward design
+non_visual/taste_smell: taste or smell
+non_visual/content: the book or media content itself (story, characters, writing, information)
+non_visual/service: delivery, refund, return, warranty, seller or customer support
+non_visual/price: price or value for money
+non_visual/vague: no concrete problem named ("bad product", "waste of money") and none shown
+
+RULES
+1. Main complaint: the complaint in the TITLE first; if the title has none, the one the body talks about most. Use only what the review states; if the text is vague but a picture shows a concrete defect, use that defect.
+2. category: choose by the SYMPTOM, not a guessed cause. not_as_described ONLY when the item received differs from what was ordered or advertised; poor quality, "not as expected", or "not like the picture" because it looks cheap is NOT not_as_described.
+3. part: where the problem actually is. Allowed for this domain: $part_list. Expired food -> contents. Size problems -> whole. Throwaway bag/box -> product_package; jar/bottle kept during use -> container. label/manual only if the label or manual itself is wrong or missing. Service/price -> none. No nameable part (overheating, slowness, colour) -> whole. A part not in the list -> other.
+4. visibility: "localized" = the defect (or evidence such as an error message, an expired date, a cracked screen) shows in a specific spot of a picture; "diffuse" = visible but over the whole product (colour, fit, generally thin material, a counterfeit that looks clearly different); "not_visible" = everything else (function, taste, service, content, missing items, unrelated photo, a counterfeit that looks identical). Size tags, price tags and manual numbers are not evidence.
+5. boxes: only if visibility is "localized", otherwise []. 1 to 3 tight boxes around the defect, all on the ONE picture where it shows best. bbox_2d = [x1, y1, x2, y2] in that picture's pixel coordinates; a box must be clearly smaller than the picture. label = a few words naming what is inside the box. target = "defect" if the defect itself is visible (a hole, an insect, smudged print) or "evidence" if it is a sign that proves the problem (an error message, an expired date).
+
+EVIDENCE: keep what the customer says apart from what the pictures show. Write the free-text fields in Korean (한국어), except review_span.
+- customer_claim: one Korean sentence stating what the customer claims, written as a claim ("고객은 ...라고 주장함"). Keep claims about when or how it happened (for example "arrived torn"), but never state them as facts.
+- review_span: the exact words from the title or review that state the main complaint, copied without any change (English, at most 20 words).
+- visual_findings: for each picture that shows something related, one Korean sentence on what is actually visible (where it is, its shape or colour). Describe the picture, not the review. If no picture shows the problem, give one entry for picture 1 saying so. box_ref = the number of the matching box in "boxes" (1 for the first box), or null.
+- claim_support: "supported" only if a picture itself shows evidence for the main claim (the customer's words are not evidence); "partially_supported" if pictures show only part of it; "not_verifiable" if pictures cannot show it (this does NOT mean the claim is false); "contradicted" only if a picture clearly conflicts with the claim.
+- limitations: 0 to 2 short Korean notes on what the pictures cannot confirm (when or how it happened, who caused it, whether it works, taste or smell). Do not guess causes.
+
+ANSWER FORM. Reply with this JSON object only, with no other text. Keep every key, in this order. Replace each <...> with your answer; where options are separated by |, write exactly one of them. Use codes exactly as written above; never invent a new code.
+{"category": "<one code from the CATEGORY LIST>",
+ "part": "<one allowed part code>",
+ "visibility": "localized|diffuse|not_visible",
+ "boxes": [{"picture": <picture number>, "bbox_2d": [<x1>, <y1>, <x2>, <y2>], "label": "<what is in the box>", "target": "defect|evidence"}],
+ "evidence": {"customer_claim": "<한국어 한 문장>",
+              "review_span": "<exact words from the title or review>",
+              "visual_findings": [{"picture": <picture number>, "description": "<한국어 한 문장>", "box_ref": <box number or null>}],
+              "claim_support": "supported|partially_supported|not_verifiable|contradicted",
+              "limitations": ["<한국어 짧은 메모>"]}}

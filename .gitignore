@@ -1,0 +1,43 @@
+# 개인 실험 레포 CluVi-prometheus/vmgfh878-art (공개)
+# 올릴 것만 골라 올리는 방식: 아래 ! 줄에 있는 것만 레포에 들어감
+# 데이터 · 고객 사진 · 모델 · HAWK 클론 · 가상환경은 레포에 없음 (데이터는 HF 비공개)
+/*
+!/.gitignore
+!/README.md
+!/CESAMARD_*.md
+!/cluvi/
+!/reports/
+!/outputs/
+!/scripts/
+
+# reports: 문서만 (하위 폴더, 고객 사진이 박힌 결과 페이지는 제외)
+/reports/*/
+/reports/Qwen_베이스라인_실험결과.html
+
+# outputs: 예측 결과 jsonl + 설정 파일만
+/outputs/*
+!/outputs/preds/
+/outputs/preds/_old/
+
+# scripts: 데이터 구축 · 라벨링만
+/scripts/_common/
+
+# 어디에 있든 안 올림
+__pycache__/
+*.pyc
+*.part
+.env
+.env.*
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.ckpt
+*.npz
+*.parquet
+*.jpg
+*.jpeg
+*.png
+*.webp
+.ipynb_checkpoints/
+~$*

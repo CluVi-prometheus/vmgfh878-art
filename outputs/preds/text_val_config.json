@@ -1,0 +1,9 @@
+{
+ "run_id": "text_val",
+ "split": "val",
+ "n": 100,
+ "warmup": 2,
+ "prompt_sha1": "e74d86bcd650",
+ "hawk_runtime": null,
+ "started": "2026-11-11 14:29:19"
+}

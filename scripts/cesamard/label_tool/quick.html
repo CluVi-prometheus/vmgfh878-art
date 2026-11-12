@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>블라인드 표본</title>
+<style>
+:root{
+  --bg:#f5f6f8; --card:#fff; --ink:#1c2230; --muted:#626d7c; --line:#dce1e7;
+  --accent:#2457d6; --accent-soft:#e9effc; --ok:#167a3a; --ok-soft:#e5f4ea;
+  --warn:#9a5b00; --warn-soft:#fdf2df; --err:#b42318;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;font-family:"Pretendard","Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif;
+  background:var(--bg);color:var(--ink);font-size:14px;line-height:1.5}
+button{font:inherit;cursor:pointer}
+header{height:52px;display:flex;align-items:center;gap:10px;padding:0 14px;background:var(--card);
+  border-bottom:1px solid var(--line);position:sticky;top:0;z-index:30}
+header h1{font-size:15px;margin:0 6px 0 0;white-space:nowrap}
+.btn{border:1px solid var(--line);background:#fff;border-radius:7px;padding:5px 10px;color:var(--ink);white-space:nowrap}
+.btn:hover{border-color:#b8c0cc}
+.btn.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.btn.ok:disabled{opacity:.45;cursor:default}
+.grow{flex:1}
+#progress{font-weight:600;white-space:nowrap}
+#savestate{color:var(--muted);font-size:12px;white-space:nowrap}
+#savestate.err{color:var(--err)}
+main{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(380px,1fr);height:calc(100vh - 52px)}
+#left{overflow:auto;padding:14px 16px 40px}
+#right{overflow:auto;padding:14px 16px 60px;background:var(--card);border-left:1px solid var(--line)}
+.badge{display:inline-block;padding:1px 8px;border-radius:999px;background:#eef1f5;color:var(--muted);font-size:12px}
+.badge.done{background:var(--ok-soft);color:var(--ok)}
+.title{font-size:16px;font-weight:700;margin:6px 0}
+.text{white-space:pre-wrap;background:#fafbfc;border:1px solid var(--line);border-radius:8px;padding:10px 12px;
+  max-height:260px;overflow:auto;font-size:14.5px}
+.orig{margin:8px 0 0}
+.orig summary{cursor:pointer;color:var(--muted);font-size:13px}
+.orig .text{max-height:180px;font-size:13.5px;color:#3b4453}
+.photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin-top:12px}
+.photos figure{margin:0;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:6px;cursor:zoom-in}
+.photos img{width:100%;height:260px;object-fit:contain;display:block}
+.photos figcaption{font-size:12px;color:var(--muted);text-align:center}
+.q{margin:4px 0 16px}
+.q .lab{font-weight:700;font-size:14.5px;margin-bottom:6px}
+.q .lab small{font-weight:400;color:var(--muted);margin-left:6px;font-size:12.5px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.grid button{border:1px solid var(--line);background:#fff;border-radius:8px;padding:6px 10px;text-align:left;color:var(--ink)}
+.grid button:hover{border-color:#aab3bf}
+.grid button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.grid button.alt{background:var(--warn-soft);border-color:#e3b25c}
+.grid button .k{float:right;font-size:11px;color:var(--muted)}
+.grid button.on .k{color:#dfe7fb}
+.grid button .sub{display:block;font-size:11.5px;color:var(--muted);line-height:1.3}
+.grid button.on .sub{color:#dfe7fb}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:8px 0}
+.toggle{display:flex;gap:6px;align-items:center;cursor:pointer}
+.toggle.on{color:var(--warn);font-weight:600}
+.excl{border:1px dashed #c9cfd8;background:#fff;border-radius:8px;padding:6px 10px;color:var(--muted)}
+.excl.on{background:#fdecea;border-color:var(--err);color:var(--err);font-weight:600}
+textarea{width:100%;border:1px solid var(--line);border-radius:7px;padding:6px 8px;font:inherit;min-height:44px;resize:vertical}
+.help{font-size:12.5px;color:#3b4453;background:#fafbfc;border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin-top:14px}
+.help ul{margin:4px 0 0 16px;padding:0}
+.need{color:var(--err);font-size:12.5px;margin-top:6px}
+.cand{border:2px solid #e3b25c;background:var(--warn-soft);border-radius:10px;padding:8px 10px;margin-bottom:14px}
+.cand .row{margin:4px 0}
+.cand button{border:1px solid #d9b77a;background:#fff;border-radius:8px;padding:5px 10px}
+.cand button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.cand .agreed{color:var(--muted);font-size:13px}
+#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#1c2230;color:#fff;padding:8px 14px;
+  border-radius:8px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:60}
+#toast.show{opacity:.95}
+#modal{position:fixed;inset:0;background:rgba(15,18,25,.85);display:none;align-items:center;justify-content:center;z-index:50;cursor:zoom-out}
+#modal.open{display:flex}
+#modal img{max-width:94vw;max-height:92vh}
+@media (max-width: 900px){
+  header{height:auto;flex-wrap:wrap;padding:6px 10px;row-gap:6px}
+  header .grow{display:none}
+  main{display:block;height:auto}
+  #left,#right{overflow:visible;padding:12px}
+  #right{border-left:none;border-top:1px solid var(--line)}
+  .photos img{height:200px}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>블라인드 표본</h1>
+  <span id="progress">0/0</span>
+  <button class="btn" id="prev" title="이전 (←)">◀</button>
+  <select class="btn" id="jump"></select>
+  <button class="btn" id="next" title="다음 (→)">▶</button>
+  <span class="grow"></span>
+  <span id="savestate">불러오는 중…</span>
+</header>
+<main>
+  <section id="left"></section>
+  <section id="right"></section>
+</main>
+<div id="modal"><img alt=""></div>
+<div id="toast"></div>
+
+<script>
+// Blind quick labeling: no model answer is shown. Main complaint's group + what the photos show,
+// with "ambiguous" (an alternative group) and "exclude" as explicit answers.
+let SET = "blind60";
+const GROUPS = [
+  ["damage", "물리적 손상", "찢어짐·깨짐·찌그러짐·긁힘·개봉 흔적"],
+  ["contamination", "오염·변질", "벌레·곰팡이·이물질·얼룩"],
+  ["manufacturing", "제조·마감 불량", "얇은 소재·봉제·인쇄·색·조립이 처음부터 불량"],
+  ["not_as_described", "설명과 다름", "가품·다른 제품/사이즈/색·누락·중고·유통기한"],
+  ["function", "기능·사양", "작동 안 함·성능 부족·핏 안 맞음·설계 불편"],
+  ["non_visual", "비시각·기타", "맛·냄새·배송/환불/서비스·가격·책 내용·모호"],
+];
+const PHOTO = [
+  ["localized", "한 곳에 보임", "문제가 사진의 일부분에 보임", "a"],
+  ["diffuse", "전체에 보임", "색·핏·전체적으로 얇음 등", "s"],
+  ["not_visible", "제품은 있지만 문제는 안 보임", "기능·맛·누락 등 사진으로 알 수 없음", "d"],
+  ["unrelated", "사진이 불만과 무관", "다른 물건·영수증·상자만·관계없는 화면", "f"],
+];
+let items = [], labels = {}, cur = 0, rev = 0, stale = false, saveTimer = null;
+let tStart = Date.now(), lastAct = Date.now();
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
+function toast(m) { const t = $("#toast"); t.textContent = m; t.classList.add("show"); clearTimeout(toast._t); toast._t = setTimeout(() => t.classList.remove("show"), 2000); }
+function lab(row) { return labels[row] || (labels[row] = {group: null, alt_group: null, ambiguous: false, photo: null, exclude: false, note: "", done: false, seconds: 0}); }
+function complete(L) { return L.exclude || (L.group && L.photo && (!L.ambiguous || L.alt_group)); }
+
+// active time only: gaps over 60 s without input are not counted
+function tick() {
+  const now = Date.now(), it = items[cur];
+  if (it && now - lastAct < 60000) lab(String(it.row_id)).seconds += (now - tStart) / 1000;
+  tStart = now;
+}
+["mousedown", "keydown", "scroll", "mousemove"].forEach(e => addEventListener(e, () => { tick(); lastAct = Date.now(); }, {passive: true}));
+
+function render() {
+  const it = items[cur]; if (!it) return;
+  const row = String(it.row_id), L = lab(row);
+  const done = Object.values(labels).filter(x => x.done).length;
+  $("#progress").textContent = `완료 ${done}/${items.length}`;
+  $("#jump").innerHTML = items.map((x, i) => `<option value="${i}" ${i === cur ? "selected" : ""}>${(labels[x.row_id] || {}).done ? "✓" : "·"} ${i + 1}. #${x.row_id} ${x.domain}</option>`).join("");
+  const ko = it.text_ko != null;
+  $("#left").innerHTML = `
+    <div><span class="badge">${cur + 1} / ${items.length}</span> <span class="badge">#${row}</span> <span class="badge">${esc(it.domain)}</span>
+      ${L.done ? '<span class="badge done">완료</span>' : ""}</div>
+    <div class="title">${esc(ko ? it.title_ko : it.title)}</div>
+    <div class="text">${esc(ko ? it.text_ko : it.text)}</div>
+    ${ko ? `<details class="orig"><summary>영어 원문 보기</summary><div class="title" style="font-size:14px">${esc(it.title)}</div><div class="text">${esc(it.text)}</div></details>`
+         : '<div class="need">번역이 아직 없어요 (원문)</div>'}
+    <div class="photos">${it.images.map(im => `<figure data-src="/${esc(im.src)}"><img src="/${esc(im.src)}" loading="lazy" alt=""><figcaption>사진 ${im.idx} · 누르면 크게</figcaption></figure>`).join("")}</div>`;
+  const cand = it.candidates;
+  if (cand) {  // a field both answers agree on is filled in
+    if (!L.group && !L.exclude && cand.group.length === 1) L.group = cand.group[0];
+    if (!L.photo && !L.exclude && cand.photo.length === 1) L.photo = cand.photo[0];
+  }
+  const gname = id => (GROUPS.find(g => g[0] === id) || [, id])[1];
+  const pname = id => (PHOTO.find(p => p[0] === id) || [, id])[1];
+  const candRow = (label, list, key, name) => `<div class="row"><b style="min-width:70px">${label}</b>${list.length === 1
+      ? `<span class="agreed">두 답이 같아요: ${esc(name(list[0]))}</span>`
+      : list.map((v, i) => `<button data-${key}="${v}" class="${L[key] === v ? "on" : ""}">답 ${i + 1} · ${esc(name(v))}</button>`).join("")}</div>`;
+  const candBox = cand ? `<div class="cand"><b>두 답이 갈렸어요.</b> 아래 기준대로 맞는 쪽을 고르세요. 둘 다 아니면 아래 목록에서 직접 고르면 돼요.
+      ${candRow("① 유형", cand.group, "group", gname)}${candRow("② 사진", cand.photo, "photo", pname)}</div>` : "";
+  const gbtn = (g, i, alt) => `<button data-${alt ? "alt" : "group"}="${g[0]}" class="${(alt ? L.alt_group : L.group) === g[0] ? (alt ? "alt" : "on") : ""}">
+      ${alt ? "" : `<span class="k">${i + 1}</span>`}${g[1]}<span class="sub">${g[2]}</span></button>`;
+  $("#right").innerHTML = `${candBox}
+    <div class="q"><div class="lab">① 대표 불만의 문제 유형 <small>제목의 불만이 먼저 · 숫자키 1~6</small></div>
+      <div class="grid">${GROUPS.map((g, i) => gbtn(g, i, false)).join("")}</div>
+      <div class="row"><label class="toggle ${L.ambiguous ? "on" : ""}"><input type="checkbox" id="amb" ${L.ambiguous ? "checked" : ""}> 애매해요 — 다른 유형도 말이 됨 (키 7)</label></div>
+      ${L.ambiguous ? `<div class="lab" style="font-size:13px">두 번째로 그럴듯한 유형</div><div class="grid">${GROUPS.filter(g => g[0] !== L.group).map(g => gbtn(g, 0, true)).join("")}</div>` : ""}
+    </div>
+    <div class="q"><div class="lab">② 사진에 그 문제가 보이나요? <small>키 a s d f</small></div>
+      <div class="grid">${PHOTO.map(p => `<button data-photo="${p[0]}" class="${L.photo === p[0] ? "on" : ""}"><span class="k">${p[3]}</span>${p[1]}<span class="sub">${p[2]}</span></button>`).join("")}</div>
+    </div>
+    <div class="row"><button class="excl ${L.exclude ? "on" : ""}" id="excl">판단 불가로 제외 (불만이 아님·내용을 알 수 없음) · 키 x</button></div>
+    <textarea id="note" placeholder="메모 (선택)">${esc(L.note)}</textarea>
+    <div class="row"><button class="btn ok" id="done" ${complete(L) ? "" : "disabled"}>완료하고 다음 (Enter)</button>
+      ${complete(L) ? "" : `<span class="need">${!L.group && !L.exclude ? "① 유형을 고르세요" : !L.photo && !L.exclude ? "② 사진을 고르세요" : "두 번째 유형을 고르세요"}</span>`}</div>
+    <div class="help"><b>기준 (2026-10-07 확정)</b><ul>
+      <li>찢어짐·깨짐·찌그러짐·긁힘은 <b>언제 생겼든</b> → 물리적 손상</li>
+      <li>작동 안 함·몇 달 만에 고장 → 기능·사양</li>
+      <li>받은 물건이 사진·광고와 색·디자인·제품이 다름 → 설명과 다름 (품질이 기대보다 못한 것만으로는 아님)</li>
+      <li>포장이 찢어지거나 찌그러져 옴 → 물리적 손상 (부위는 포장)</li>
+      <li>제조·마감 불량은 <b>처음부터 잘못 만든 것만</b>: 얇은 소재·보풀, 봉제, 인쇄, 색 바램, 조립·접착</li>
+      <li>쇳조각·머리카락 → 오염 · 배송·환불·보증·맛·가격 → 비시각</li>
+      <li>사이즈 태그·가격표·설명서 숫자는 증거가 아님 → 사진은 '문제 안 보임'</li></ul></div>`;
+}
+
+function set(fn) { const it = items[cur]; if (!it) return; fn(lab(String(it.row_id))); render(); queueSave(); }
+function go(i) { tick(); cur = Math.max(0, Math.min(items.length - 1, i)); render(); window.scrollTo(0, 0); $("#left").scrollTop = 0; }
+function finish() {
+  const it = items[cur], L = lab(String(it.row_id));
+  if (!complete(L)) return toast("아직 남은 판단이 있어요");
+  set(L => { L.done = true; });
+  const next = items.findIndex((x, i) => i > cur && !(labels[x.row_id] || {}).done);
+  const any = items.findIndex(x => !(labels[x.row_id] || {}).done);
+  if (next >= 0) go(next); else if (any >= 0) go(any); else toast("60건 모두 끝났어요. 수고했어요!");
+}
+
+document.addEventListener("click", e => {
+  const b = e.target.closest("button, figure, #modal");
+  if (!b) return;
+  if (b.id === "modal") return b.classList.remove("open");
+  if (b.tagName === "FIGURE") { $("#modal img").src = b.dataset.src; return $("#modal").classList.add("open"); }
+  if (b.dataset.group) return set(L => { L.group = b.dataset.group; L.exclude = false; if (L.alt_group === L.group) L.alt_group = null; });
+  if (b.dataset.alt) return set(L => { L.alt_group = b.dataset.alt; });
+  if (b.dataset.photo) return set(L => { L.photo = b.dataset.photo; L.exclude = false; });
+  if (b.id === "excl") return set(L => { L.exclude = !L.exclude; });
+  if (b.id === "done") return finish();
+  if (b.id === "prev") return go(cur - 1);
+  if (b.id === "next") return go(cur + 1);
+});
+document.addEventListener("change", e => {
+  if (e.target.id === "amb") set(L => { L.ambiguous = e.target.checked; if (!L.ambiguous) L.alt_group = null; });
+  if (e.target.id === "jump") go(+e.target.value);
+});
+document.addEventListener("input", e => { if (e.target.id === "note") { lab(String(items[cur].row_id)).note = e.target.value; queueSave(); } });
+document.addEventListener("keydown", e => {
+  if (e.target.tagName === "TEXTAREA" || e.target.tagName === "SELECT") return;
+  if (e.key === "Escape") return $("#modal").classList.remove("open");
+  const k = e.key.toLowerCase();
+  if (k >= "1" && k <= "6") return set(L => { L.group = GROUPS[+k - 1][0]; L.exclude = false; if (L.alt_group === L.group) L.alt_group = null; });
+  if (k === "7") return set(L => { L.ambiguous = !L.ambiguous; if (!L.ambiguous) L.alt_group = null; });
+  const p = PHOTO.find(x => x[3] === k); if (p) return set(L => { L.photo = p[0]; L.exclude = false; });
+  if (k === "x") return set(L => { L.exclude = !L.exclude; });
+  if (e.key === "Enter") { e.preventDefault(); return finish(); }
+  if (e.key === "ArrowLeft") return go(cur - 1);
+  if (e.key === "ArrowRight") return go(cur + 1);
+});
+
+function queueSave() { clearTimeout(saveTimer); saveTimer = setTimeout(save, 400); }
+async function save() {
+  if (stale) return;
+  tick();
+  const body = {meta: {set: SET, base_rev: rev, mode: "blind_quick", guide_version: "v1.3", saved_at: new Date().toISOString()}, labels};
+  try {
+    const r = await fetch("/api/labels", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(body)});
+    const j = await r.json();
+    if (r.status === 409) { stale = true; $("#savestate").textContent = "다른 창에서 저장됨 — 새로고침하세요"; $("#savestate").className = "err"; return; }
+    if (!r.ok) throw new Error(j.error);
+    rev = j.rev; $("#savestate").textContent = `저장됨 ${j.saved}`; $("#savestate").className = "";
+  } catch (err) { $("#savestate").textContent = "저장 실패 — 서버 확인"; $("#savestate").className = "err"; }
+}
+
+(async () => {
+  SET = (await (await fetch("/api/set")).json()).set;
+  document.title = `${SET.endsWith("_adj") ? "다시 보기" : "블라인드 표본"} · ${SET}`;
+  if (SET.endsWith("_adj")) $("header h1").textContent = "갈린 답 다시 보기";
+  items = await (await fetch("/api/items")).json();
+  const saved = await (await fetch("/api/labels")).json();
+  labels = saved.labels || {}; rev = (saved.meta || {}).rev || 0;
+  const first = items.findIndex(x => !(labels[x.row_id] || {}).done);
+  cur = first >= 0 ? first : 0;
+  $("#savestate").textContent = rev ? `불러옴 (rev ${rev})` : "새로 시작";
+  render();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,317 @@
+<title>E3 실험 제안</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* 레이아웃: 결정 문서 — 결론 → 근거 수치 → 축별 판정(A~G 배지는 방법론 지도와 같은 색) → 주 실험 → 예비안 → 하지 말 것 */
+:root {
+  --bg: #F2F4F6; --panel: #FFFFFF; --fg: #18212C; --muted: #5A6675; --line: #D5DBE2; --soft: #E7EBEF;
+  --a: #A85C00; --b: #0F7C80; --c: #2058C2; --d: #B2366A; --e: #6A44B8; --f: #2E7D3A; --g: #4A5868;
+  --main: #B2366A; --main-bg: #F8E3EC; --alt: #2058C2; --alt-bg: #E5EDFA;
+  --ok: #2E7D3A; --ok-bg: #E3F2E5; --no: #9A3A2E; --no-bg: #F6E2DF;
+  --on: #FFFFFF;
+  --sans: "IBM Plex Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", Consolas, ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0F141A; --panel: #171E27; --fg: #E4E9EF; --muted: #9AA5B3; --line: #2C3743; --soft: #202934;
+    --a: #EBA24C; --b: #4CC7C9; --c: #78A5F3; --d: #EC7FAA; --e: #B39AF0; --f: #6BCB7A; --g: #A8B4C2;
+    --main: #EC7FAA; --main-bg: #2E1824; --alt: #78A5F3; --alt-bg: #16233A; --ok: #6BCB7A; --ok-bg: #162A19; --no: #F09A8C; --no-bg: #35201C;
+    --on: #0F141A; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0F141A; --panel: #171E27; --fg: #E4E9EF; --muted: #9AA5B3; --line: #2C3743; --soft: #202934;
+  --a: #EBA24C; --b: #4CC7C9; --c: #78A5F3; --d: #EC7FAA; --e: #B39AF0; --f: #6BCB7A; --g: #A8B4C2;
+  --main: #EC7FAA; --main-bg: #2E1824; --alt: #78A5F3; --alt-bg: #16233A; --ok: #6BCB7A; --ok-bg: #162A19; --no: #F09A8C; --no-bg: #35201C;
+  --on: #0F141A; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 15px; line-height: 1.7; }
+.wrap { max-width: 1060px; margin: 0 auto; padding-block: 34px 80px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: flex; flex-direction: column; gap: 28px; }
+h1 { margin: 0; font-size: 30px; line-height: 1.3; text-wrap: balance; }
+h2 { margin: 0; font-size: 21px; line-height: 1.4; text-wrap: balance; }
+h3 { margin: 0; font-size: 16px; }
+p { margin: 0; }
+ul, ol { margin: 0; padding-left: 1.3em; display: flex; flex-direction: column; gap: 4px; }
+a { color: var(--c); text-underline-offset: 2px; }
+code { font-family: var(--mono); font-size: 0.87em; background: var(--soft); padding: 1px 5px; border-radius: 4px; overflow-wrap: anywhere; }
+.muted { color: var(--muted); } .small { font-size: 13px; }
+.lead { font-size: 16px; color: var(--muted); max-width: 820px; }
+.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; color: var(--muted); text-transform: uppercase; }
+section { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 20px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.links { display: flex; flex-wrap: wrap; gap: 10px; }
+.links a { display: inline-flex; flex-direction: column; gap: 2px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; text-decoration: none; color: var(--fg); }
+.links a b { font-size: 14.5px; } .links a span { font-size: 12.5px; color: var(--muted); }
+
+/* 결론 카드 */
+.plan { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 12px; }
+.pc { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.pc.main { border: 2px solid var(--main); background: var(--main-bg); }
+.pc.alt { border-top: 3px solid var(--alt); }
+.pc .tag { font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: 0.04em; }
+.pc.main .tag { color: var(--main); } .pc.alt .tag { color: var(--alt); }
+.pc h3 { font-size: 17px; line-height: 1.4; }
+.pc p { font-size: 14px; }
+.fixed { display: flex; gap: 12px; align-items: flex-start; background: var(--ok-bg); border: 1px solid var(--ok); border-radius: 10px; padding: 12px 16px; font-size: 14px; }
+.fixed b { color: var(--ok); white-space: nowrap; }
+
+/* 표 */
+.tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
+table { border-collapse: collapse; width: 100%; font-size: 13.8px; line-height: 1.55; }
+th, td { text-align: left; vertical-align: top; padding: 9px 11px; border-bottom: 1px solid var(--soft); }
+th { font-size: 12px; color: var(--muted); background: var(--bg); white-space: nowrap; font-weight: 500; }
+tr:last-child td { border-bottom: 0; }
+td.nm { font-weight: 700; }
+td.n, th.n { font-family: var(--mono); text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.chip { display: inline-block; font-size: 12px; font-weight: 700; padding: 0 9px; border-radius: 999px; line-height: 1.75; white-space: nowrap; border: 1.5px solid var(--fg); }
+.chip.yes { background: var(--fg); color: var(--bg); }
+.chip.maybe { background: transparent; color: var(--fg); }
+.chip.no { border-color: var(--line); color: var(--muted); }
+.chip.chg { border-color: var(--main); color: var(--main); }
+.badge { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; font-family: var(--mono); font-size: 13px; font-weight: 600; color: var(--on); flex: none; }
+.ba { background: var(--a); } .bb { background: var(--b); } .bc { background: var(--c); } .bd { background: var(--d); } .be { background: var(--e); } .bf { background: var(--f); } .bg { background: var(--g); }
+td.ax { white-space: nowrap; }
+td.ax span { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; }
+
+/* 주 실험 */
+.how { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; }
+pre.pic { font-family: var(--mono); font-size: 12.5px; background: var(--bg); border: 1px solid var(--soft); border-radius: 8px; padding: 12px 14px; overflow-x: auto; white-space: pre; line-height: 1.6; margin: 0; }
+.crit { display: flex; flex-direction: column; gap: 8px; counter-reset: c; }
+.crit li { list-style: none; display: grid; grid-template-columns: 26px 1fr; gap: 8px; font-size: 14px; }
+.crit li::before { counter-increment: c; content: counter(c); display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--main); color: var(--on); font-family: var(--mono); font-size: 12px; font-weight: 600; margin-top: 2px; }
+.crit { padding-left: 0; }
+.note { border-left: 3px solid var(--fg); padding: 2px 0 2px 14px; display: flex; flex-direction: column; gap: 6px; max-width: 880px; }
+.warn { border-left: 3px solid var(--no); padding: 2px 0 2px 14px; display: flex; flex-direction: column; gap: 6px; }
+.alt-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.alt-card { background: var(--panel); border: 1px solid var(--line); border-top: 3px solid var(--alt); border-radius: 10px; padding: 16px 18px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.alt-card dl { margin: 0; display: grid; grid-template-columns: 72px 1fr; gap: 6px 12px; font-size: 14px; }
+.alt-card dt { font-weight: 700; font-size: 13px; color: var(--muted); }
+.alt-card dd { margin: 0; min-width: 0; }
+.yes-t { color: var(--ok); font-weight: 700; } .no-t { color: var(--no); font-weight: 700; } .mid-t { font-weight: 700; }
+
+@media (max-width: 860px) { .plan, .how, .alt-grid { grid-template-columns: 1fr; } }
+@media (max-width: 560px) { h1 { font-size: 25px; } .panel { padding: 14px; } .alt-card dl { grid-template-columns: 1fr; } }
+</style>
+
+<div class="wrap">
+
+<header style="display:flex;flex-direction:column;gap:12px">
+  <span class="eyebrow">E1 · E2 결과 기반 · Fable 5.2 검토 · 2026-11-11</span>
+  <h1>E3 실험 제안</h1>
+  <p class="lead">E1(Qwen 제로샷) · E2(+HAWK) 결과 전체와 팀이 전에 만든 <b>Qwen2.5-VL 방법론 지도</b>의 손잡이 A~G를 놓고, E3에서 무엇을 채택할지 근거와 함께 정리했습니다. 수치 옆에 출처를 붙였고, 추정은 추정이라고 적었습니다.</p>
+  <div class="links">
+    <a href="https://claude.ai/artifact/2ueQPp8usQuYBRHuTjBiS2" target="_blank" rel="noopener"><b>Qwen 베이스라인 실험 결과</b><span>E1 · E2 방식 · 결과 · 예시</span></a>
+    <a href="https://claude.ai/artifact/CWF5Ah1NB3MNBwFGhPA5wd" target="_blank" rel="noopener"><b>Qwen2.5-VL 방법론 지도</b><span>손잡이 A~G 원본</span></a>
+    <a href="https://claude.ai/artifact/Cyy9cUYbfVMzr5EdWxHRXL" target="_blank" rel="noopener"><b>Qwen 베이스라인과 HAWK</b><span>모델 · HAWK 해설</span></a>
+  </div>
+</header>
+
+<section>
+  <h2>결론</h2>
+  <div class="plan">
+    <div class="pc main">
+      <span class="tag">주 실험 · E3-L</span>
+      <h3>QLoRA로 답의 앞머리 3칸(category · part · visibility)만 학습</h3>
+      <p>프롬프트 · 출력 형식 · 디코딩 · 4비트는 E1 그대로 두고 LoRA 어댑터 하나만 더합니다. train 881로 "우리 기준으로 그룹 · 부위 · 보임 정도를 고르는 법"만 가르치고, 뒤의 박스 · 근거는 모델이 원래 하던 대로 이어 쓰게 둡니다.</p>
+      <p class="small"><b>겨냥</b>: 사진 과신, function · non_visual 혼동, scope none 누락 · <b>축</b>: <span class="badge bd" style="width:20px;height:20px;font-size:11px">D</span> <span class="badge be" style="width:20px;height:20px;font-size:11px">E</span> <span class="badge bf" style="width:20px;height:20px;font-size:11px">F</span></p>
+    </div>
+    <div class="pc alt">
+      <span class="tag">예비안 1 · E3-K</span>
+      <h3>키 순서 "본 것 먼저"</h3>
+      <p>출력 틀의 키 순서만 바꿔, 사진을 묘사한 뒤에 보임 정도와 그룹을 정하게 합니다. 학습 없음, val 약 18분.</p>
+      <p class="small"><b>겨냥</b>: 사진 과신 · claim_support 쏠림 · <b>축</b>: <span class="badge ba" style="width:20px;height:20px;font-size:11px">A</span></p>
+    </div>
+    <div class="pc alt">
+      <span class="tag">예비안 2 · E3-G</span>
+      <h3>박스만 사진별로 따로 묻기</h3>
+      <p>1차 결과가 localized일 때만, 사진 한 장씩 Qwen 공식 grounding 문장으로 박스를 다시 묻습니다. 이 호출에서는 HAWK를 끕니다.</p>
+      <p class="small"><b>겨냥</b>: 박스 복사 · 전체 덮기 · HAWK의 박스 손상 · <b>축</b>: <span class="badge bc" style="width:20px;height:20px;font-size:11px">C</span> <span class="badge bf" style="width:20px;height:20px;font-size:11px">F</span></p>
+    </div>
+  </div>
+  <div class="fixed"><b>버그 고침</b><span>검토 중 발견: 확신도(<code>conf.group6</code>)가 E1 · E2의 val 100 · test 185건 모두 0으로 기록됨. 프롬프트 v0.3.1부터 JSON 키가 <code>category</code>인데 코드가 <code>group6</code>을 찾았기 때문. 예측 결과는 그대로이고, 라우터 · cascade용 확신도만 빠졌음. <code>cluvi/models.py</code>를 고쳐 <b>다음 실행부터</b> <code>category</code>의 그룹 부분 확률을 기록합니다 (E1 · E2 파일은 다시 돌리지 않으면 0으로 남음).</span></div>
+</section>
+
+<section>
+  <h2>새로 계산한 근거 (val 100, 실버 기준)</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>발견</th><th>수치</th><th>뜻</th></tr></thead>
+    <tbody>
+      <tr><td class="nm">scope none 7건은 전부 group6 오답의 결과</td><td>정답 non_visual(서비스 · 가격) 7건을 function 2, not_as_described 4, manufacturing 1로 답함. "서비스 · 가격이면 none" 코드 규칙을 넣어 다시 계산해도 Scope F1 0.280 그대로</td><td>따로 고칠 문제가 아님. non_visual을 맞히면 같이 풀림</td></tr>
+      <tr><td class="nm">예측 그룹 쏠림</td><td>예측 / 실버: manufacturing 30 / 19 (1.58배), non_visual 2 / 9 (0.22배), function 13 / 22</td><td>설계 문서 신호표 3순위 기준(1.5배 초과 또는 절반 미만)에 걸림</td></tr>
+      <tr><td class="nm">박스 복사는 여러 장 리뷰에서만</td><td>복사 17건 모두 사진 2~4장. 여러 장에서 localized로 답한 30건 중 17건</td><td>사진별로 따로 물으면 구조상 사라짐</td></tr>
+      <tr><td class="nm">사진 1장이어도 박스가 빗나감</td><td>정답 localized + 박스 45건: 1장 17건 중 적중 3, 여러 장 28건 중 적중 5 · 다른 사진을 고름 9</td><td>복사만의 문제가 아님</td></tr>
+      <tr><td class="nm">박스가 너무 큼</td><td>첫 박스 넓이 중앙값: 모델 19.4% vs 실버 3.5%</td><td>"결함"이 아니라 "물체"를 침 (원문 label에 "book" 등)</td></tr>
+      <tr><td class="nm">근거 칸 쏠림</td><td>claim_support supported 91/100, limitations 빈칸 88/100</td><td>E0 때(26/30)와 같은 쏠림</td></tr>
+      <tr><td class="nm">단순 규칙만으로 Vis F1 상승</td><td>E1 0.561 → "그룹이 function · non_visual이면 not_visible" 0.688 → "글만 보는 R0가 not_visible이면 not_visible" 0.698 (R0 단독 0.649)</td><td>사진 과신은 글 정보로 상당 부분 고쳐짐. <b>LoRA가 넘어야 할 참고선</b></td></tr>
+      <tr><td class="nm">E1과 R0는 서로 다른 걸 틀림</td><td>group6 정답: E1 71, R0 70, 둘 다 58, 둘 중 하나라도 83</td><td>나중에 라우터(G축) 여지가 큼. 단 확신도 버그부터</td></tr>
+      <tr><td class="nm">실버 라벨이 헷갈린 행</td><td>val에도 claude_unsure 30건. E1 group6 정확도: 확신 70건 0.786, 헷갈림 30건 0.533 (R0 0.757 / 0.567)</td><td>val 점수를 둘로 나눠 봐야 함</td></tr>
+      <tr><td class="nm">train 881 구성</td><td>헷갈림 239건: manufacturing 70/170 (41%), non_visual 26/80, contamination 14/47, function 35/186. 박스 있는 행 333</td><td>헷갈림 행을 통째로 빼면 약한 클래스가 더 줄어듦</td></tr>
+      <tr><td class="nm">train에 근거 문장 정답 없음</td><td>customer_claim · visual_findings · claim_support 컬럼 없음</td><td>"JSON 전체를 따라 쓰게 학습"은 그대로는 불가</td></tr>
+      <tr><td class="nm">학습 입력 길이</td><td>train 시각 토큰 중앙 1,250 · 상위 10% 3,711 · 최대 5,088. 글 쪽 약 1,575토큰</td><td>건당 입력 중앙 약 2,800, 최대 약 6,700토큰</td></tr>
+      <tr><td class="nm">출력 길이 구성</td><td>원문 글자 중앙값: 라벨 103, 박스 136, 근거 418 (전체 632)</td><td>디코딩 시간의 약 2/3가 근거 문장</td></tr>
+    </tbody>
+  </table></div>
+  <p class="small muted">출처: <code>outputs/preds/heavy_val.jsonl</code> · <code>text_val.jsonl</code> · <code>metadata.parquet</code>, 설계 문서 6절, <code>outputs/eval/e1_metrics.json</code> · <code>e2_vs_e1_test.json</code>. test는 확신도 값 유무만 봤고 정답과 대조하지 않음.</p>
+</section>
+
+<section>
+  <h2>손잡이 A~G 판정</h2>
+  <p class="muted" style="max-width:860px">방법론 지도의 일곱 축 기준입니다 (지도는 A~E가 아니라 A~G). <span class="chip chg">바뀜</span> 표시는 지도가 원래 매긴 채택 표시와 달라진 곳입니다.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>축</th><th>지도의 원래 표시</th><th>E3 판정</th><th>근거</th></tr></thead>
+    <tbody>
+      <tr><td class="ax"><span><i class="badge ba">A</i>입력</span></td><td>제로샷 · 해상도 낮추기 · 장수 제한 채택, 크롭 후보, 퓨샷 · RAG 안 함</td><td>키 순서 <span class="chip maybe">후보 (예비안 1)</span><br>해상도 낮추기 <span class="chip no">안 함</span> <span class="chip chg">바뀜</span><br>크롭 <span class="chip maybe">후보 유지</span> · 퓨샷 <span class="chip no">안 함</span></td><td>E0에서 프롬프트는 형식만 고쳤고 박스 · 쏠림은 못 고침. 해상도는 박스가 이미 약하고(test Pointing 0.50) 리뷰당 시간의 대부분이 디코딩(7.1초 / 10.6초)이라 줄여도 이득이 작음</td></tr>
+      <tr><td class="ax"><span><i class="badge bb">B</i>얹기</span></td><td>선형 프로브 · 어텐션 풀링 · 멀티태스크 채택</td><td><span class="chip maybe">후보</span> <span class="chip chg">바뀜</span><br>LoRA가 16GB에 안 들어갈 때의 대체</td><td>은닉상태를 한 번 저장(약 30분, 추정)하면 CPU로 학습 가능. 하지만 라벨은 헤드가, 근거는 생성이 따로 내면 카드 안에서 서로 어긋날 수 있어 주 실험에서 내림</td></tr>
+      <tr><td class="ax"><span><i class="badge bc">C</i>출력 구조</span></td><td>JSON + 첫 토큰 확률 채택, 라벨 점수 · 헤드 교체 · 형식 강제 후보</td><td>JSON 유지 <span class="chip yes">채택</span> (확신도 버그 고침)<br>호출 나누기 <span class="chip maybe">후보 (예비안 2)</span><br>형식 강제 <span class="chip no">안 함</span> <span class="chip chg">바뀜</span></td><td>정상 출력 val 1.00 · test 0.98이라 형식 강제가 필요 없음. 헤드 교체는 박스 · 근거를 못 내서 상담원 카드와 안 맞음</td></tr>
+      <tr><td class="ax"><span><i class="badge bd">D</i>LoRA</span></td><td>LoRA · QLoRA · 붙일 위치 비교 채택</td><td>QLoRA <span class="chip yes">채택 (주 실험)</span><br>위치: LLM 어텐션만<br>병합기 · ViT <span class="chip no">안 함</span> <span class="chip chg">바뀜</span></td><td>글만 보는 R0가 Visibility(0.577 &gt; 0.507) · Scope(0.594 &gt; 0.376)에서 E1을 이김 → 문제는 "못 봄"이 아니라 "판단 기준". 비전 쪽을 건드릴 근거가 없고 881건으로는 과적합 위험</td></tr>
+      <tr><td class="ax"><span><i class="badge be">E</i>목적함수</span></td><td>분류 손실 채택, SFT 후보, 증류 채택</td><td>SFT <span class="chip yes">채택</span> <span class="chip chg">바뀜</span><br>단 손실은 라벨 앞머리에만</td><td>JSON 생성을 유지하니 따라 쓰기(SFT)가 자연스러움. 근거 정답이 없어 전체 SFT는 불가. 라벨 토큰에만 손실을 걸면 사실상 분류 손실. 실버로 배우는 것 자체가 Claude → Qwen 증류</td></tr>
+      <tr><td class="ax"><span><i class="badge bf">F</i>압축</span></td><td>HAWK · VisionZip · 4비트 채택</td><td>4비트 <span class="chip yes">유지</span><br>HAWK: 주 실험에서 끔, 박스 호출에는 금지 <span class="chip chg">바뀜</span><br>VisionZip <span class="chip no">안 함</span> <span class="chip chg">바뀜</span></td><td>HAWK는 test Pointing 0.50 → 0.27, val diffuse 재현율 0.76 → 0.53. 이득은 E2E −18%인데 시간 대부분이 디코딩이라 토큰 선택을 더 파도 줄일 여지가 작음. 분류 호출용 HAWK는 E3 고정 뒤 후보</td></tr>
+      <tr><td class="ax"><span><i class="badge bg">G</i>시스템</span></td><td>라우터 · 캐스케이드 나중에</td><td><span class="chip maybe">나중에 유지</span><br>확신도 버그는 지금 고침 (완료)</td><td>E1 · R0 합집합 83 vs E1 71로 여지는 큼. 지금까지 확신도가 전부 0이라 라우터 자료가 없었음</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2>주 실험 E3-L: QLoRA "라벨 앞머리" 학습</h2>
+  <div class="how">
+    <div class="panel">
+      <h3>쉬운 말로</h3>
+      <p>원래 가중치 82.9억 개는 얼려 두고, LLM 28층의 어텐션 옆에 작은 행렬(약 505만 개, 전체의 0.06%)만 붙여 학습합니다. 학습할 때는 <b>답의 앞 세 칸만 채점</b>하고, 뒤의 박스 · 근거는 채점하지 않습니다. 라벨이 답의 맨 앞에 있어서 가능한 방법입니다.</p>
+<pre class="pic">학습 예시 1건 (train 881 중)
+  입력  : E1과 똑같은 채팅 템플릿 · 사진 · 프롬프트 v0.3.3
+  정답  : ```json
+          {"category": "function/fit_size", "part": "whole", "visibility": "diffuse"
+          └──────────── 여기까지만 손실 (종료 토큰은 학습 안 함) ────────────┘
+  추론  : 같은 프롬프트 → 어댑터가 앞머리를 고르고,
+          박스 · 근거는 원래 모델처럼 이어서 씀</pre>
+      <p class="small muted">종료 토큰까지 가르치면 박스 · 근거를 안 쓰게 됩니다. E1 원문이 <code>```json</code>으로 시작하므로 그 모양을 그대로 맞춥니다.</p>
+    </div>
+    <div class="panel">
+      <h3>설정</h3>
+      <div class="tbl"><table>
+        <tbody>
+          <tr><td class="nm">바꾸는 것 (하나)</td><td>LoRA 어댑터 유무. 나머지 전부 E1 그대로 → E1과 깨끗한 짝</td></tr>
+          <tr><td class="nm">붙일 곳</td><td>LLM 28층 q · k · v · o_proj (112개 모듈). ViT는 이름이 <code>attn.qkv</code>라 안 걸림, 붙인 뒤 112개인지 확인</td></tr>
+          <tr><td class="nm">r / alpha / dropout</td><td>8 / 16 / 0.1</td></tr>
+          <tr><td class="nm">학습률</td><td>1e-4, cosine, warmup 10% (출발값, 추정)</td></tr>
+          <tr><td class="nm">에폭</td><td>3, 에폭마다 체크포인트 → val로 고름</td></tr>
+          <tr><td class="nm">배치</td><td>1 × 누적 8, gradient checkpointing, ViT는 기울기 없음. 12~15GB 예상(추정)</td></tr>
+          <tr><td class="nm">긴 입력</td><td>가장 긴 train 샘플로 10스텝 먼저. 안 들어가면 시각 토큰 4,000 초과 75건(8.5%)만 학습에서 제외 (해상도는 안 건드림)</td></tr>
+          <tr><td class="nm">헷갈림 239건</td><td>전부 쓰되 손실 가중 0.5. 추가 변형: 확신 642건만</td></tr>
+          <tr><td class="nm">추론</td><td>어댑터를 합치지 않고 붙인 채로 (4비트 가중치에 합치면 오차)</td></tr>
+          <tr><td class="nm">비용</td><td>학습 약 3~4.5시간, val 18분, test 33분. 구현 약 150줄 (peft 루프 + 콜레이터 + 어댑터 로딩)</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+  <div class="two-wrap panel">
+    <h3>기대 효과 (추측)</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>지표</th><th class="n">E1</th><th class="n">기대</th><th>근거</th></tr></thead>
+      <tbody>
+        <tr><td class="nm">val Visibility F1</td><td class="n">0.561</td><td class="n">0.70 이상</td><td>단순 규칙이 0.688, R0가 0.649</td></tr>
+        <tr><td class="nm">val Scope F1</td><td class="n">0.280</td><td class="n">0.40 이상</td><td>R0 0.395. none 7건이 non_visual에 달림</td></tr>
+        <tr><td class="nm">val Group6 F1</td><td class="n">0.657</td><td class="n">0.72~0.78</td><td>function 0.50 · non_visual 0.22 재현율 회복분. val은 같은 라벨러라 부풀려짐</td></tr>
+        <tr><td class="nm">test Group6 F1</td><td class="n">0.675</td><td class="n">0.68~0.73</td><td>신뢰구간이 0을 포함할 가능성 높음. Claude 라벨이 사람과 약 73% 일치라 천장이 낮음. 여지는 test_blind(0.492) 쪽</td></tr>
+        <tr><td class="nm">test Visibility · Scope</td><td class="n">0.507 · 0.376</td><td class="n">R0(0.577 · 0.594) 이상</td><td>실버로 배운 R0가 사람 정답에서 이미 E1을 이김 → 이 기준은 test로 옮겨짐</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note"><p><b>전망</b>: 주 지표 Group6는 test에서 뚜렷한 상승을 못 보일 수 있고, 확실히 움직일 곳은 Visibility와 Scope입니다. 보고 문장을 미리 "Group6 비열등 + Visibility · Scope 개선"으로 잡아 두는 편이 안전합니다.</p></div>
+  </div>
+  <div class="how">
+    <div class="panel">
+      <h3>val 성공 기준 (미리 정함)</h3>
+      <ol class="crit">
+        <li>Group6 Macro-F1 +0.05 이상, function 재현율 0.65 이상, non_visual 0.45 이상</li>
+        <li>Visibility F1 0.69 이상 (규칙 참고선 0.688 초과), not_visible 재현율 0.24 → 0.60 이상</li>
+        <li>Scope F1 0.395 이상</li>
+        <li>형식 유지: 정상 출력 95% 이상, review_span 원문 일치 90% 이상, 박스 문제 건수가 E1보다 늘지 않음</li>
+        <li>확신 70건 · 헷갈림 30건을 따로 보고. 확신 쪽에서만 올라도 인정, 헷갈림 쪽에서만 오르면 "Claude 버릇 학습"으로 의심</li>
+      </ol>
+    </div>
+    <div class="panel">
+      <h3>위험과 물러날 곳</h3>
+      <ul>
+        <li><b>어댑터가 뒤쪽 근거 · 박스를 흔듦</b> → 기준 4로 감시. 무너지면 "라벨은 어댑터 켜고, 근거는 끄고" 두 번 호출 (prefill 약 2초 추가)</li>
+        <li><b>실버 버릇 학습</b>: val은 오르는데 test는 안 오름 → test 1회로 확인, test_blind 따로 보고</li>
+        <li><b>16GB 초과</b> → 10스텝 점검으로 먼저 확인, 안 되면 B축 프로브로 대체</li>
+        <li><b>not_visible로 과하게 쏠림</b> → localized 재현율(지금 0.87)이 떨어지는지 혼동행렬 양쪽을 봄</li>
+        <li><b>호환</b>: HAWK 런타임(transformers 4.52.0)과 peft 버전 확인 필요</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>예비안</h2>
+  <div class="alt-grid">
+    <div class="alt-card">
+      <h3>E3-K 키 순서 "본 것 먼저"</h3>
+      <dl>
+        <dt>바꾸는 것</dt><dd>출력 틀의 키 순서만: <code>visual_findings → claim_support → visibility → category → part → boxes → 나머지</code></dd>
+        <dt>겨냥</dt><dd>사진 과신, claim_support 쏠림. 지금은 사진을 묘사하기 전에 visibility를 먼저 정함</dd>
+        <dt>근거</dt><dd>신호표 3순위 발동. 팀이 미리 정해 둔 조치</dd>
+        <dt>비용</dt><dd>학습 없음, val 약 18분, 파서 소폭</dd>
+        <dt>전망</dt><dd>성공 확률 낮게 봄 (추측). E0에서 visual_findings가 고객 주장을 되풀이하는 경우가 있었음</dd>
+        <dt>판정</dt><dd>Vis F1 0.65 이상, not_visible 재현율 0.50 이상, Group6 하락 0.02 이내, 정상 95% 이상</dd>
+        <dt>순서</dt><dd>20분이면 되니 LoRA 학습 전에 val만 먼저. LoRA는 여전히 E1 프롬프트 기준 (변형마다 E1 대비 하나)</dd>
+      </dl>
+    </div>
+    <div class="alt-card">
+      <h3>E3-G 박스만 사진별로 따로 묻기</h3>
+      <dl>
+        <dt>바꾸는 것</dt><dd>1차 결과가 localized일 때만, 사진 한 장씩 Qwen 공식 grounding 문장으로 박스를 다시 물음. 이 호출에서는 HAWK 끔</dd>
+        <dt>겨냥</dt><dd>박스 복사(구조상 0), HAWK의 박스 손상, 전체 덮기 일부</dd>
+        <dt>비용</dt><dd>localized 예측(val 63%)에 사진당 1~2초 추가 (추정). 어느 사진 박스를 1순위로 낼지 규칙을 미리 정해야 함</dd>
+        <dt>한계</dt><dd>사진 1장에서도 17건 중 3건만 적중 → 복사를 없애도 Pointing이 크게 오른다는 보장은 없음. 결함 이름을 무엇으로 물을지(뜻풀이 vs review_span)가 관건</dd>
+        <dt>판정</dt><dd>복사 0, 전체 덮기 9 → 4 이하, val Pointing 0.18 → 0.30 이상 (val 박스는 실버라 거칠게만 읽음)</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>문제별 판단</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>문제</th><th>프롬프트로?</th><th>구조 변경?</th><th>학습?</th><th>근거</th></tr></thead>
+    <tbody>
+      <tr><td class="nm">사진 과신 (not_visible 38건 중 29건 오답)</td><td class="mid-t">일부 가능성 (키 순서, 미검증)</td><td class="mid-t">규칙 · R0 결합으로 0.69까지 가능하나 에러 화면 같은 증거를 버리게 됨</td><td class="yes-t">필요</td><td>R0가 글만으로 Vis를 더 잘함. train에서 function의 72%, non_visual의 94%가 not_visible</td></tr>
+      <tr><td class="nm">function · non_visual 혼동</td><td class="no-t">어려움</td><td>불필요</td><td class="yes-t">필요</td><td>규칙 2에 not_as_described 좁히기가 이미 있는데도 non_visual 9건 중 4건이 그리로 감 ("마우스가 작다"를 counterfeit_wrong으로)</td></tr>
+      <tr><td class="nm">scope none 누락</td><td>불필요</td><td class="no-t">코드 규칙 효과 0 (계산함)</td><td class="yes-t">위와 함께 풀림</td><td>7건 전부 group6 오답의 결과</td></tr>
+      <tr><td class="nm">박스 복사 · 전체 덮기</td><td class="no-t">안 됨 (E0에서 실패)</td><td class="yes-t">필요 (사진별 호출)</td><td>후순위</td><td>복사는 여러 장에서만. 실버 박스 품질이 확인 안 돼 박스 학습은 보류</td></tr>
+      <tr><td class="nm">HAWK의 박스 손상</td><td class="no-t">안 됨</td><td class="yes-t">필요 (박스 호출은 HAWK 끔)</td><td>불필요</td><td>test Pointing 0.50 → 0.27</td></tr>
+      <tr><td class="nm">claim_support · limitations 쏠림</td><td class="mid-t">limitations는 문구에 민감하나 벌점 1.05에서 다시 빈칸 88/100</td><td class="mid-t">일부 (visibility와 claim_support 일관성 검사)</td><td class="mid-t">간접 효과 기대</td><td>예측이 not_visible이면 not_verifiable 5/9. visibility가 고쳐지면 따라올 가능성 (추측). 정답 라벨이 없어 직접 학습 불가</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2>하지 말 것</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>하지 말 것</th><th>이유</th></tr></thead>
+    <tbody>
+      <tr><td class="nm">test 혼동행렬 · 오답을 보고 고치기, 체크포인트를 test로 고르기</td><td>test는 설정당 1회. 프롬프트 뿌리가 이미 test 122를 본 상태라 더 오염시키면 수치를 못 믿음</td></tr>
+      <tr><td class="nm">LoRA와 프롬프트 · 형식 · HAWK를 동시에 바꾸기</td><td>무엇이 효과였는지 나눌 수 없음</td></tr>
+      <tr><td class="nm">val 상승만으로 성공 선언</td><td>val은 같은 Claude 라벨이고 헷갈림 30건이 섞여 있음</td></tr>
+      <tr><td class="nm">헷갈림 239건을 조용히 삭제</td><td>약한 클래스가 줄고 선택 편향. 가중이나 명시적 변형으로</td></tr>
+      <tr><td class="nm">실버 박스로 grounding 학습부터</td><td>val · test Pointing 격차(0.18 vs 0.50)의 원인이 확인 안 됨</td></tr>
+      <tr><td class="nm">ViT · 병합기 LoRA, 큰 r, 많은 에폭</td><td>881건이고, 문제는 보는 능력이 아니라 판단 기준</td></tr>
+      <tr><td class="nm">학습 때만 해상도 낮추기, 어댑터를 4비트 가중치에 합치기</td><td>학습 · 추론 조건 불일치, 양자화 오차</td></tr>
+      <tr><td class="nm">반복벌점 · 디코딩 다시 건드리기</td><td>E0에서 결론 남 (1.0은 무한 반복)</td></tr>
+      <tr><td class="nm">"function · non_visual이면 not_visible" 규칙을 서비스 동작으로 채택</td><td>에러 화면 같은 localized 증거를 버림. 참고선으로만</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section class="panel">
+  <h2>서비스 관점에서 이 선택의 뜻</h2>
+  <p>상담원 지원 카드에서 가장 위험한 실패는 분류 오답보다 <b>"사진으로 확인됐다"는 거짓 확신</b>입니다. 지금 모델은 사진에 안 보이는 불만 38건 중 30건에 supported를 붙이고, limitations도 88%가 비어 있어 상담원이 환불 · 교환 판단에서 사진 근거를 과신하게 됩니다.</p>
+  <p>그래서 E3의 1차 목표를 Group6 몇 점보다 <b>visibility의 정직함</b>에 두는 것이 서비스와 맞고, 라벨 앞머리 QLoRA는 그 판단 기준을 직접 가르치면서 카드 형식(박스 · 한국어 근거)을 그대로 둡니다. 어댑터는 수십 MB라 HF 비공개 저장소에 올려 "원래 모델 + 어댑터"로 불러 쓰는 기존 계획과도 맞습니다.</p>
+  <p>박스는 틀리면 없는 것보다 나쁘므로, 사진별 호출이 검증되기 전까지는 카드에서 "참고용"으로 약하게 표시하거나 숨기는 편이 안전합니다. HAWK는 박스가 필요 없는 리뷰의 분류 호출에만 쓰는 쪽으로 정리됩니다. E1과 R0가 서로 다른 것을 틀린다는 점(합집합 83 vs 71)은 다음 단계 라우터의 근거이고, 그 전제인 확신도 기록은 이번에 고쳤습니다.</p>
+  <p class="small muted">확인하지 못한 것: 학습 때 실제 VRAM과 스텝 시간, peft와 transformers 4.52.0 런타임의 호환, 실버 박스의 품질. 기대 효과와 비용은 모두 추정입니다. 검토: Fable 5.2 (읽기 · CPU 계산만, 프로젝트 파일 수정 · GPU 실행 없음). 확신도 버그 수정은 이 페이지를 만든 쪽이 코드에 반영.</p>
+</section>
+
+</div>

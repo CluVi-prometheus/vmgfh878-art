@@ -1,0 +1,9 @@
+{
+ "run_id": "mock_test",
+ "split": "test",
+ "n": 185,
+ "warmup": 2,
+ "prompt_sha1": "e74d86bcd650",
+ "hawk_runtime": null,
+ "started": "2026-11-11 14:29:47"
+}

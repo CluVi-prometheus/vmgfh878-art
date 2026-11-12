@@ -1,0 +1,546 @@
+<title>Qwen 베이스라인과 HAWK</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* 레이아웃: 맨 위 한 장 그림에서 칸마다 색(공식 · 바꿈 · 우리 · HAWK)을 정하고, 아래 결정 카드와 HAWK 해설이 같은 색을 따라간다 */
+:root {
+  --bg: #F3F4F7; --panel: #FFFFFF; --fg: #17202B; --muted: #5B6676; --line: #D6DBE3; --soft: #E8EBF0;
+  --off: #2E7D3A; --off-bg: #E3F2E5;      /* 공식 그대로 */
+  --frc: #A85C00; --frc-bg: #FBEEDD;      /* 장비 때문에 바꿈 */
+  --our: #2058C2; --our-bg: #E5EDFA;      /* 우리 것 */
+  --hwk: #6A44B8; --hwk-bg: #EEE7F8;      /* HAWK */
+  --sans: "IBM Plex Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", Consolas, ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0F141A; --panel: #171E27; --fg: #E4E9EF; --muted: #9AA5B3; --line: #2C3743; --soft: #202934;
+    --off: #6BCB7A; --off-bg: #162A19; --frc: #EBA24C; --frc-bg: #2C2215;
+    --our: #78A5F3; --our-bg: #16233A; --hwk: #B39AF0; --hwk-bg: #231C36;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0F141A; --panel: #171E27; --fg: #E4E9EF; --muted: #9AA5B3; --line: #2C3743; --soft: #202934;
+  --off: #6BCB7A; --off-bg: #162A19; --frc: #EBA24C; --frc-bg: #2C2215;
+  --our: #78A5F3; --our-bg: #16233A; --hwk: #B39AF0; --hwk-bg: #231C36;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 15px; line-height: 1.7; }
+.wrap { max-width: 1060px; margin: 0 auto; padding-block: 36px 72px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: flex; flex-direction: column; gap: 30px; }
+h1 { margin: 0; font-size: 30px; line-height: 1.3; text-wrap: balance; }
+h2 { margin: 0; font-size: 21px; line-height: 1.4; text-wrap: balance; }
+h3 { margin: 0; font-size: 15.5px; }
+p { margin: 0; }
+ul, ol { margin: 0; padding-left: 1.3em; display: flex; flex-direction: column; gap: 4px; }
+a { color: var(--our); text-underline-offset: 2px; }
+code { font-family: var(--mono); font-size: 0.86em; background: var(--soft); padding: 1px 5px; border-radius: 4px; overflow-wrap: anywhere; }
+pre { margin: 0; font-family: var(--mono); font-size: 12.5px; line-height: 1.6; background: var(--soft); border-radius: 8px; padding: 12px 14px; overflow-x: auto; }
+.lead { font-size: 16px; color: var(--muted); max-width: 800px; }
+.muted { color: var(--muted); }
+section { display: flex; flex-direction: column; gap: 14px; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+
+/* 색 칩 */
+.legend { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 700; padding: 2px 10px; border-radius: 999px; white-space: nowrap; }
+.chip.off { color: var(--off); background: var(--off-bg); }
+.chip.frc { color: var(--frc); background: var(--frc-bg); }
+.chip.our { color: var(--our); background: var(--our-bg); }
+.chip.hwk { color: var(--hwk); background: var(--hwk-bg); }
+
+/* 판정 */
+.verdict { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.vcell { border-radius: 10px; padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; min-width: 0; border: 1px solid var(--line); background: var(--panel); }
+.vcell .n { font-size: 26px; font-weight: 700; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.vcell.off .n { color: var(--off); } .vcell.frc .n { color: var(--frc); } .vcell.our .n { color: var(--our); }
+.vcell .t { font-size: 13.5px; color: var(--muted); }
+
+/* 그림 */
+.scroll { overflow-x: auto; }
+.fig svg { display: block; width: 100%; min-width: 880px; height: auto; }
+.fig svg text { font-family: var(--sans); fill: var(--fg); }
+.fig .ts { font-size: 11.5px; fill: var(--muted); }
+.fig .tm { font-family: var(--mono); font-size: 10.5px; fill: var(--muted); }
+.fig .tb { font-size: 13.5px; font-weight: 700; }
+.b-off { fill: var(--off-bg); stroke: var(--off); stroke-width: 1.4; }
+.b-frc { fill: var(--frc-bg); stroke: var(--frc); stroke-width: 1.4; }
+.b-our { fill: var(--our-bg); stroke: var(--our); stroke-width: 1.4; }
+.b-hwk { fill: var(--hwk-bg); stroke: var(--hwk); stroke-width: 1.4; stroke-dasharray: 5 3; }
+.b-plain { fill: var(--panel); stroke: var(--line); stroke-width: 1.3; }
+.arr { stroke: var(--muted); stroke-width: 1.5; fill: none; }
+.ah { fill: var(--muted); }
+.seg-sys { fill: var(--soft); stroke: var(--line); }
+.seg-vis { fill: var(--off-bg); stroke: var(--off); }
+.seg-txt { fill: var(--our-bg); stroke: var(--our); }
+.seg-cut { fill: none; stroke: var(--line); stroke-dasharray: 3 3; }
+.bar { fill: var(--hwk); opacity: 0.55; }
+.bar.top { opacity: 1; }
+.grid { stroke: var(--line); stroke-width: 1; }
+
+/* 결정 카드 */
+.cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.card.off { border-top: 3px solid var(--off); } .card.frc { border-top: 3px solid var(--frc); }
+.card.our { border-top: 3px solid var(--our); } .card.hwk { border-top: 3px solid var(--hwk); }
+.card header { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.card dl { margin: 0; display: grid; grid-template-columns: 4.6em minmax(0, 1fr); gap: 4px 12px; font-size: 14px; }
+.card dt { color: var(--muted); font-size: 12.5px; padding-top: 2px; }
+.card dd { margin: 0; min-width: 0; }
+
+/* 표 */
+.tbl { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 12.5px; color: var(--muted); font-weight: 700; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* 단계 목록 */
+.steps { list-style: none; padding: 0; counter-reset: s; display: flex; flex-direction: column; gap: 10px; }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 12px; align-items: start; }
+.steps li::before { content: counter(s); width: 26px; height: 26px; border-radius: 50%; background: var(--hwk-bg); color: var(--hwk); font-weight: 700; font-size: 13px; display: grid; place-items: center; }
+.formula { font-family: var(--mono); font-size: 13.5px; background: var(--hwk-bg); color: var(--fg); border-radius: 8px; padding: 12px 14px; overflow-x: auto; white-space: nowrap; }
+
+.ideas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.check { list-style: none; padding: 0; }
+.check li { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 8px; }
+.check .ok { color: var(--off); font-weight: 700; }
+.check .wait { color: var(--frc); font-weight: 700; }
+
+@media (max-width: 760px) {
+  .verdict, .cards, .ideas { grid-template-columns: minmax(0, 1fr); }
+  h1 { font-size: 25px; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto; } }
+</style>
+
+<div class="wrap">
+
+<header style="display:flex;flex-direction:column;gap:12px">
+  <h1>Qwen 베이스라인과 HAWK</h1>
+  <p class="lead">E1(Qwen2.5-VL-7B 제로샷)과 E2(+HAWK)를 어떤 틀로 돌리는지, 칸마다 무엇을 어디서 가져왔고 왜 그렇게 정했는지 한 장에 모았습니다. 뒤쪽은 HAWK 알고리즘을 원본 코드 기준으로 풀고, 나중에 우리 식으로 고칠 수 있는 자리를 짚습니다.</p>
+  <div class="legend">
+    <span class="chip off">공식 그대로</span>
+    <span class="chip frc">장비 때문에 바꿈</span>
+    <span class="chip our">우리 것 (프롬프트 · 출력)</span>
+    <span class="chip hwk">HAWK (E2에서만 켬)</span>
+  </div>
+  <p style="font-size:14px">실행 결과: <a href="https://claude.ai/artifact/2ueQPp8usQuYBRHuTjBiS2" target="_blank" rel="noopener">Qwen 베이스라인 실험 결과</a> (E1 · E2, 2026-11-11) · 다음 단계: <a href="https://claude.ai/artifact/HCqigeKf8W97bgtZkMVgVY" target="_blank" rel="noopener">E3 실험 제안</a></p>
+</header>
+
+<section>
+  <h2>제대로 된 틀인가</h2>
+  <div class="verdict">
+    <div class="vcell off"><span class="n">8칸</span><span class="t">Qwen 모델 카드 · README · 템플릿 · HAWK 코드에 적힌 그대로</span></div>
+    <div class="vcell frc"><span class="n">3칸</span><span class="t">16GB GPU 때문에 바꿈. 바꾼 이유와 영향을 문서에 적어 둠</span></div>
+    <div class="vcell our"><span class="n">2칸</span><span class="t">우리가 만든 것: 프롬프트 글, 출력 JSON과 파싱</span></div>
+  </div>
+  <div class="panel">
+    <p><b>판단:</b> 베이스라인으로 쓸 수 있는 틀입니다. 모델을 부르는 방식은 공식 예제와 같고, 우리가 손댄 곳은 과제에 꼭 필요한 프롬프트와 출력뿐입니다. 장비 때문에 바꾼 세 칸 중 영향이 큰 것은 <b>LLM 4비트</b> 하나이고, 그것도 Qwen이 직접 낸 4비트판과 같은 방식(비전 인코더는 그대로)입니다.</p>
+    <ul class="check">
+      <li><span class="ok">✓</span><span>실제 프로세서로 확인: 사진 앞에 "Picture 1:", 기본 시스템 프롬프트가 들어가고, dev 5건 모두 시각 토큰 수가 계산값과 정확히 같음 (transformers 4.52.0)</span></li>
+      <li><span class="ok">✓</span><span>Fable 검수의 큰 지적 5개 반영 (메모리 측정 오염, 이어쓰기 섞임, 실행 환경 어긋남, test 관계 공개, 판정 기준)</span></li>
+      <li><span class="ok">✓</span><span>GPU 점검 E0 1번 (dev 5건): JSON 5/5 정상, 비전 인코더 안 4비트 층 0개(= bf16 유지), 가중치 6.33GB, 최대 메모리 8.6GB, 디코딩 초당 26~34토큰, 리뷰당 9~22초</span></li>
+      <li><span class="ok">✓</span><span>E0 1-H (HAWK, dev 5건): 4비트 · 여러 사진에서 적용됨. 시각 토큰을 정확히 20% 남김(예: 2,460 → 492), 질문 토큰 약 1,330개, prefill 약 20% 단축, 최대 메모리 8.1 → 7.4GB</span></li>
+      <li><span class="wait">!</span><span>5건 중 2건에서 HAWK를 켜자 보임 정도를 목록에 없는 값("localizable")으로 답함. 표본이 작아 결론은 E2에서</span></li>
+      <li><span class="wait">!</span><span>알고 쓰는 약점: 4비트라 원본보다 몇 점 낮을 수 있음 (Qwen AWQ판 기준 MMMU −2.8), 프롬프트 뿌리가 test를 본 적 있음 → test 122와 test_blind(정답 54건)를 따로 보고</span></li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>한 장 그림</h2>
+  <div class="panel fig">
+    <div class="scroll">
+      <svg viewBox="0 0 1000 350" role="img" aria-label="사진과 글이 Qwen2.5-VL-7B로 들어가 분석 카드가 되는 흐름. 칸마다 공식, 바꿈, 우리 것, HAWK 색으로 구분">
+        <defs><marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="ah"/></marker></defs>
+        <!-- 사진 줄 -->
+        <text x="10" y="24" class="ts">사진 쪽</text>
+        <rect x="10" y="36" width="118" height="66" rx="8" class="b-plain"/>
+        <text x="69" y="62" text-anchor="middle" class="tb">사진 파일</text>
+        <text x="69" y="82" text-anchor="middle" class="ts">원본, 최대 4장</text>
+        <rect x="146" y="36" width="112" height="66" rx="8" class="b-frc"/>
+        <text x="202" y="62" text-anchor="middle" class="tb">EXIF 회전</text>
+        <text x="202" y="82" text-anchor="middle" class="ts">정답 박스 기준</text>
+        <rect x="276" y="36" width="176" height="66" rx="8" class="b-off"/>
+        <text x="364" y="58" text-anchor="middle" class="tb">qwen_vl_utils</text>
+        <text x="364" y="76" text-anchor="middle" class="ts">비율 유지 리사이즈</text>
+        <text x="364" y="92" text-anchor="middle" class="tm">256~1,280 토큰/장</text>
+        <rect x="470" y="36" width="150" height="66" rx="8" class="b-off"/>
+        <text x="545" y="58" text-anchor="middle" class="tb">ViT 32층</text>
+        <text x="545" y="76" text-anchor="middle" class="ts">14px 패치, bf16</text>
+        <text x="545" y="92" text-anchor="middle" class="tm">원본 정밀도 유지</text>
+        <rect x="638" y="36" width="140" height="66" rx="8" class="b-off"/>
+        <text x="708" y="58" text-anchor="middle" class="tb">병합기</text>
+        <text x="708" y="76" text-anchor="middle" class="ts">패치 2×2 → 1토큰</text>
+        <text x="708" y="92" text-anchor="middle" class="tm">28×28px = 1토큰</text>
+        <path d="M128,69 H144" class="arr" marker-end="url(#a1)"/>
+        <path d="M258,69 H274" class="arr" marker-end="url(#a1)"/>
+        <path d="M452,69 H468" class="arr" marker-end="url(#a1)"/>
+        <path d="M620,69 H636" class="arr" marker-end="url(#a1)"/>
+        <path d="M778,69 H826" class="arr" marker-end="url(#a1)"/>
+        <!-- 글 줄 -->
+        <text x="10" y="168" class="ts">글 쪽</text>
+        <rect x="10" y="180" width="190" height="66" rx="8" class="b-our"/>
+        <text x="105" y="204" text-anchor="middle" class="tb">리뷰 + 프롬프트</text>
+        <text x="105" y="222" text-anchor="middle" class="ts">vlm-v0.3.3, 예시 없음</text>
+        <text x="105" y="238" text-anchor="middle" class="tm">약 1,360토큰</text>
+        <rect x="218" y="180" width="234" height="66" rx="8" class="b-off"/>
+        <text x="335" y="204" text-anchor="middle" class="tb">채팅 템플릿</text>
+        <text x="335" y="222" text-anchor="middle" class="ts">기본 시스템 프롬프트</text>
+        <text x="335" y="238" text-anchor="middle" class="tm">add_vision_id → "Picture N:"</text>
+        <rect x="470" y="180" width="150" height="66" rx="8" class="b-off"/>
+        <text x="545" y="208" text-anchor="middle" class="tb">토크나이저</text>
+        <text x="545" y="228" text-anchor="middle" class="ts">어휘 152,064</text>
+        <path d="M200,213 H216" class="arr" marker-end="url(#a1)"/>
+        <path d="M452,213 H468" class="arr" marker-end="url(#a1)"/>
+        <path d="M620,213 H826" class="arr" marker-end="url(#a1)"/>
+        <!-- LLM -->
+        <rect x="828" y="20" width="162" height="246" rx="10" class="b-frc"/>
+        <text x="909" y="46" text-anchor="middle" class="tb">LLM 28층</text>
+        <text x="909" y="64" text-anchor="middle" class="ts">NF4 4비트</text>
+        <text x="909" y="80" text-anchor="middle" class="tm">3,584차원</text>
+        <rect x="840" y="106" width="138" height="54" rx="7" class="b-hwk"/>
+        <text x="909" y="128" text-anchor="middle" class="tb" style="fill:var(--hwk)">0층 앞: HAWK</text>
+        <text x="909" y="146" text-anchor="middle" class="ts">시각 토큰 20%만 남김</text>
+        <text x="909" y="190" text-anchor="middle" class="ts">사진 토큰 + 글 토큰을</text>
+        <text x="909" y="206" text-anchor="middle" class="ts">한 줄로 이어 받음</text>
+        <text x="909" y="232" text-anchor="middle" class="tm">평균 약 3,500토큰</text>
+        <!-- 출력 줄 -->
+        <path d="M909,266 V286" class="arr" marker-end="url(#a1)"/>
+        <rect x="828" y="288" width="162" height="54" rx="8" class="b-off"/>
+        <text x="909" y="311" text-anchor="middle" class="tb">greedy 디코딩</text>
+        <text x="909" y="329" text-anchor="middle" class="tm">반복 벌점 1.05 (공식)</text>
+        <path d="M828,315 H762" class="arr" marker-end="url(#a1)"/>
+        <rect x="520" y="288" width="240" height="54" rx="8" class="b-our"/>
+        <text x="640" y="311" text-anchor="middle" class="tb">JSON → 파싱 → 분석 카드</text>
+        <text x="640" y="329" text-anchor="middle" class="ts">픽셀 좌표 → 0~1, 부위 묶음 자동</text>
+        <path d="M520,315 H456" class="arr" marker-end="url(#a1)"/>
+        <rect x="276" y="288" width="178" height="54" rx="8" class="b-plain"/>
+        <text x="365" y="311" text-anchor="middle" class="tb">평가 13지표</text>
+        <text x="365" y="329" text-anchor="middle" class="ts">val 100 · test 185</text>
+      </svg>
+    </div>
+    <p class="muted" style="font-size:13.5px">실행 환경: E1 · E2 · E3 모두 HAWK가 검증한 transformers 4.52.0 패치본에서 돌림 (<code>python -m cluvi.run_hawk</code>). HAWK를 끄면 패치된 부분은 그냥 지나가서 일반 transformers와 같게 동작합니다.</p>
+  </div>
+</section>
+
+<section>
+  <h2>칸마다 어떻게 정했나</h2>
+  <div class="cards">
+
+    <article class="card frc">
+      <header><h3>가중치와 정밀도</h3><span class="chip frc">장비 때문에 바꿈</span></header>
+      <dl>
+        <dt>선택</dt><dd>HF 공식 가중치(bf16)를 받아서, 불러올 때 <b>LLM만 4비트(NF4)</b>로 압축. 비전 인코더와 마지막 출력층은 bf16 그대로</dd>
+        <dt>왜</dt><dd>7B 모델은 파라미터 82.9억 개 × 2바이트 = <b>16.6GB</b>. 16GB GPU에는 가중치만으로 넘침. LLM을 4비트로 줄이면 전체가 약 7GB대로 내려감</dd>
+        <dt>근거</dt><dd>Qwen이 직접 낸 4비트판(AWQ)도 <code>modules_to_not_convert: ["visual"]</code>로 비전 인코더는 압축하지 않음. 같은 나눔을 따름</dd>
+        <dt>AWQ판은</dt><dd>불러오려면 <code>autoawq</code>가 필요한데, 이 패키지가 transformers를 4.47로 내려서 Qwen2.5-VL · HAWK가 요구하는 버전과 충돌</dd>
+        <dt>대가</dt><dd>Qwen 공식 표에서 AWQ는 원본보다 MMMU 58.4 → 55.6, DocVQA 94.9 → 94.6. 우리도 몇 점 손해 볼 수 있음</dd>
+      </dl>
+    </article>
+
+    <article class="card off">
+      <header><h3>모델 불러오기</h3><span class="chip off">공식 그대로</span></header>
+      <dl>
+        <dt>선택</dt><dd>모델 카드 quickstart 코드 그대로</dd>
+        <dt>코드</dt><dd><code>Qwen2_5_VLForConditionalGeneration.from_pretrained(..., torch_dtype="auto", device_map="auto")</code></dd>
+        <dt>추가</dt><dd>4비트 설정만 덧붙임. 어텐션은 <code>sdpa</code> (HAWK <code>infer.py</code>와 같음. flash-attn은 Windows에서 못 씀)</dd>
+        <dt>안전장치</dt><dd>일부가 CPU로 밀려나면 멈춤 (밀려나면 느려져서 지연 측정이 의미 없어짐)</dd>
+      </dl>
+    </article>
+
+    <article class="card off">
+      <header><h3>사진 처리</h3><span class="chip off">공식 그대로</span></header>
+      <dl>
+        <dt>선택</dt><dd>공식 도구 <code>qwen_vl_utils.process_vision_info</code> → 프로세서. 모델 카드와 같은 순서</dd>
+        <dt>한 가지</dt><dd><span class="chip frc">바꿈</span> 이 도구는 휴대폰 사진의 회전 정보(EXIF)를 적용하지 않음. 정답 박스는 세운 사진 기준이라, 세운 사진을 PIL로 넘김 (PIL 입력은 공식 지원)</dd>
+        <dt>장수</dt><dd>최대 4장 (사람 정답 리뷰 대부분이 4장 이하). 넘으면 앞 4장</dd>
+      </dl>
+    </article>
+
+    <article class="card off">
+      <header><h3>해상도</h3><span class="chip off">공식 예시값</span></header>
+      <dl>
+        <dt>선택</dt><dd>사진당 <b>256~1,280 시각 토큰</b> (<code>min_pixels = 256×28×28</code>, <code>max_pixels = 1280×28×28</code>). 모델 카드에 예시로 적힌 값 그대로</dd>
+        <dt>왜</dt><dd>기본값은 최대 16,384토큰/장이라 4,000×3,000 사진 한 장이 15,301토큰. 4장이면 6만 토큰이 넘어 16GB에서 불가</dd>
+        <dt>HAWK는</dt><dd>평가 때 1,280~16,384를 썼지만 같은 이유로 못 씀. E1과 E2가 같은 값이라 비교는 공정</dd>
+      </dl>
+    </article>
+
+    <article class="card off">
+      <header><h3>사진 번호 · 시스템 프롬프트</h3><span class="chip off">공식 그대로</span></header>
+      <dl>
+        <dt>번호</dt><dd>템플릿 옵션 <code>add_vision_id=True</code> → 사진마다 앞에 "Picture 1: ", "Picture 2: " (README의 방법). 모델은 박스를 <code>"picture": 1</code>처럼 답하고 코드가 0부터 세는 번호로 바꿈</dd>
+        <dt>시스템</dt><dd>템플릿 기본값 "You are a helpful assistant." 그대로</dd>
+        <dt>순서</dt><dd>사진 먼저, 글 나중 (모델 카드 예시와 같음). HAWK는 마지막 사진 뒤의 글만 "질문"으로 쓰므로 이 순서가 중요</dd>
+      </dl>
+    </article>
+
+    <article class="card off">
+      <header><h3>디코딩</h3><span class="chip off">공식 그대로</span></header>
+      <dl>
+        <dt>선택</dt><dd>greedy (매번 확률이 가장 높은 토큰). 나머지는 모델에 딸린 <code>generation_config.json</code> 그대로</dd>
+        <dt>원래 값</dt><dd><code>do_sample: true</code>, <code>temperature: 0.000001</code>(사실상 greedy), <code>repetition_penalty: 1.05</code>. HAWK <code>infer.py</code>도 greedy</dd>
+        <dt>E0에서 확인</dt><dd>반복 벌점은 출력뿐 아니라 <b>프롬프트의 모든 토큰</b>에 걸림 → 첫 프롬프트(v0.2)에서는 라벨 코드를 피하다가 <code>localizable</code> 같은 말을 지어냄. 출력 틀을 고친 v0.3.3에서는 1.05로도 형식이 맞고, 끄면(1.0) 드물게 같은 말을 끝없이 반복함 → <b>공식값 1.05 그대로</b></dd>
+        <dt>길이</dt><dd><span class="chip frc">바꿈</span> 최대 640토큰 (카드 예시 128). 한국어 근거가 있어 출력이 약 300토큰</dd>
+      </dl>
+    </article>
+
+    <article class="card our">
+      <header><h3>프롬프트 · 출력</h3><span class="chip our">우리 것</span></header>
+      <dl>
+        <dt>프롬프트</dt><dd><code>cluvi/prompts/vlm-v0.3.3.txt</code> (E0에서 형식만 고친 판). <code>그룹/결함</code> 한 코드 목록 + 판단 규칙 5개 + 근거 규칙 + 빈칸 있는 출력 틀. 예시 리뷰 없음(제로샷)</dd>
+        <dt>출력</dt><dd>부위 · 결함 · 보임 정도 · 박스 · 근거(고객 주장 / 원문 / 사진 관찰 / 뒷받침 여부 / 한계). 부위 묶음과 group5는 코드가 만듦</dd>
+        <dt>박스</dt><dd>Qwen2.5-VL은 <b>자기가 본(리사이즈된) 사진의 픽셀 좌표</b>로 답함 (기술보고서 2.1.2절, 공식 예제가 <code>image_grid_thw × 14</code>로 나눔). 코드가 그 크기로 나눠 0~1로 바꿈</dd>
+      </dl>
+    </article>
+
+    <article class="card off">
+      <header><h3>비용 재는 법</h3><span class="chip off">논문 정의</span></header>
+      <dl>
+        <dt>Prefill</dt><dd>첫 출력 토큰이 나올 때까지 (VisionZip 3.3절의 정의). 비전 인코더 포함</dd>
+        <dt>E2E</dt><dd>사진 파일 열기부터 마지막 토큰까지 (HAWK 표 5의 E2E). 리뷰당 중앙값 + p90</dd>
+        <dt>VRAM</dt><dd>리뷰마다 <code>max_memory_allocated</code>의 최댓값 (HAWK 코드와 같음)</dd>
+        <dt>장치</dt><dd>매 단계 로짓 뒤에 기록기 하나: 첫 호출 = prefill 끝, 고른 토큰 확률만 저장. 확률표 전체를 쌓는 <code>output_scores</code>는 메모리를 부풀려서 뺌 (검수 지적)</dd>
+      </dl>
+    </article>
+
+  </div>
+</section>
+
+<section>
+  <h2>해상도: 28픽셀이 토큰 하나</h2>
+  <div class="panel">
+    <p>ViT는 사진을 14×14px 조각(패치)으로 자르고, 병합기가 이웃한 2×2 조각을 하나로 묶습니다. 그래서 <b>28×28px = 시각 토큰 1개</b>입니다. PatchTST가 시계열을 구간으로 잘라 토큰으로 만든 것과 같은 생각입니다. <code>smart_resize</code>는 사진 비율을 지키면서 가로 · 세로를 28의 배수로 맞추고, 전체 픽셀이 상한 · 하한 안에 들어오게 줄이거나 늘립니다.</p>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>원본 크기 (가로×세로)</th><th>모델이 보는 크기</th><th class="num">시각 토큰 (우리 설정)</th><th class="num">기본 설정이었다면</th></tr></thead>
+        <tbody>
+          <tr><td>4,000 × 3,000 (휴대폰 사진)</td><td>1,148 × 840</td><td class="num">1,230</td><td class="num">15,301</td></tr>
+          <tr><td>1,080 × 1,920 (세로 화면)</td><td>728 × 1,316</td><td class="num">1,222</td><td class="num">2,691</td></tr>
+          <tr><td>1,600 × 1,200</td><td>1,148 × 840</td><td class="num">1,230</td><td class="num">2,451</td></tr>
+          <tr><td>500 × 500 (작은 사진)</td><td>504 × 504</td><td class="num">324</td><td class="num">324</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted" style="font-size:13.5px">라벨링 때 정답셋 171건(지금 test의 대부분) 기준: 리뷰당 시각 토큰 평균 2,095개, 중앙값 1,272, 상위 10% 3,690, 최대 4,988. 하한(256) 때문에 커지는 사진은 0장. 1,148 × 840은 41 × 30 = 1,230토큰입니다.</p>
+  </div>
+</section>
+
+<section>
+  <h2>HAWK: 어떻게 토큰을 고르나</h2>
+  <div class="panel">
+    <p><b>한 줄 요약:</b> LLM 첫 층에 들어가기 직전, 글(질문) 토큰이 각 사진 토큰을 얼마나 "쳐다보는지"를 잰 뒤, 미리 구해 둔 <b>헤드별 중요도</b>로 가중해 점수를 매기고 상위 20%만 남깁니다. 나머지 27층은 짧아진 시퀀스로 돕니다. 학습이 없고(training-free), 리뷰마다 한 번(prefill 때)만 고릅니다.</p>
+  </div>
+
+  <div class="panel fig">
+    <div class="scroll">
+      <svg viewBox="0 0 1000 470" role="img" aria-label="HAWK 단계: 입력 시퀀스에서 0층 정규화, q k 투영, 글과 사진의 점수 계산, 헤드 가중합, 상위 20% 선택을 거쳐 짧아진 시퀀스가 LLM으로 들어가는 그림">
+        <defs><marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="ah"/></marker></defs>
+        <text x="20" y="24" class="ts">입력 시퀀스 (예: 사진 2장, 시각 2,095 + 글 1,360 토큰, 길이는 대략 비례)</text>
+        <rect x="20" y="36" width="24" height="34" class="seg-sys"/>
+        <rect x="44" y="36" width="318" height="34" class="seg-vis"/>
+        <rect x="362" y="36" width="224" height="34" class="seg-vis"/>
+        <rect x="586" y="36" width="352" height="34" class="seg-txt"/>
+        <rect x="938" y="36" width="40" height="34" class="seg-sys"/>
+        <text x="32" y="90" text-anchor="middle" class="tm">시스템</text>
+        <text x="203" y="58" text-anchor="middle" class="tb">Picture 1 · 1,230</text>
+        <text x="474" y="58" text-anchor="middle" class="tb">Picture 2 · 865</text>
+        <text x="762" y="58" text-anchor="middle" class="tb" style="fill:var(--our)">프롬프트 글 1,360 = "질문"</text>
+        <text x="958" y="90" text-anchor="middle" class="tm">답변 시작</text>
+        <text x="300" y="90" text-anchor="middle" class="ts">사진 토큰 V개 (점수를 받을 쪽)</text>
+        <text x="762" y="90" text-anchor="middle" class="ts">마지막 사진 뒤 ~ 대화 끝 (점수를 매기는 쪽)</text>
+
+        <rect x="20" y="118" width="300" height="92" rx="8" class="b-hwk"/>
+        <text x="170" y="142" text-anchor="middle" class="tb">① 0층 입력 정규화</text>
+        <text x="170" y="162" text-anchor="middle" class="ts">임베딩 → layer0.input_layernorm</text>
+        <text x="170" y="182" text-anchor="middle" class="tm">어텐션은 아직 안 돌림 (싸다)</text>
+        <rect x="350" y="118" width="300" height="92" rx="8" class="b-hwk"/>
+        <text x="500" y="142" text-anchor="middle" class="tb">② q · k만 계산</text>
+        <text x="500" y="162" text-anchor="middle" class="ts">q_proj → Q: 28헤드 × 128</text>
+        <text x="500" y="182" text-anchor="middle" class="ts">k_proj → K: 4헤드 × 128 → 7번 복제 = 28</text>
+        <text x="500" y="200" text-anchor="middle" class="tm">위치 회전(RoPE) 전 값</text>
+        <rect x="680" y="118" width="300" height="92" rx="8" class="b-hwk"/>
+        <text x="830" y="142" text-anchor="middle" class="tb">③ 글이 사진을 보는 정도</text>
+        <text x="830" y="162" text-anchor="middle" class="ts">Q(글) · K(사진)ᵀ / √128</text>
+        <text x="830" y="182" text-anchor="middle" class="ts">글 토큰 방향으로 평균 → [28 × V]</text>
+        <path d="M320,164 H348" class="arr" marker-end="url(#a2)"/>
+        <path d="M650,164 H678" class="arr" marker-end="url(#a2)"/>
+        <path d="M830,210 V246 H170 V262" class="arr" marker-end="url(#a2)"/>
+
+        <rect x="20" y="264" width="300" height="92" rx="8" class="b-hwk"/>
+        <text x="170" y="288" text-anchor="middle" class="tb">④ 헤드마다 L2 정규화</text>
+        <text x="170" y="308" text-anchor="middle" class="ts">헤드끼리 점수 크기를 맞춤</text>
+        <text x="170" y="328" text-anchor="middle" class="tm">score_normalization = "l2"</text>
+        <rect x="350" y="264" width="300" height="92" rx="8" class="b-hwk"/>
+        <text x="500" y="288" text-anchor="middle" class="tb">⑤ 헤드 중요도로 가중합</text>
+        <text x="500" y="308" text-anchor="middle" class="ts">28개 가중치 w (합 = 1)</text>
+        <text x="500" y="328" text-anchor="middle" class="ts">→ 사진 토큰마다 점수 하나 [V]</text>
+        <rect x="680" y="264" width="300" height="92" rx="8" class="b-hwk"/>
+        <text x="830" y="288" text-anchor="middle" class="tb">⑥ 상위 k개만 남김</text>
+        <text x="830" y="308" text-anchor="middle" class="ts">k = ⌈0.20 × V⌉ (예: 419개)</text>
+        <text x="830" y="328" text-anchor="middle" class="ts">원래 순서 유지, 글 토큰은 전부 유지</text>
+        <path d="M320,310 H348" class="arr" marker-end="url(#a2)"/>
+        <path d="M650,310 H678" class="arr" marker-end="url(#a2)"/>
+        <path d="M830,356 V384" class="arr" marker-end="url(#a2)"/>
+
+        <text x="20" y="402" class="ts">줄어든 시퀀스 → LLM 0~27층 (위치값 MRoPE는 남긴 토큰의 원래 값 그대로)</text>
+        <rect x="20" y="414" width="24" height="34" class="seg-sys"/>
+        <rect x="44" y="414" width="64" height="34" class="seg-vis"/>
+        <rect x="108" y="414" width="45" height="34" class="seg-vis"/>
+        <rect x="153" y="414" width="352" height="34" class="seg-txt"/>
+        <rect x="505" y="414" width="40" height="34" class="seg-sys"/>
+        <rect x="545" y="414" width="433" height="34" class="seg-cut"/>
+        <text x="96" y="470" text-anchor="middle" class="tm">사진 419</text>
+        <text x="329" y="436" text-anchor="middle" class="tb" style="fill:var(--our)">글 1,360 (그대로)</text>
+        <text x="760" y="436" text-anchor="middle" class="ts">버린 사진 토큰 1,676개만큼 짧아짐</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>식 한 줄</h3>
+    <div class="formula">점수(j) = Σ<sub>h=1..28</sub> w<sub>h</sub> · L2정규화<sub>h</sub>( (1/|T|) Σ<sub>t∈T</sub> q<sub>h,t</sub> · k<sub>h,j</sub> / √128 )<sub>j</sub>&nbsp;&nbsp;→&nbsp;&nbsp;상위 ⌈0.20·V⌉개의 j만 남김</div>
+    <p class="muted" style="font-size:13.5px">T = 글(질문) 토큰들, j = 사진 토큰, h = 어텐션 헤드, w<sub>h</sub> = 미리 구한 헤드 중요도. 코드: <code>src/hawk/pruning.py</code>의 <code>compute_hawk_scores</code> · <code>select_keep_indices</code>.</p>
+  </div>
+
+  <div class="panel fig">
+    <h3>헤드 중요도 28개 (저장소 <code>config.py</code>에 들어 있는 값)</h3>
+    <div class="scroll">
+      <svg viewBox="0 0 760 240" role="img" aria-label="Qwen2.5-VL-7B 0층 28개 헤드의 HAWK 중요도 막대그래프. 1번 헤드가 0.238로 가장 크고 26번은 0">
+        <!-- y축: 0 ~ 0.25, 높이 160px (y=190이 0) -->
+        <line x1="50" y1="190" x2="740" y2="190" class="grid"/>
+        <line x1="50" y1="126" x2="740" y2="126" class="grid"/>
+        <line x1="50" y1="62" x2="740" y2="62" class="grid"/>
+        <text x="44" y="194" text-anchor="end" class="tm">0</text>
+        <text x="44" y="130" text-anchor="end" class="tm">0.10</text>
+        <text x="44" y="66" text-anchor="end" class="tm">0.20</text>
+        <g id="bars"></g>
+        <text x="395" y="232" text-anchor="middle" class="ts">헤드 번호 (0층, 0~27)</text>
+      </svg>
+    </div>
+    <p class="muted" style="font-size:13.5px">원래 값(합 1.26)을 합이 1이 되게 나눈 값입니다. <b>1번 헤드 혼자 0.238</b>로 전체의 4분의 1에 가깝고, 0번이 0.069, 26번은 0입니다. 논문은 이 값을 "헤드를 하나씩 꺼 보고 벤치마크 점수가 얼마나 떨어지는지"로 구했습니다(헤드 제거 실험). 이 값을 구하는 스크립트는 저장소에 없고 숫자만 들어 있어서, 우리는 이 숫자를 그대로 씁니다.</p>
+  </div>
+
+  <div class="panel">
+    <h3>원본 코드 지도 (읽는 순서)</h3>
+    <ol class="steps">
+      <li><div><b><code>scripts/patch_transformers.py</code></b> — transformers 4.52.0 사본의 두 곳에 문장을 끼워 넣음. ① <code>modeling_qwen2_5_vl.py</code>: LLM에 넘기기 직전에 <code>prune_qwen_prefill</code> 호출 (첫 prefill에만). ② <code>generation/utils.py</code>: prefill 뒤에 짧아진 길이로 장부 정리 (input_ids, attention_mask, cache_position, 위치 보정값 <code>rope_deltas</code>, 최대 길이)</div></li>
+      <li><div><b><code>src/hawk/config.py</code></b> — <code>HawkConfig</code> (keep_ratio, 헤드 가중치, 정규화 방식, 최소 토큰 수). 설명에 "고정 1008 해상도는 0.198, <b>원본 해상도는 0.20</b>" → 우리는 사진 크기를 그대로 쓰니 0.20</div></li>
+      <li><div><b><code>src/hawk/integration.py</code></b> — <code>configure_model(model, HawkConfig(...))</code>: 모델에 설정을 달아 두기만 함. 안 부르면 패치된 부분은 그냥 지나감</div></li>
+      <li><div><b><code>src/hawk/pruning.py</code></b> — <code>_query_indices</code>(질문 범위 찾기) → <code>compute_hawk_scores</code>(③~⑤) → <code>select_keep_indices</code>(⑥) → <code>prune_qwen_prefill</code>(전부 묶고 위치값 · 마스크를 같이 잘라 냄)</div></li>
+    </ol>
+  </div>
+
+  <div class="panel">
+    <h3>원본과 우리 설정의 차이</h3>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>원본 (논문 · 저장소)</th><th>우리</th><th>영향</th></tr></thead>
+        <tbody>
+          <tr><td>A100 40GB, bf16</td><td>RTX 5060 Ti 16GB, LLM 4비트</td><td>헤드 가중치는 bf16 모델에서 구한 값인데 4비트 q · k에 적용 → 점수가 조금 달라질 수 있음</td></tr>
+          <tr><td>평가 해상도 1,280~16,384토큰/장</td><td>256~1,280토큰/장</td><td>20%를 남기면 사진당 평균 약 240토큰. 논문 고정 해상도 실험(1,296 → 256)과 비슷한 구간</td></tr>
+          <tr><td>짧은 질문 (벤치마크 문항)</td><td>약 1,360토큰짜리 지시문 전체가 질문</td><td>리뷰와 무관한 규칙 · 라벨 목록이 점수의 대부분을 차지할 수 있음 (가장 큰 차이)</td></tr>
+          <tr><td>사진 1장</td><td>최대 4장, 사이에 "Picture N:" 글자</td><td>코드는 여러 장의 토큰을 한데 모아 상위 k를 고름. 한 장이 몫을 다 가져갈 수 있음</td></tr>
+          <tr><td>Linux, torch 2.5.1</td><td>Windows, torch 2.11</td><td>RTX 50 시리즈는 CUDA 12.8 이상만 지원. 요구사항(<code>torch&gt;=2.5</code>) 범위 안</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted" style="font-size:13.5px">그래서 E2 결과는 "논문 재현"이 아니라 "HAWK 원본 코드를 우리 과제 · 장비에 그대로 적용한 결과"로 보고합니다.</p>
+  </div>
+
+  <div class="panel">
+    <h3>무엇이 빨라지나</h3>
+    <ul>
+      <li><b>LLM prefill</b>: 28층 전부가 약 3,500토큰 대신 약 1,800토큰을 처리 (평균 리뷰 기준 약 절반). E2의 이득은 여기서 나옴</li>
+      <li><b>디코딩</b>: 앞에 쌓인 KV 캐시가 짧아져 토큰 하나 만드는 비용이 조금 줄어듦. 다만 출력 약 300토큰을 만드는 시간이 E2E의 대부분이라 E2E에서는 효과가 묻힘</li>
+      <li><b>비전 인코더</b>: 그대로. 토큰을 고르는 곳이 ViT 뒤라서 ViT 비용은 안 줄어듦 (해상도 낮추기와의 차이). <b>E0 실측: prefill 1.9~6.9초 중 비전 인코더가 0.8~4.8초(60~70%)</b> → HAWK가 줄일 수 있는 건 나머지 LLM 부분뿐이라, prefill 단축은 생각보다 작을 수 있음</li>
+      <li><b>메모리</b>: 점수 계산(28헤드 × 1,360 × 2,095 ≈ 8천만 칸)이 잠깐 메모리를 쓰지만, <b>E0 실측으로는 최대 메모리가 오히려 0.7GB쯤 줄었음</b> (KV 캐시가 짧아진 효과가 더 큼)</li>
+      <li><b>E0 실측 (dev 5건)</b>: prefill 3.96 → 3.19초처럼 약 20% 단축. 비전 인코더 2.45초는 그대로이고, LLM 부분만 약 1.5 → 0.7초로 절반</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>나중에 우리 식으로 바꿀 자리</h2>
+  <p class="muted">HAWK의 뼈대(0층에서 글→사진 점수 → 상위 k)는 두고, 아래 손잡이를 하나씩 바꿔 가며 E2와 짝지어 비교하면 됩니다.</p>
+  <div class="ideas">
+    <div class="card hwk">
+      <h3>질문 범위 좁히기</h3>
+      <p>지금은 지시문 전체 1,360토큰이 질문입니다. <b>리뷰 글만</b>, 또는 주 불만 문장만 질문으로 쓰면 리뷰마다 다른 곳을 보게 됩니다. 고칠 곳: <code>_query_indices</code>.</p>
+      <p class="muted" style="font-size:13.5px">잴 것: 같은 유지율에서 Group6 F1, 정답 박스 안 토큰을 얼마나 남겼는지(박스 덮음 비율)</p>
+    </div>
+    <div class="card hwk">
+      <h3>사진별 몫 보장</h3>
+      <p>여러 장을 한데 모아 고르면 한 장이 몫을 다 가져갈 수 있습니다. 사진마다 최소 몫을 주고 나머지를 점수로 나누는 방식. 고칠 곳: <code>select_keep_indices</code>.</p>
+      <p class="muted" style="font-size:13.5px">잴 것: 사진 2장 이상 리뷰에서만 쪼개 본 성능</p>
+    </div>
+    <div class="card hwk">
+      <h3>우리 데이터로 헤드 중요도 다시 구하기</h3>
+      <p>지금 28개 숫자는 일반 벤치마크에서 구한 값입니다. silver 데이터로 헤드를 하나씩 꺼 보며 다시 구하면 결함 찾기에 맞는 가중치가 됩니다. 7B 0층은 28번 끄는 실험이면 됩니다.</p>
+      <p class="muted" style="font-size:13.5px">주의: val · test는 이 계산에 쓰지 않음</p>
+    </div>
+    <div class="card hwk">
+      <h3>리뷰마다 유지율 바꾸기</h3>
+      <p>글만으로 판단되는 민원(맛 · 배송 등)은 사진 토큰을 더 버리고, 국소 결함은 더 남기는 방식. 텍스트 모델의 "사진 필요 여부" 확신도와 연결되어 나중에 cascade와도 이어집니다.</p>
+      <p class="muted" style="font-size:13.5px">잴 것: 평균 유지율이 같을 때 고정 20%보다 나은지</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>공부 순서</h2>
+  <div class="panel">
+    <ol class="steps">
+      <li><div><b>28픽셀 = 1토큰</b>: 위 표의 4,000 × 3,000 사진을 손으로 계산해 보기 (비율 유지 → 28의 배수 → 41 × 30)</div></li>
+      <li><div><b>모델이 실제로 받는 글</b>: E0 0번에서 찍은 템플릿 결과에서 시스템 프롬프트 · "Picture N:" · 사진 자리(<code>&lt;|image_pad|&gt;</code>)를 찾아보기</div></li>
+      <li><div><b>HAWK 네 함수</b>: <code>pruning.py</code>를 <code>_query_indices</code> → <code>compute_hawk_scores</code> → <code>select_keep_indices</code> → <code>prune_qwen_prefill</code> 순서로 읽기 (모두 합쳐 약 200줄)</div></li>
+      <li><div><b>실제 숫자 보기</b>: E0 1-H 결과의 <code>cost.hawk</code>에서 원래 / 남은 시각 토큰 수, 질문 토큰 수 확인</div></li>
+      <li><div><b>논문</b>: HAWK 3.3절(점수 식)과 표 5(지연 · 메모리), VisionZip 3.3절(prefill 정의)</div></li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <h2>서비스로 가는 길</h2>
+  <div class="panel">
+    <ul>
+      <li><b>E1 방식</b>: 서버가 공식 가중치를 4비트로 불러 같은 프롬프트로 분석 카드를 만듦. 따로 만들어 둘 결과물은 없음</li>
+      <li><b>E2 방식</b>: 위와 같고, 불러온 뒤 <code>configure_model</code> 한 줄을 더 부름. HAWK는 학습이 없어서 저장할 파일도 없음 (헤드 가중치 28개는 코드에 들어 있음)</li>
+      <li><b>E3에서 LoRA를 한다면</b>: 학습 결과는 작은 어댑터 파일 하나 → HF 비공개 저장소에 올리고, 서버는 원래 모델 + 어댑터를 불러 씀</li>
+    </ul>
+  </div>
+</section>
+
+<p class="muted" style="font-size:13px">출처: Qwen2.5-VL-7B-Instruct 모델 카드 · <code>generation_config.json</code> · <code>chat_template.json</code>, <code>qwen-vl-utils</code> 소스, Qwen2.5-VL 기술보고서(arXiv 2502.13923), Qwen 공식 grounding 예제(2025-01), Qwen2.5-VL-7B-Instruct-AWQ 모델 카드, HAWK 논문(arXiv 2604.07812)과 저장소 <code>peppery77/HAWK</code> 커밋 3af2071, VisionZip(arXiv 2412.04467). 우리 수치: 라벨링 정답셋 171건 사진 크기로 계산(2026-11-11). 설계 문서: <code>reports/초기실험_설계_v0.1.md</code>.</p>
+
+</div>
+
+<script>
+(function () {
+  var w = [0.069, 0.238, 0.038, 0.025, 0.008, 0.008, 0.027, 0.036, 0.043, 0.037, 0.019, 0.043, 0.009, 0.045,
+           0.022, 0.032, 0.034, 0.028, 0.013, 0.041, 0.044, 0.021, 0.018, 0.038, 0.027, 0.020, 0.000, 0.018];
+  var g = document.getElementById("bars");
+  if (!g) return;
+  var ns = "http://www.w3.org/2000/svg", x0 = 58, step = 24, bw = 16, y0 = 190, scale = 640; // 0.25 -> 160px
+  w.forEach(function (v, i) {
+    var h = v * scale, x = x0 + i * step;
+    var r = document.createElementNS(ns, "rect");
+    r.setAttribute("x", x); r.setAttribute("y", y0 - h); r.setAttribute("width", bw); r.setAttribute("height", Math.max(h, 0.5));
+    r.setAttribute("class", v >= 0.045 ? "bar top" : "bar");
+    var t = document.createElementNS(ns, "title"); t.textContent = "헤드 " + i + ": " + v.toFixed(3); r.appendChild(t);
+    g.appendChild(r);
+    var lab = document.createElementNS(ns, "text");
+    lab.setAttribute("x", x + bw / 2); lab.setAttribute("y", 206); lab.setAttribute("text-anchor", "middle"); lab.setAttribute("class", "tm");
+    lab.textContent = i; g.appendChild(lab);
+    if (v >= 0.045) {
+      var val = document.createElementNS(ns, "text");
+      val.setAttribute("x", x + bw / 2); val.setAttribute("y", y0 - h - 6); val.setAttribute("text-anchor", "middle"); val.setAttribute("class", "tm");
+      val.textContent = v.toFixed(3); g.appendChild(val);
+    }
+  });
+})();
+</script>

@@ -1,0 +1,649 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>결함 라벨링</title>
+<style>
+:root{
+  --bg:#f5f6f8; --card:#fff; --ink:#1c2230; --muted:#626d7c; --line:#dce1e7;
+  --accent:#2457d6; --accent-soft:#e9effc; --ok:#167a3a; --ok-soft:#e5f4ea;
+  --warn:#9a5b00; --warn-soft:#fdf2df; --err:#b42318;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;font-family:"Pretendard","Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif;
+  background:var(--bg);color:var(--ink);font-size:14px;line-height:1.5}
+button{font:inherit;cursor:pointer}
+header{height:52px;display:flex;align-items:center;gap:10px;padding:0 14px;background:var(--card);
+  border-bottom:1px solid var(--line);position:sticky;top:0;z-index:30}
+header h1{font-size:15px;margin:0 6px 0 0;white-space:nowrap}
+.nav{display:flex;align-items:center;gap:6px}
+.btn{border:1px solid var(--line);background:#fff;border-radius:7px;padding:5px 10px;color:var(--ink);white-space:nowrap}
+.btn:hover{border-color:#b8c0cc}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.btn.small{padding:2px 8px;font-size:12px}
+.btn.ghost{border-color:transparent;background:transparent;color:var(--muted)}
+select.btn{padding:5px 6px;max-width:260px}
+.grow{flex:1}
+#progress{font-weight:600;white-space:nowrap}
+#savestate{color:var(--muted);font-size:12px;white-space:nowrap}
+#savestate.err{color:var(--err)}
+#annot{width:90px}
+main{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(400px,1fr);height:calc(100vh - 52px)}
+#left{overflow:auto;padding:14px 16px 40px}
+#right{overflow:auto;padding:14px 16px 60px;background:var(--card);border-left:1px solid var(--line)}
+.review-head{display:flex;gap:8px;align-items:center;margin-bottom:6px;flex-wrap:wrap}
+.badge{display:inline-block;padding:1px 8px;border-radius:999px;background:#eef1f5;color:var(--muted);font-size:12px}
+.badge.done{background:var(--ok-soft);color:var(--ok)}
+.title{font-size:16px;font-weight:700;margin:2px 0 6px}
+.text{white-space:pre-wrap;background:#fafbfc;border:1px solid var(--line);border-radius:8px;padding:10px 12px;
+  max-height:240px;overflow:auto;font-size:14.5px}
+.orig{margin:8px 0 0}
+.orig summary{cursor:pointer;color:var(--muted);font-size:13px}
+.orig .text{max-height:180px;font-size:13.5px;color:#3b4453}
+.sec{border-top:1px solid var(--line);margin-top:10px;padding-top:8px}
+.sec:first-of-type{border-top:none;margin-top:4px;padding-top:0}
+.sec-h{font-weight:700;font-size:14.5px;margin-bottom:2px}
+.sec-h small{font-weight:400;color:var(--muted);margin-left:6px;font-size:12.5px}
+.pgroup{display:grid;grid-template-columns:62px 1fr;gap:6px;align-items:start;margin:5px 0}
+.pgroup .pg{color:var(--muted);font-size:12.5px;padding-top:5px}
+.imgcard{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px;margin:0 0 14px}
+.imgbar{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+.imgbar .idx{font-weight:700}
+.imgbar label{display:flex;align-items:center;gap:5px;color:var(--muted);cursor:pointer}
+.wrap{position:relative;display:inline-block;max-width:100%;line-height:0;user-select:none;cursor:crosshair}
+.wrap img{display:block;max-width:100%;max-height:72vh;width:auto;height:auto;-webkit-user-drag:none}
+.box{position:absolute;border:2.5px solid;pointer-events:none;box-shadow:0 0 0 1px rgba(255,255,255,.7)}
+.box.temp{border-style:dashed}
+.box .tag{position:absolute;left:-2.5px;bottom:100%;font-size:11.5px;line-height:18px;padding:0 5px;color:#fff;
+  white-space:nowrap;pointer-events:auto;cursor:pointer;border-radius:4px 4px 0 0}
+.box .tag .x{margin-left:6px;font-weight:700}
+.hint-draw{color:var(--muted);font-size:12px;margin:0 0 10px}
+.issue{border:2px solid var(--line);border-radius:12px;padding:10px 12px 6px;margin:12px 0;background:#fff}
+.issue.active{box-shadow:0 0 0 3px var(--accent-soft)}
+.issue-head{display:flex;align-items:center;gap:8px;margin-bottom:2px}
+.chip{width:14px;height:14px;border-radius:4px;display:inline-block}
+.issue-head b{font-size:15px}
+.q{margin:9px 0}
+.q .lab{font-weight:600;margin-bottom:5px}
+.q .lab small{color:var(--muted);font-weight:400;margin-left:6px}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{border:1px solid var(--line);background:#fff;border-radius:7px;padding:4px 10px;color:var(--ink)}
+.seg button:hover{border-color:#aab3bf}
+.seg button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.seg button .sub{display:block;font-size:11px;color:var(--muted);line-height:1.2}
+.seg button.on .sub{color:#dfe7fb}
+input[type=text],textarea{width:100%;border:1px solid var(--line);border-radius:7px;padding:6px 8px;font:inherit}
+textarea{min-height:52px;resize:vertical}
+.boxlist{display:flex;flex-direction:column;gap:5px}
+.boxrow{display:flex;align-items:center;gap:8px;font-size:13px}
+.drawnote{font-size:12.5px;padding:6px 8px;border-radius:7px;background:var(--accent-soft);color:#1f3f99}
+.drawnote.warn{background:var(--warn-soft);color:var(--warn)}
+.missing{background:#fdecea;color:var(--err);border-radius:8px;padding:8px 10px;margin:10px 0;font-size:13px}
+.missing ul{margin:4px 0 0 18px;padding:0}
+.footer{display:flex;gap:8px;align-items:center;margin-top:14px;flex-wrap:wrap}
+.review-meta{border-top:1px solid var(--line);margin-top:14px;padding-top:10px}
+.review-meta label{display:flex;gap:6px;align-items:center;cursor:pointer}
+#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#1c2230;color:#fff;padding:8px 14px;
+  border-radius:8px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:60}
+#toast.show{opacity:.95}
+#modal{position:fixed;inset:0;background:rgba(15,18,25,.82);display:none;align-items:center;justify-content:center;z-index:50}
+#modal.open{display:flex}
+#modal .wrap img{max-width:94vw;max-height:88vh}
+#modal .close{position:absolute;top:12px;right:16px}
+#guide{position:fixed;top:52px;right:0;bottom:0;width:min(520px,92vw);background:var(--card);border-left:1px solid var(--line);
+  box-shadow:-8px 0 24px rgba(0,0,0,.08);overflow:auto;padding:14px 18px 40px;display:none;z-index:40}
+#guide.open{display:block}
+#guide h3{margin:16px 0 6px;font-size:14px}
+#guide table{border-collapse:collapse;width:100%;font-size:12.5px}
+#guide td,#guide th{border:1px solid var(--line);padding:4px 6px;vertical-align:top;text-align:left}
+#guide p,#guide li{font-size:13px}
+.empty{color:var(--muted);padding:12px;border:1px dashed var(--line);border-radius:10px;text-align:center}
+/* narrow windows (e.g. the app's side pane): stack review/photos above the questions */
+@media (max-width: 900px){
+  header{height:auto;flex-wrap:wrap;padding:6px 10px;row-gap:6px}
+  header .grow{display:none}
+  main{display:block;height:auto}
+  #left,#right{overflow:visible;padding:12px}
+  #right{border-left:none;border-top:1px solid var(--line)}
+  .wrap img{max-height:60vh}
+  #guide{top:0}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>결함 라벨링</h1>
+  <span id="progress">0/0</span>
+  <div class="nav">
+    <button class="btn" id="prev" title="이전 (←)">◀</button>
+    <select class="btn" id="jump"></select>
+    <button class="btn" id="next" title="다음 (→)">▶</button>
+  </div>
+  <span class="grow"></span>
+  <span id="savestate">불러오는 중…</span>
+  <input id="annot" class="btn" type="text" placeholder="라벨러" title="라벨러 이름">
+  <button class="btn" id="export" title="JSON 백업 다운로드">백업</button>
+  <button class="btn" id="guideBtn">가이드</button>
+</header>
+<main>
+  <section id="left"></section>
+  <section id="right"></section>
+</main>
+<div id="modal"><button class="btn close" id="modalClose">닫기 (Esc)</button><div id="modalBody"></div></div>
+<aside id="guide"></aside>
+<div id="toast"></div>
+
+<script>
+let SET = "pilot30";  // replaced at boot by the set the server is serving
+const COLORS = ["#e11d48", "#2457d6", "#16833a", "#c26a00", "#7c3aed", "#0e7490"];
+const GROUPS = [
+  {id: "damage", name: "물리적 손상", sub: "찢어짐·깨짐·찌그러짐·뜯김",
+   defects: [["tear_hole", "찢어짐·구멍"], ["crush_break", "찌그러짐·깨짐"], ["scratch", "긁힘·흠집"], ["opened_tampered", "개봉·훼손 흔적"]]},
+  {id: "contamination", name: "오염·변질", sub: "벌레·곰팡이·이물질·얼룩",
+   defects: [["pest", "벌레"], ["mold_spoil", "곰팡이·변질"], ["foreign_object", "이물질"], ["stain_dirt", "얼룩·먼지"]]},
+  {id: "manufacturing", name: "제조·마감 불량", sub: "소재·봉제·인쇄·색·조립",
+   defects: [["material", "소재·재질"], ["stitching", "봉제"], ["print", "인쇄"], ["color", "색상·색 바램"], ["display", "디스플레이"], ["assembly", "조립·접착"]]},
+  {id: "not_as_described", name: "설명과 다름", sub: "가품·누락·중고·유통기한",
+   defects: [["counterfeit_wrong", "가품·다른 제품 (다른 사이즈·색 포함)"], ["missing", "구성품 누락"], ["used", "중고 흔적"], ["label_expiry", "표기·유통기한"]]},
+  {id: "function", name: "기능·사양", sub: "작동·성능·핏·설계",
+   defects: [["malfunction", "작동 불량"], ["performance", "성능 미달"], ["fit_size", "핏·사이즈"], ["design_usability", "설계·사용 불편"]]},
+  {id: "non_visual", name: "비시각·기타", sub: "맛·내용·서비스·가격",
+   defects: [["taste_smell", "맛·냄새"], ["content", "내용"], ["service", "서비스"], ["price", "가격"], ["vague", "모호"]]},
+];
+const PRODUCT_PARTS = {
+  Books: [["cover", "표지"], ["corner", "모서리"], ["spine_binding", "책등·제본"], ["pages", "내지"], ["print_surface", "인쇄면"]],
+  Fashion: [["body_fabric", "원단 몸판"], ["seam", "솔기·봉제선"], ["pocket", "주머니"], ["sleeve", "소매"], ["collar", "칼라·목둘레"],
+            ["fastener", "여밈(지퍼·단추)"], ["print_deco", "프린트·장식"], ["lining", "안감"], ["hem", "밑단"]],
+  Electronics: [["housing", "본체 외관"], ["display", "화면"], ["camera", "카메라"], ["battery", "배터리·충전"], ["port", "포트·단자"],
+                ["button", "버튼·조작부"], ["audio", "스피커·음향"], ["internal", "내부 부품"], ["software", "소프트웨어"]],
+  Edible: [["contents", "내용물"], ["container", "용기·병"]],
+  Misc: [],
+};
+const OTHER_PARTS = {
+  packaging: [["outer_box", "외부 상자·택배 봉투"], ["product_package", "제품 포장(봉지·박스)"], ["seal", "봉인·씰"]],
+  accessory: [["charger_cable", "충전기·케이블"], ["other_accessory", "기타 구성품"]],
+  label_doc: [["label", "라벨·표기"], ["manual", "설명서·동봉물"]],
+};
+const VIS =[["localized", "한 곳에 보임", "박스 그림"], ["diffuse", "전체에 퍼져 보임", "박스 없음"], ["not_visible", "안 보임", "박스 없음"]];
+const TARGETS = {defect: "결함", evidence: "증거"};
+
+let items = [], labels = {}, cur = 0, activeIssue = 0, annotator = "";
+let saveTimer = null, showOrig = false, rev = 0, stale = false, drafts = {};
+
+// Check-the-draft mode: a review the human hasn't touched starts from the auto-labeler's
+// main issue. The untouched draft is kept in `draft` so edits can be measured later.
+function prefillDrafts() {
+  items.forEach(it => {
+    const row = String(it.row_id), d = drafts[row];
+    if (!d || (labels[row] && (labels[row].issues.length || labels[row].done))) return;
+    const main = (d.issues || []).filter(i => i.main).slice(0, 1);
+    const issue = JSON.parse(JSON.stringify(main.length ? main : (d.issues || []).slice(0, 1)));
+    labels[row] = {issues: issue, marks: {...(d.marks || {})}, unsure: false, note: "", done: false,
+                   seconds: (labels[row] && labels[row].seconds) || 0, from_draft: true,
+                   draft: {issues: JSON.parse(JSON.stringify(issue)), marks: {...(d.marks || {})},
+                           unsure: !!d.unsure, note: d.note || "", alts: d.alts || [], why: d.why || ""}};
+  });
+}
+try { showOrig = !!localStorage.getItem("showOrig"); } catch (e) {}
+
+const $ = (s, el = document) => el.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
+const groupOf = id => GROUPS.find(g => g.id === id);
+const nameOf = (pairs, id) => (pairs.find(p => p[0] === id) || [, id])[1];
+
+function toast(msg) {
+  const t = $("#toast"); t.textContent = msg; t.classList.add("show");
+  clearTimeout(toast._t); toast._t = setTimeout(() => t.classList.remove("show"), 2200);
+}
+// Affected Part: one list, grouped by where the part belongs (scope is derived from the part)
+function partGroups(domain) {
+  return [
+    {scope: "product", name: "제품", parts: [...(PRODUCT_PARTS[domain] || []), ["whole", "제품 전체"]]},
+    {scope: "packaging", name: "포장", parts: OTHER_PARTS.packaging},
+    {scope: "accessory", name: "구성품", parts: OTHER_PARTS.accessory},
+    {scope: "label_doc", name: "라벨·문서", parts: OTHER_PARTS.label_doc},
+    {scope: "none", name: "부위 없음", parts: [["none", "해당 없음 (서비스·가격 등)"]]},
+    {scope: "other", name: "기타", parts: [["other", "목록에 없음 (직접 입력)"]]},
+  ];
+}
+// One-line Korean summary of another labeler's answer, shown next to the draft.
+function altText(a, domain) {
+  const g = groupOf(a.group);
+  const part = partGroups(domain).flatMap(x => x.parts).find(x => x[0] === a.part);
+  return `${g ? g.name : (a.group || "?")} > ${g ? nameOf(g.defects, a.defect) : (a.defect || "?")}`
+       + ` · ${part ? part[1] : (a.part || "?")} · ${a.vis ? nameOf(VIS, a.vis) : "?"}`;
+}
+function lab(row) {
+  if (!labels[row]) labels[row] = {issues: [], marks: {}, unsure: false, note: "", done: false, seconds: 0};
+  return labels[row];
+}
+function newIssue() {
+  return {scope: null, part: null, part_text: "", group: null, defect: null, vis: null, boxes: []};
+}
+
+// ---------- validation ----------
+function missingFor(row) {
+  const L = lab(row), out = [];
+  if (!L.issues.length) out.push("문제를 1개 이상 추가하세요 (없으면 비시각·기타 > 모호)");
+  L.issues.forEach((it, i) => {
+    const n = `문제 ${i + 1}`;
+    if (!it.part) out.push(`${n}: ① Affected Part (부위)`);
+    else if (it.part === "other" && !(it.part_text || "").trim()) out.push(`${n}: ① 목록에 없는 부위 이름을 적어 주세요`);
+    if (!it.group) out.push(`${n}: ② Issue / Defect (결함 종류)`);
+    else if (!it.defect) out.push(`${n}: ② 세부 결함`);
+    if (!it.vis) out.push(`${n}: ③ Grounding (사진에서 보이나)`);
+    else if (it.vis === "localized" && !it.boxes.length) out.push(`${n}: ③ 박스를 1개 이상 그리세요`);
+  });
+  return out;
+}
+
+// ---------- persistence ----------
+function payload() {
+  return {meta: {set: SET, annotator, updated: new Date().toISOString(), tool_version: 2, guide_version: "v1.3", base_rev: rev}, labels};
+}
+// Another window saved newer labels: stop saving from this window so it can't overwrite them.
+function markStale() {
+  stale = true;
+  const s = $("#savestate");
+  s.textContent = "다른 창에서 더 최신 내용이 저장됨 · 이 창은 새로고침(F5)하세요"; s.classList.add("err");
+  toast("다른 창에서 저장된 최신 내용이 있어요. 이 창을 새로고침(F5)하세요.");
+}
+function scheduleSave() {
+  if (stale) { markStale(); return; }
+  try { localStorage.setItem("labels_" + SET, JSON.stringify(payload())); } catch (e) {}
+  clearTimeout(saveTimer);
+  $("#savestate").textContent = "저장 대기…"; $("#savestate").classList.remove("err");
+  saveTimer = setTimeout(saveNow, 600);
+}
+async function saveNow() {
+  clearTimeout(saveTimer);
+  if (stale) { markStale(); return; }
+  try {
+    const r = await fetch("/api/labels", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(payload())});
+    const j = await r.json();
+    if (r.status === 409) { markStale(); return; }
+    if (!r.ok) throw new Error(j.error || r.status);
+    rev = j.rev;
+    $("#savestate").textContent = "저장됨 " + j.saved;
+  } catch (e) {
+    $("#savestate").textContent = "서버 저장 실패 · 브라우저에 보관 중"; $("#savestate").classList.add("err");
+  }
+}
+function changed() {
+  const row = items[cur].row_id, L = lab(row);
+  if (L.done && missingFor(row).length) L.done = false;
+  scheduleSave(); renderHeader();
+}
+
+// ---------- timing ----------
+// Count time on the current review only while the page is visible and the
+// labeler touched mouse/keyboard within the last minute, so an idle open tab adds nothing.
+const TICK = 5, IDLE_MS = 60000;
+let lastActivity = Date.now();
+["mousemove", "mousedown", "keydown", "wheel"].forEach(ev =>
+  document.addEventListener(ev, () => { lastActivity = Date.now(); }, {passive: true}));
+setInterval(() => {
+  if (items.length && document.visibilityState === "visible" && Date.now() - lastActivity < IDLE_MS)
+    lab(items[cur].row_id).seconds += TICK;
+}, TICK * 1000);
+function stopClock() {}
+function startClock() {}
+document.addEventListener("visibilitychange", () => { if (document.visibilityState === "hidden") saveNow(); });
+
+// ---------- header ----------
+function renderHeader() {
+  const done = items.filter(x => labels[x.row_id] && labels[x.row_id].done).length;
+  $("#progress").textContent = `완료 ${done}/${items.length}`;
+  $("#jump").innerHTML = items.map((x, i) =>
+    `<option value="${i}" ${i === cur ? "selected" : ""}>${labels[x.row_id] && labels[x.row_id].done ? "✓" : "·"} ${i + 1}. #${x.row_id} ${x.domain}</option>`).join("");
+}
+
+// ---------- left: review + images ----------
+function renderLeft() {
+  const it = items[cur], L = lab(it.row_id);
+  const imgs = it.images.map(im => `
+    <div class="imgcard">
+      <div class="imgbar">
+        <span class="idx">사진 ${im.idx}</span>
+        <label><input type="checkbox" data-mark="${im.idx}" ${L.marks[im.idx] ? "checked" : ""}> 고객이 그린 표시 있음</label>
+        <span class="grow"></span>
+        <button class="btn small" data-zoom="${im.idx}">크게 보기</button>
+      </div>
+      <div class="wrap" data-img="${im.idx}"><img src="/images_hr/${encodeURIComponent(im.src.split("/").pop())}" alt="사진 ${im.idx}" draggable="false"></div>
+    </div>`).join("");
+  $("#left").innerHTML = `
+    <div class="review-head">
+      <span class="badge">${cur + 1} / ${items.length}</span>
+      <span class="badge">#${it.row_id}</span>
+      <span class="badge">${esc(it.domain)}</span>
+      <span class="badge">사진 ${it.images.length}장${it.n_images_total > it.images.length ? ` (전체 ${it.n_images_total}장 중)` : ""}</span>
+      ${L.done ? '<span class="badge done">완료</span>' : ""}
+    </div>
+    ${it.text_ko ? `
+      <div class="title">${esc(it.title_ko)}</div>
+      <div class="text">${esc(it.text_ko)}</div>
+      <details class="orig" ${showOrig ? "open" : ""}><summary>영어 원문 보기</summary>
+        <div class="title" style="font-size:14px">${esc(it.title)}</div><div class="text">${esc(it.text)}</div></details>
+      <p class="hint-draw">번역은 Claude 직역이에요. [원문 불명확] 표시는 원문 자체가 애매한 부분이에요.</p>`
+    : `<div class="title">${esc(it.title)}</div><div class="text">${esc(it.text)}</div>`}
+    <p class="hint-draw">박스: ③ Grounding에서 '한 곳에 보임'을 고른 뒤, 사진 위에서 드래그하세요. 작은 결함은 '크게 보기'에서 그리면 편해요.</p>
+    ${imgs}`;
+  const det = $("#left details.orig");
+  if (det) det.ontoggle = () => { showOrig = det.open; try { localStorage.setItem("showOrig", showOrig ? "1" : ""); } catch (e) {} };
+  $("#left").querySelectorAll("[data-mark]").forEach(cb => cb.onchange = () => {
+    if (cb.checked) L.marks[cb.dataset.mark] = true; else delete L.marks[cb.dataset.mark];
+    changed();
+  });
+  $("#left").querySelectorAll("[data-zoom]").forEach(b => b.onclick = () => openModal(+b.dataset.zoom));
+  $("#left").querySelectorAll(".wrap").forEach(attachDraw);
+  renderBoxes();
+}
+
+function renderBoxes() {
+  const L = lab(items[cur].row_id);
+  document.querySelectorAll(".wrap").forEach(w => {
+    w.querySelectorAll(".box").forEach(b => b.remove());
+    const idx = +w.dataset.img;
+    L.issues.forEach((iss, ii) => iss.boxes.forEach((bx, bi) => {
+      if (bx.img !== idx) return;
+      const [x1, y1, x2, y2] = bx.bbox, c = COLORS[ii % COLORS.length];
+      const d = document.createElement("div");
+      d.className = "box";
+      d.style.cssText = `left:${x1 * 100}%;top:${y1 * 100}%;width:${(x2 - x1) * 100}%;height:${(y2 - y1) * 100}%;border-color:${c}`;
+      d.innerHTML = `<span class="tag" style="background:${c}"><span class="t">${ii + 1}·${TARGETS[bx.target]}</span><span class="x" title="삭제">✕</span></span>`;
+      $(".t", d).onclick = e => { e.stopPropagation(); bx.target = bx.target === "defect" ? "evidence" : "defect"; changed(); renderBoxes(); renderRight(); };
+      $(".x", d).onclick = e => { e.stopPropagation(); iss.boxes.splice(bi, 1); changed(); renderBoxes(); renderRight(); };
+      $(".tag", d).onmousedown = e => e.stopPropagation();
+      w.appendChild(d);
+    }));
+  });
+}
+
+function attachDraw(w) {
+  w.addEventListener("mousedown", e => {
+    if (e.button !== 0) return;
+    const L = lab(items[cur].row_id), iss = L.issues[activeIssue];
+    if (!iss) { toast("먼저 오른쪽에서 '+ 문제 추가'를 누르세요"); return; }
+    if (iss.vis !== "localized") { toast(`문제 ${activeIssue + 1}: ③ Grounding에서 '한 곳에 보임'을 고르면 박스를 그릴 수 있어요`); return; }
+    e.preventDefault();
+    const r = w.getBoundingClientRect();
+    const pt = ev => [Math.min(1, Math.max(0, (ev.clientX - r.left) / r.width)), Math.min(1, Math.max(0, (ev.clientY - r.top) / r.height))];
+    const [sx, sy] = pt(e), c = COLORS[activeIssue % COLORS.length];
+    const tmp = document.createElement("div");
+    tmp.className = "box temp"; tmp.style.borderColor = c; w.appendChild(tmp);
+    let ex = sx, ey = sy;
+    const move = ev => {
+      [ex, ey] = pt(ev);
+      tmp.style.cssText = `left:${Math.min(sx, ex) * 100}%;top:${Math.min(sy, ey) * 100}%;width:${Math.abs(ex - sx) * 100}%;height:${Math.abs(ey - sy) * 100}%;border-color:${c}`;
+    };
+    const up = () => {
+      window.removeEventListener("mousemove", move); window.removeEventListener("mouseup", up); tmp.remove();
+      if (Math.abs(ex - sx) < 0.008 || Math.abs(ey - sy) < 0.008) return;
+      const r4 = v => Math.round(v * 10000) / 10000;
+      iss.boxes.push({img: +w.dataset.img, bbox: [r4(Math.min(sx, ex)), r4(Math.min(sy, ey)), r4(Math.max(sx, ex)), r4(Math.max(sy, ey))],
+                      target: iss.defect === "label_expiry" ? "evidence" : "defect"});
+      changed(); renderBoxes(); renderRight();
+    };
+    window.addEventListener("mousemove", move); window.addEventListener("mouseup", up);
+  });
+}
+
+function openModal(idx) {
+  const im = items[cur].images.find(x => x.idx === idx);
+  $("#modalBody").innerHTML = `<div class="wrap" data-img="${idx}"><img src="/images_hr/${encodeURIComponent(im.src.split("/").pop())}" draggable="false"></div>`;
+  attachDraw($("#modalBody .wrap"));
+  $("#modal").classList.add("open");
+  renderBoxes();
+}
+function closeModal() { $("#modal").classList.remove("open"); $("#modalBody").innerHTML = ""; renderBoxes(); }
+$("#modalClose").onclick = closeModal;
+$("#modal").onmousedown = e => { if (e.target.id === "modal") closeModal(); };
+
+// ---------- right: questions ----------
+function seg(name, pairs, value, extra = "") {
+  return `<div class="seg" data-q="${name}">${pairs.map(p =>
+    `<button data-v="${p[0]}" class="${p[0] === value ? "on" : ""}">${esc(p[1])}${p[2] ? `<span class="sub">${esc(p[2])}</span>` : ""}</button>`).join("")}${extra}</div>`;
+}
+function renderRight() {
+  const it = items[cur], L = lab(it.row_id);
+  if (activeIssue >= L.issues.length) activeIssue = Math.max(0, L.issues.length - 1);
+  const cards = L.issues.map((iss, i) => {
+    const g = groupOf(iss.group), c = COLORS[i % COLORS.length];
+    const partRows = partGroups(it.domain).map(pg =>
+      `<div class="pgroup"><span class="pg">${pg.name}</span>${seg("part:" + pg.scope, pg.parts, iss.part)}</div>`).join("");
+    let boxBlock = "";
+    if (iss.vis === "localized") {
+      const rows = iss.boxes.map((b, bi) => `<div class="boxrow"><span class="chip" style="background:${c}"></span>사진 ${b.img}
+          ${seg(`target:${bi}`, [["defect", "결함"], ["evidence", "증거"]], b.target)}
+          <button class="btn small ghost" data-delbox="${bi}">삭제</button></div>`).join("");
+      boxBlock = `<div class="q"><div class="lab">bounding box <small>결함이 보이는 사진마다 드래그</small></div>
+        ${i === activeIssue
+          ? `<div class="drawnote">지금 왼쪽 사진에 드래그하면 문제 ${i + 1} 박스가 그려져요.</div>`
+          : `<div class="drawnote warn">이 카드를 클릭하면 이 문제의 박스를 그릴 수 있어요.</div>`}
+        <div class="boxlist" style="margin-top:6px">${rows || '<span style="color:var(--muted);font-size:12.5px">아직 박스 없음</span>'}</div></div>`;
+    }
+    return `<div class="issue ${i === activeIssue ? "active" : ""}" data-issue="${i}" style="border-color:${i === activeIssue ? c : "var(--line)"}">
+      <div class="issue-head"><span class="chip" style="background:${c}"></span><b>문제 ${i + 1}</b><span class="grow"></span>
+        <button class="btn small ghost" data-del="${i}">문제 삭제</button></div>
+      <div class="sec">
+        <div class="sec-h">① Affected Part <small>실제 문제가 발생한 제품 부위</small></div>
+        ${partRows}
+        <div style="margin-top:6px"><input type="text" data-q="part_text"
+          placeholder="${iss.part === "other" ? "목록에 없는 부위 이름 (필수)" : "구체적 표현 (선택) 예: 안감 솔기, 아래쪽 모서리"}"
+          value="${esc(iss.part_text || "")}"></div>
+      </div>
+      <div class="sec">
+        <div class="sec-h">② Issue / Defect <small>목록에서 종류 → 세부</small></div>
+        <div class="q">${seg("group", GROUPS.map(x => [x.id, x.name, x.sub]), iss.group)}</div>
+        ${g ? `<div class="q">${seg("defect", g.defects, iss.defect)}</div>` : ""}
+      </div>
+      <div class="sec">
+        <div class="sec-h">③ Grounding <small>사진에서 보이나 → 한 곳에 보이면 박스</small></div>
+        <div class="q">${seg("vis", VIS, iss.vis)}</div>
+        ${boxBlock}
+      </div>
+    </div>`;
+  }).join("");
+  const miss = missingFor(it.row_id);
+  const draftNote = L.from_draft ? `<div class="drawnote" style="margin-bottom:8px">
+      <b>Claude 초안이에요.</b> 맞으면 그대로 <b>완료하고 다음</b>, 틀린 칸만 고친 뒤 완료하세요.
+      ${L.draft && L.draft.why ? `<br>확인 이유: ${esc(L.draft.why)}` : ""}
+      ${L.draft && L.draft.unsure ? `<br><span style="color:var(--warn)">Claude도 애매하다고 표시함: ${esc(L.draft.note)}</span>` : ""}
+      ${L.draft && L.draft.alts && L.draft.alts.length ? `<br>다른 모델 의견: ${L.draft.alts.map(a =>
+          `<br>&nbsp;· ${esc(a.who)}: ${esc(altText(a, it.domain))}`).join("")}` : ""}</div>` : "";
+  $("#right").innerHTML = `
+    ${draftNote}
+    ${cards || '<div class="empty">이 리뷰의 불만 문제를 하나씩 추가하세요.<br>문제마다 ① Affected Part → ② Issue / Defect → ③ Grounding 순서로 고릅니다.</div>'}
+    <button class="btn" id="addIssue" style="margin-top:4px">+ 문제 추가</button>
+    <div class="review-meta">
+      <label><input type="checkbox" id="unsure" ${L.unsure ? "checked" : ""}> 판단이 애매함 (그래도 최선의 답을 고르고 이유를 메모)</label>
+      <textarea id="note" placeholder="메모 (선택)" style="margin-top:6px">${esc(L.note || "")}</textarea>
+    </div>
+    ${L.done ? "" : (miss.length && L.issues.length ? `<div class="missing">남은 판단<ul>${miss.map(m => `<li>${esc(m)}</li>`).join("")}</ul></div>` : "")}
+    <div class="footer">
+      ${L.done ? `<span class="badge done">완료됨</span><button class="btn" id="undone">완료 취소</button>`
+               : `<button class="btn ok" id="done">완료하고 다음 →</button>`}
+      <span style="color:var(--muted);font-size:12px">이 리뷰에 쓴 시간 ${Math.round(L.seconds / 6) / 10}분</span>
+    </div>`;
+
+  $("#addIssue").onclick = () => { L.issues.push(newIssue()); activeIssue = L.issues.length - 1; changed(); renderRight(); };
+  $("#unsure").onchange = e => { L.unsure = e.target.checked; changed(); };
+  $("#note").oninput = e => { L.note = e.target.value; changed(); };
+  const doneBtn = $("#done");
+  if (doneBtn) doneBtn.onclick = () => {
+    const m = missingFor(it.row_id);
+    if (m.length) { toast("남은 판단이 있어요"); renderRight(); return; }
+    L.done = true; changed(); go(nextUndone(cur), true);
+  };
+  const undo = $("#undone");
+  if (undo) undo.onclick = () => { L.done = false; changed(); renderRight(); renderLeft(); };
+
+  $("#right").querySelectorAll(".issue").forEach(card => {
+    const i = +card.dataset.issue, iss = L.issues[i];
+    card.addEventListener("click", e => {
+      if (activeIssue === i || e.target.closest("input,textarea")) return;
+      activeIssue = i; renderRight();
+    });
+    card.querySelector("[data-del]").onclick = e => {
+      e.stopPropagation();
+      if (!confirm(`문제 ${i + 1}을 삭제할까요?`)) return;
+      L.issues.splice(i, 1); activeIssue = Math.max(0, i - 1); changed(); renderRight(); renderBoxes();
+    };
+    card.querySelectorAll(".seg button").forEach(b => b.onclick = e => {
+      e.stopPropagation();
+      const q = b.parentElement.dataset.q, v = b.dataset.v;
+      activeIssue = i;
+      if (q.startsWith("part:")) { iss.part = v; iss.scope = q.slice(5); }
+      else if (q === "group") { if (iss.group !== v) { iss.group = v; iss.defect = null; } }
+      else if (q === "defect") {
+        iss.defect = v;
+        if ((v === "service" || v === "price") && !iss.part) { iss.part = "none"; iss.scope = "none"; }
+      }
+      else if (q === "vis") {
+        if (v !== "localized" && iss.boxes.length) {
+          if (!confirm(`'${nameOf(VIS, v)}'로 바꾸면 이 문제의 박스 ${iss.boxes.length}개가 지워져요. 바꿀까요?`)) return;
+          iss.boxes = [];
+        }
+        iss.vis = v;
+      }
+      else if (q.startsWith("target:")) iss.boxes[+q.split(":")[1]].target = v;
+      changed(); renderRight(); renderBoxes();
+    });
+    const pt = card.querySelector('input[data-q="part_text"]');
+    if (pt) pt.oninput = () => { iss.part_text = pt.value; changed(); };
+    card.querySelectorAll("[data-delbox]").forEach(b => b.onclick = e => {
+      e.stopPropagation(); iss.boxes.splice(+b.dataset.delbox, 1); changed(); renderRight(); renderBoxes();
+    });
+  });
+}
+
+// ---------- navigation ----------
+function nextUndone(from) {
+  for (let k = 1; k <= items.length; k++) {
+    const i = (from + k) % items.length;
+    if (!(labels[items[i].row_id] && labels[items[i].row_id].done)) return i;
+  }
+  return null;
+}
+function go(i, fromDone = false) {
+  if (i === null) { toast(`${items.length}건 모두 완료했어요. 수고했어요!`); renderAll(); return; }
+  if (i < 0 || i >= items.length) return;
+  stopClock(); scheduleSave();
+  cur = i; activeIssue = 0;
+  try { localStorage.setItem("cur_" + SET, String(cur)); } catch (e) {}
+  renderAll(); $("#left").scrollTop = 0; $("#right").scrollTop = 0;
+  startClock();
+  if (fromDone) toast("완료! 다음 리뷰로 넘어왔어요");
+}
+function renderAll() { renderHeader(); renderLeft(); renderRight(); }
+
+$("#prev").onclick = () => go(cur - 1);
+$("#next").onclick = () => go(cur + 1);
+$("#jump").onchange = e => go(+e.target.value);
+$("#annot").oninput = e => { annotator = e.target.value.trim(); scheduleSave(); };
+$("#export").onclick = () => {
+  stopClock(); startClock();
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([JSON.stringify(payload(), null, 1)], {type: "application/json"}));
+  a.download = `${SET}_labels_backup.json`; a.click();
+};
+$("#guideBtn").onclick = () => $("#guide").classList.toggle("open");
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") { if ($("#modal").classList.contains("open")) closeModal(); else $("#guide").classList.remove("open"); return; }
+  if (/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) return;
+  if (e.key === "ArrowLeft") go(cur - 1);
+  if (e.key === "ArrowRight") go(cur + 1);
+});
+window.addEventListener("beforeunload", () => {
+  if (stale) return;
+  try { navigator.sendBeacon("/api/labels", new Blob([JSON.stringify(payload())], {type: "application/json"})); } catch (e) {}
+});
+
+// ---------- guide ----------
+$("#guide").innerHTML = `
+  <h2 style="font-size:16px;margin:4px 0 8px">판단 가이드 (요약)</h2>
+  <p>리뷰마다 불만 <b>문제</b>를 찾아 하나씩 추가하고, 문제마다 세 칸을 채웁니다.
+  같은 부위·같은 종류의 여러 증상은 문제 1개로 묶어요.</p>
+  <p><b>대표 문제 1개만</b> 만들어요 (v1.3). 제목에 나온 불만이 우선이고, 제목에 불만이 없으면 본문에서 가장 길게 말한 불만.
+  리뷰에 없는 걸 추측해서 만들지 않아요.</p>
+  <h3>① Affected Part — 실제 문제가 발생한 제품 부위</h3>
+  <ul>
+    <li>목록에서 1개. <b>제품</b>(물건 자체) / <b>포장</b>(상자·봉지·봉인) / <b>구성품</b>(충전기·케이블 등 딸린 것) / <b>라벨·문서</b>(표기·설명서)로 묶여 있어요.</li>
+    <li>특정 부위를 말할 수 없으면 '제품 전체'. 서비스·가격처럼 부위가 없으면 '해당 없음'.</li>
+    <li>목록에 없으면 '목록에 없음' + 이름 직접 입력.</li>
+    <li>텍스트가 모호하면 사진을 보고 정해요. 예: "Damaged product"인데 사진에 소매 구멍 → 소매.</li>
+    <li><b>부위 = 문제가 실제로 있는 물건 쪽.</b> 유통기한 지남 → 내용물 (라벨은 ③에서 증거 박스). 사이즈 안 맞음 → 제품 전체.</li>
+    <li>라벨·문서는 라벨·설명서 <b>자체</b>가 잘못됐거나 빠졌을 때만 (잘못 인쇄, 설명서·보증서 누락).</li>
+    <li>버리는 포장(봉지·상자) → 포장 &gt; 제품 포장. 계속 쓰는 병·통 → 용기·병.</li>
+    <li>발열·느림처럼 특정 부위를 말할 수 없으면 제품 전체.</li>
+  </ul>
+  <h3>② Issue / Defect — 목록에서 종류 → 세부</h3>
+  <table>
+  ${GROUPS.map(g => `<tr><td><b>${g.name}</b></td><td>${g.defects.map(d => d[1]).join(" / ")}</td></tr>`).join("")}
+  </table>
+  <p><b>원인 말고 증상으로 골라요.</b> 왜 그렇게 됐는지는 추측하지 않아요.</p>
+  <table>
+    <tr><td>겉이 깨지거나 찢어진 게 보임 (화면에 금 간 것 포함)</td><td>물리적 손상</td></tr>
+    <tr><td>겉은 멀쩡한데 작동·표시가 이상함</td><td>기능·사양 &gt; 작동 불량</td></tr>
+    <tr><td>처음부터 잘못 만들어짐 (소재·봉제·인쇄·색·접착·빛샘)</td><td>제조·마감 불량</td></tr>
+    <tr><td>얇다, 싸구려 원단, 종이질 나쁨, 소재가 더럽다</td><td>제조·마감 &gt; 소재·재질</td></tr>
+    <tr><td>가품·누락·중고·유통기한, 주문과 다른 사이즈·색이 옴</td><td>설명과 다름 (다른 것보다 우선)</td></tr>
+    <tr><td>들어가면 안 될 게 들어 있음 (쇳조각, 스테이플러 심, 머리카락)</td><td>오염·변질 &gt; 이물질</td></tr>
+    <tr><td>구조가 쓰기 불편함 (매번 청소, 넣는 곳이 불편)</td><td>기능·사양 &gt; 설계·사용 불편</td></tr>
+  </table>
+  <ul>
+    <li>글이 모호하거나 불명확해도 사진에 구체적 결함이 보이면 그 결함으로.</li>
+    <li>글과 사진 어디에도 구체적 내용이 없을 때만 비시각·기타 &gt; 모호.</li>
+    <li>'내용'은 책·콘텐츠 내용에만 써요.</li>
+    <li>보증·환불·배송·응대 문제 → 비시각·기타 &gt; 서비스.</li>
+  </ul>
+  <h3>③ Grounding — 사진에서 보이나 → bounding box</h3>
+  <table>
+    <tr><td><b>한 곳에 보임</b></td><td>결함이나 증거가 사진 속 특정 영역에 보임 (제품의 절반 미만) → 박스</td></tr>
+    <tr><td><b>전체에 퍼져 보임</b></td><td>색상, 핏, 전반적으로 얇음, 통째로 다른 제품 (박스 없음)</td></tr>
+    <tr><td><b>안 보임</b></td><td>기능·맛·내용, 누락된 것, 사진이 무관함 (박스 없음)</td></tr>
+  </table>
+  <ul>
+    <li><b>가짜 제품</b>: 겉모습이 확실히 다르면 '전체에 퍼져 보임', 정품과 똑같아 보이면 '안 보임'.</li>
+    <li><b>박스는 가장 잘 보이는 사진 1장에만 그리면 돼요</b> (필수). 다른 사진은 선택.</li>
+    <li><b>박스는 결함이나 증거가 보일 때만.</b> 부위(키보드, 마우스)만 보이고 결함 자체는 안 보이면 '안 보임'.</li>
+    <li>기능 문제라도 증거가 찍혀 있으면 '한 곳에 보임' + <b>증거</b> 박스. 예: "과열" 경고 화면 캡처.</li>
+    <li><b>증거는 사진만 보고도 문제라고 알 수 있을 때만</b> (경고 메시지, 지난 유통기한 날짜, 깨진 화면).
+      리뷰를 읽어야 의미가 생기는 것(사이즈 태그, 가격표, 설명서 숫자, 책 그림)은 '안 보임'.</li>
+    <li>결함이 보이는 <b>모든 사진</b>에 그려요. 결함 영역에 꽉 맞게.</li>
+    <li>떨어진 곳이 여러 군데면 각각 (5개 넘으면 묶어서 1개).</li>
+    <li><b>결함</b>: 손상·오염 자체 / <b>증거</b>: 유통기한·라벨·화면 캡처처럼 결함을 보여주는 표시. 박스 태그를 클릭하면 전환.</li>
+    <li>고객이 그린 동그라미·화살표는 '고객이 그린 표시 있음'에 체크하고, 박스는 표시가 아니라 결함에 그려요.</li>
+  </ul>
+  <h3>애매할 때</h3>
+  <p>그래도 최선의 답을 고르고 '판단이 애매함' 체크 + 메모. 비워두지 않아요.</p>`;
+
+// ---------- boot ----------
+(async function boot() {
+  try { SET = (await (await fetch("/api/set")).json()).set || SET; } catch (e) {}
+  $("header h1").textContent = `결함 라벨링 · ${SET}`;
+  document.title = `결함 라벨링 · ${SET}`;
+  items = await (await fetch("/api/items")).json();
+  let server = {};
+  try { server = await (await fetch("/api/labels")).json(); } catch (e) {}
+  rev = (server.meta && server.meta.rev) || 0;
+  try { drafts = ((await (await fetch("/api/drafts")).json()).labels) || {}; } catch (e) {}
+  let local = null;
+  try { local = JSON.parse(localStorage.getItem("labels_" + SET) || "null"); } catch (e) {}
+  const pick = server && server.labels ? server : (local && local.labels ? local : null);
+  if (pick) { labels = pick.labels; annotator = (pick.meta && pick.meta.annotator) || ""; }
+  prefillDrafts();
+  $("#annot").value = annotator;
+  $("#savestate").textContent = pick === server && server.labels ? "불러옴" : (pick ? "브라우저 보관본 불러옴" : "새로 시작");
+  let saved = NaN;
+  try { saved = parseInt(localStorage.getItem("cur_" + SET), 10); } catch (e) {}
+  cur = Number.isInteger(saved) && saved >= 0 && saved < items.length ? saved : (nextUndone(-1) ?? 0);
+  renderAll(); startClock();
+  if (pick && pick !== server) saveNow();
+})();
+</script>
+</body>
+</html>
