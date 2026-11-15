@@ -1,0 +1,93 @@
+{
+ "e1": {
+  "n": 185,
+  "missing": 0,
+  "group6_f1": 0.6748151274013342,
+  "group6_acc": 0.6988636363636364,
+  "visibility_f1": 0.507491595162828,
+  "scope_f1": 0.3759353261891333,
+  "part_f1": 0.3401687211527637,
+  "rec_function": 0.53125,
+  "rec_non_visual": 0.14285714285714285,
+  "rec_not_visible": 0.125,
+  "rec_localized": 0.9620253164556962,
+  "valid_rate": 0.9837837837837838,
+  "verbatim_rate": 0.9081081081081082,
+  "box_problem_reviews": 57,
+  "box_issues": {
+   "box_out_of_range": 18,
+   "box_whole_picture": 30,
+   "box_copied": 37,
+   "box_but_not_localized": 24,
+   "bad_box": 1
+  },
+  "pointing": 0.5,
+  "mean_iou": 0.23769230615832093,
+  "e2e_ms_median": 10573.8,
+  "pred_group6": {
+   "manufacturing": 55,
+   "not_as_described": 56,
+   "damage": 43,
+   "non_visual": 3,
+   "contamination": 7,
+   "function": 21
+  }
+ },
+ "e3": {
+  "n": 185,
+  "missing": 0,
+  "group6_f1": 0.760627866673015,
+  "group6_acc": 0.7784090909090909,
+  "visibility_f1": 0.7196763582424509,
+  "scope_f1": 0.6560995419558956,
+  "part_f1": 0.5474009368767433,
+  "rec_function": 0.78125,
+  "rec_non_visual": 0.47619047619047616,
+  "rec_not_visible": 0.734375,
+  "rec_localized": 0.8607594936708861,
+  "valid_rate": 1.0,
+  "verbatim_rate": 0.9027027027027027,
+  "box_problem_reviews": 28,
+  "box_issues": {
+   "box_but_not_localized": 8,
+   "box_copied": 17,
+   "box_whole_picture": 10,
+   "box_out_of_range": 4,
+   "bad_box": 1
+  },
+  "pointing": 0.5178571428571429,
+  "mean_iou": 0.22323356330418972,
+  "e2e_ms_median": 13593.5,
+  "pred_group6": {
+   "not_as_described": 47,
+   "manufacturing": 39,
+   "non_visual": 14,
+   "damage": 43,
+   "function": 32,
+   "contamination": 10
+  }
+ },
+ "paired": {
+  "all": {
+   "diff": 0.08581273927168076,
+   "lo": -0.00025377752021895267,
+   "hi": 0.1636508240907638,
+   "n": 176,
+   "flip_rate": 0.20540540540540542
+  },
+  "test": {
+   "diff": 0.047381134322444285,
+   "lo": -0.06257142332441032,
+   "hi": 0.16041657641280416,
+   "n": 122,
+   "flip_rate": 0.18032786885245902
+  },
+  "test_blind": {
+   "diff": 0.1699321146689569,
+   "lo": 0.05840049131033777,
+   "hi": 0.28748363029527313,
+   "n": 54,
+   "flip_rate": 0.25396825396825395
+  }
+ }
+}

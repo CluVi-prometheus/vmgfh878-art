@@ -1,0 +1,165 @@
+{
+ "rows": [
+  {
+   "row_id": 1900,
+   "tokens": 6962,
+   "visual": 5004,
+   "ok": true,
+   "s": 17.42,
+   "loss": 0.31549715995788574,
+   "peak_gb": 10.43,
+   "reserved_gb": 11.2
+  },
+  {
+   "row_id": 2618,
+   "tokens": 6877,
+   "visual": 4988,
+   "ok": true,
+   "s": 17.23,
+   "loss": 0.2155798375606537,
+   "peak_gb": 10.38,
+   "reserved_gb": 11.44
+  },
+  {
+   "row_id": 2909,
+   "tokens": 6869,
+   "visual": 4938,
+   "ok": true,
+   "s": 16.99,
+   "loss": 0.2093173712491989,
+   "peak_gb": 10.38,
+   "reserved_gb": 11.44
+  },
+  {
+   "row_id": 2405,
+   "tokens": 6825,
+   "visual": 4920,
+   "ok": true,
+   "s": 16.89,
+   "loss": 0.11492518335580826,
+   "peak_gb": 10.35,
+   "reserved_gb": 11.44
+  },
+  {
+   "row_id": 3056,
+   "tokens": 6773,
+   "visual": 5088,
+   "ok": true,
+   "s": 17.17,
+   "loss": 0.26503169536590576,
+   "peak_gb": 10.33,
+   "reserved_gb": 11.44
+  },
+  {
+   "row_id": 2163,
+   "tokens": 6768,
+   "visual": 4920,
+   "ok": true,
+   "s": 16.73,
+   "loss": 0.192459836602211,
+   "peak_gb": 10.32,
+   "reserved_gb": 11.44
+  },
+  {
+   "row_id": 2460,
+   "tokens": 6761,
+   "visual": 4920,
+   "ok": true,
+   "s": 16.78,
+   "loss": 0.27526694536209106,
+   "peak_gb": 10.32,
+   "reserved_gb": 11.44
+  },
+  {
+   "row_id": 3770,
+   "tokens": 6757,
+   "visual": 4961,
+   "ok": true,
+   "s": 17.06,
+   "loss": 0.13813526928424835,
+   "peak_gb": 10.32,
+   "reserved_gb": 12.17
+  },
+  {
+   "row_id": 2750,
+   "tokens": 6735,
+   "visual": 4888,
+   "ok": true,
+   "s": 16.7,
+   "loss": 0.029762601479887962,
+   "peak_gb": 10.31,
+   "reserved_gb": 12.17
+  },
+  {
+   "row_id": 3062,
+   "tokens": 6725,
+   "visual": 5084,
+   "ok": true,
+   "s": 17.22,
+   "loss": 0.1878676414489746,
+   "peak_gb": 10.3,
+   "reserved_gb": 12.17
+  },
+  {
+   "row_id": 2590,
+   "tokens": 2780,
+   "visual": 1225,
+   "ok": true,
+   "s": 4.14,
+   "loss": 0.09230557829141617,
+   "peak_gb": 8.22,
+   "reserved_gb": 12.17
+  },
+  {
+   "row_id": 3830,
+   "tokens": 4075,
+   "visual": 2460,
+   "ok": true,
+   "s": 7.43,
+   "loss": 0.14069880545139313,
+   "peak_gb": 8.9,
+   "reserved_gb": 12.17
+  },
+  {
+   "row_id": 3593,
+   "tokens": 2857,
+   "visual": 1248,
+   "ok": true,
+   "s": 4.23,
+   "loss": 0.3283483684062958,
+   "peak_gb": 8.26,
+   "reserved_gb": 12.17
+  },
+  {
+   "row_id": 3437,
+   "tokens": 4024,
+   "visual": 2460,
+   "ok": true,
+   "s": 7.37,
+   "loss": 0.41792964935302734,
+   "peak_gb": 8.88,
+   "reserved_gb": 12.17
+  },
+  {
+   "row_id": 564,
+   "tokens": 2827,
+   "visual": 1230,
+   "ok": true,
+   "s": 4.2,
+   "loss": 0.2120952308177948,
+   "peak_gb": 8.24,
+   "reserved_gb": 12.17
+  }
+ ],
+ "estimate": {
+  "s_per_token": 0.0032740521567505405,
+  "epoch_h": 1.6881354692188364,
+  "train_h": 5.064406407656509
+ },
+ "lora": {
+  "lora_modules": 112,
+  "trainable_params": 5046272,
+  "trainable_share": 0.0006081888031305926,
+  "adapter_dtype": "torch.float32"
+ }
+}

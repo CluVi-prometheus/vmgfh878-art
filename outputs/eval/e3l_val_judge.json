@@ -1,0 +1,284 @@
+{
+ "e3": "C:\\Users\\user\\Documents\\멀티모달 프로젝트\\outputs\\preds\\heavy_lora-e3l-epoch3_val.jsonl",
+ "e1": "C:\\Users\\user\\Documents\\멀티모달 프로젝트\\outputs\\preds\\heavy_val.jsonl",
+ "e1_metrics": {
+  "n": 100,
+  "missing": 0,
+  "group6_f1": 0.6570490822591663,
+  "group6_acc": 0.71,
+  "visibility_f1": 0.5609929078014183,
+  "scope_f1": 0.2798086124401914,
+  "part_f1": 0.36496894409937886,
+  "rec_function": 0.5,
+  "rec_non_visual": 0.2222222222222222,
+  "rec_not_visible": 0.23684210526315788,
+  "rec_localized": 0.8666666666666667,
+  "valid_rate": 1.0,
+  "verbatim_rate": 0.92,
+  "box_problem_reviews": 33,
+  "box_issues": {
+   "box_copied": 17,
+   "box_out_of_range": 11,
+   "box_but_not_localized": 16,
+   "box_whole_picture": 13,
+   "bad_box": 1
+  },
+  "pointing": 0.17777777777777778,
+  "mean_iou": 0.07065092235482441,
+  "e2e_ms_median": 10574.15,
+  "pred_group6": {
+   "damage": 23,
+   "manufacturing": 30,
+   "not_as_described": 29,
+   "function": 13,
+   "non_visual": 2,
+   "contamination": 3
+  }
+ },
+ "e3_metrics": {
+  "n": 100,
+  "missing": 0,
+  "group6_f1": 0.8301186511877007,
+  "group6_acc": 0.85,
+  "visibility_f1": 0.7399109953326821,
+  "scope_f1": 0.543082745741289,
+  "part_f1": 0.6064802103458318,
+  "rec_function": 0.9545454545454546,
+  "rec_non_visual": 0.7777777777777778,
+  "rec_not_visible": 0.8421052631578947,
+  "rec_localized": 0.7111111111111111,
+  "valid_rate": 1.0,
+  "verbatim_rate": 0.91,
+  "box_problem_reviews": 20,
+  "box_issues": {
+   "box_copied": 11,
+   "box_out_of_range": 2,
+   "box_but_not_localized": 7,
+   "box_whole_picture": 8
+  },
+  "pointing": 0.17777777777777778,
+  "mean_iou": 0.09311000372990076,
+  "e2e_ms_median": 13881.2,
+  "pred_group6": {
+   "damage": 24,
+   "non_visual": 10,
+   "manufacturing": 16,
+   "not_as_described": 21,
+   "function": 25,
+   "contamination": 4
+  }
+ },
+ "criteria": [
+  {
+   "name": "Group6 Macro-F1",
+   "e1": 0.6570490822591663,
+   "e3": 0.8301186511877007,
+   "threshold": ">= 0.707 (E1 +0.05)",
+   "pass": true
+  },
+  {
+   "name": "function recall",
+   "e1": 0.5,
+   "e3": 0.9545454545454546,
+   "threshold": ">= 0.65",
+   "pass": true
+  },
+  {
+   "name": "non_visual recall",
+   "e1": 0.2222222222222222,
+   "e3": 0.7777777777777778,
+   "threshold": ">= 0.45",
+   "pass": true
+  },
+  {
+   "name": "Visibility Macro-F1",
+   "e1": 0.5609929078014183,
+   "e3": 0.7399109953326821,
+   "threshold": ">= 0.69",
+   "pass": true
+  },
+  {
+   "name": "not_visible recall",
+   "e1": 0.23684210526315788,
+   "e3": 0.8421052631578947,
+   "threshold": ">= 0.60",
+   "pass": true
+  },
+  {
+   "name": "Scope Macro-F1",
+   "e1": 0.2798086124401914,
+   "e3": 0.543082745741289,
+   "threshold": ">= 0.395",
+   "pass": true
+  },
+  {
+   "name": "valid rate",
+   "e1": 1.0,
+   "e3": 1.0,
+   "threshold": ">= 0.95",
+   "pass": true
+  },
+  {
+   "name": "review_span verbatim",
+   "e1": 0.92,
+   "e3": 0.91,
+   "threshold": ">= 0.90",
+   "pass": true
+  },
+  {
+   "name": "reviews with box problem",
+   "e1": 33,
+   "e3": 20,
+   "threshold": "<= 33 (E1)",
+   "pass": true
+  }
+ ],
+ "n_pass": 9,
+ "subsets": {
+  "sure": {
+   "n": 70,
+   "e1": {
+    "n": 70,
+    "missing": 0,
+    "group6_f1": 0.6969496021220158,
+    "group6_acc": 0.7857142857142857,
+    "visibility_f1": 0.544031647746818,
+    "scope_f1": 0.36268472906403937,
+    "part_f1": 0.39098400270649075,
+    "rec_function": 0.5333333333333333,
+    "rec_non_visual": 0.3333333333333333,
+    "rec_not_visible": 0.2,
+    "rec_localized": 0.8709677419354839,
+    "valid_rate": 1.0,
+    "verbatim_rate": 0.9571428571428572,
+    "box_problem_reviews": 23,
+    "box_issues": {
+     "box_copied": 11,
+     "box_out_of_range": 7,
+     "box_but_not_localized": 13,
+     "box_whole_picture": 9,
+     "bad_box": 1
+    },
+    "pointing": 0.25806451612903225,
+    "mean_iou": 0.08767687695378436,
+    "e2e_ms_median": 9420.45,
+    "pred_group6": {
+     "damage": 20,
+     "manufacturing": 18,
+     "not_as_described": 20,
+     "function": 9,
+     "non_visual": 2,
+     "contamination": 1
+    }
+   },
+   "e3": {
+    "n": 70,
+    "missing": 0,
+    "group6_f1": 0.9275296388199613,
+    "group6_acc": 0.9571428571428572,
+    "visibility_f1": 0.7544963036522123,
+    "scope_f1": 0.7703216374269006,
+    "part_f1": 0.6266383345651638,
+    "rec_function": 1.0,
+    "rec_non_visual": 1.0,
+    "rec_not_visible": 0.8,
+    "rec_localized": 0.7741935483870968,
+    "valid_rate": 1.0,
+    "verbatim_rate": 0.9285714285714286,
+    "box_problem_reviews": 15,
+    "box_issues": {
+     "box_copied": 8,
+     "box_out_of_range": 2,
+     "box_whole_picture": 7,
+     "box_but_not_localized": 6
+    },
+    "pointing": 0.25806451612903225,
+    "mean_iou": 0.12398035351461274,
+    "e2e_ms_median": 13881.2,
+    "pred_group6": {
+     "damage": 20,
+     "non_visual": 7,
+     "not_as_described": 16,
+     "manufacturing": 9,
+     "function": 16,
+     "contamination": 2
+    }
+   }
+  },
+  "unsure": {
+   "n": 30,
+   "e1": {
+    "n": 30,
+    "missing": 0,
+    "group6_f1": 0.46868686868686865,
+    "group6_acc": 0.5333333333333333,
+    "visibility_f1": 0.5886809269162211,
+    "scope_f1": 0.25142857142857145,
+    "part_f1": 0.2915854978354978,
+    "rec_function": 0.42857142857142855,
+    "rec_non_visual": 0.0,
+    "rec_not_visible": 0.3076923076923077,
+    "rec_localized": 0.8571428571428571,
+    "valid_rate": 1.0,
+    "verbatim_rate": 0.8333333333333334,
+    "box_problem_reviews": 10,
+    "box_issues": {
+     "box_but_not_localized": 3,
+     "box_whole_picture": 4,
+     "box_copied": 6,
+     "box_out_of_range": 4
+    },
+    "pointing": 0.0,
+    "mean_iou": 0.032950594314270235,
+    "e2e_ms_median": 11249.15,
+    "pred_group6": {
+     "manufacturing": 12,
+     "not_as_described": 9,
+     "damage": 3,
+     "function": 4,
+     "contamination": 2
+    }
+   },
+   "e3": {
+    "n": 30,
+    "missing": 0,
+    "group6_f1": 0.5808441558441558,
+    "group6_acc": 0.6,
+    "visibility_f1": 0.6890269151138716,
+    "scope_f1": 0.3514285714285714,
+    "part_f1": 0.590625,
+    "rec_function": 0.8571428571428571,
+    "rec_non_visual": 0.3333333333333333,
+    "rec_not_visible": 0.9230769230769231,
+    "rec_localized": 0.5714285714285714,
+    "valid_rate": 1.0,
+    "verbatim_rate": 0.8666666666666667,
+    "box_problem_reviews": 5,
+    "box_issues": {
+     "box_but_not_localized": 1,
+     "box_copied": 3,
+     "box_whole_picture": 1
+    },
+    "pointing": 0.0,
+    "mean_iou": 0.024754229206609923,
+    "e2e_ms_median": 13991.9,
+    "pred_group6": {
+     "manufacturing": 7,
+     "not_as_described": 5,
+     "damage": 4,
+     "non_visual": 3,
+     "function": 9,
+     "contamination": 2
+    }
+   }
+  }
+ },
+ "habit_suspect": false,
+ "paired_g6": {
+  "diff": 0.17306956892853442,
+  "lo": 0.06250763405116741,
+  "hi": 0.29707424631401397,
+  "n": 100,
+  "flip_rate": 0.28
+ }
+}

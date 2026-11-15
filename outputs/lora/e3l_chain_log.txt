@@ -1,0 +1,595 @@
+[E3-L chain 11-15 12:07 +0m] start | GPU free 14.5 GB
+[E3-L chain 11-15 12:07 +0m] 1/5 probe start: python -m cluvi.train_lora --probe 10
+[train_lora] transformers 4.52.0 from C:\Users\user\Documents\멀티모달 프로젝트\HAWK\.runtime\python\transformers
+
+Loading checkpoint shards:   0%|          | 0/5 [00:00<?, ?it/s]
+Loading checkpoint shards:  20%|██        | 1/5 [00:03<00:13,  3.25s/it]
+Loading checkpoint shards:  40%|████      | 2/5 [00:06<00:09,  3.20s/it]
+Loading checkpoint shards:  60%|██████    | 3/5 [00:09<00:06,  3.17s/it]
+Loading checkpoint shards:  80%|████████  | 4/5 [00:12<00:03,  3.15s/it]
+Loading checkpoint shards: 100%|██████████| 5/5 [00:13<00:00,  2.26s/it]
+Loading checkpoint shards: 100%|██████████| 5/5 [00:13<00:00,  2.67s/it]
+[heavy] Qwen/Qwen2.5-VL-7B-Instruct | transformers 4.52.0 | nf4-llm / bf16-vision | 4-bit layers inside ViT: 0 (expect 0) | pixels 200704-1003520 | HAWK keep None | weights 6.33 GB
+[probe] LoRA {'lora_modules': 112, 'trainable_params': 5046272, 'trainable_share': 0.0010023245876038401, 'adapter_dtype': 'torch.float32'} | GPU 15.9 GB
+[probe 0/15 warm-up] row 900 | 3501 tokens (visual 1932) | OUT OF MEMORY | 3.74s | loss None | peak 14.75 GB (reserved 15.1 / 15.9)
+[probe 1/15] row 1900 | 6962 tokens (visual 5004) | OUT OF MEMORY | 8.34s | loss None | peak 14.94 GB (reserved 15.15 / 15.9)
+[probe 2/15] row 2618 | 6877 tokens (visual 4988) | OUT OF MEMORY | 8.2s | loss None | peak 14.58 GB (reserved 15.05 / 15.9)
+[probe 3/15] row 2909 | 6869 tokens (visual 4938) | OUT OF MEMORY | 8.11s | loss None | peak 14.81 GB (reserved 15.05 / 15.9)
+[E3-L chain 11-15 12:09 +0m] start | GPU free 15.8 GB
+[E3-L chain 11-15 12:09 +0m] 1/5 probe start: python -m cluvi.train_lora --probe 10
+[train_lora] transformers 4.52.0 from C:\Users\user\Documents\멀티모달 프로젝트\HAWK\.runtime\python\transformers
+
+Loading checkpoint shards:   0%|          | 0/5 [00:00<?, ?it/s]
+Loading checkpoint shards:  20%|██        | 1/5 [00:02<00:11,  2.99s/it]
+Loading checkpoint shards:  40%|████      | 2/5 [00:06<00:09,  3.02s/it]
+Loading checkpoint shards:  60%|██████    | 3/5 [00:09<00:06,  3.00s/it]
+Loading checkpoint shards:  80%|████████  | 4/5 [00:12<00:03,  3.01s/it]
+Loading checkpoint shards: 100%|██████████| 5/5 [00:12<00:00,  2.16s/it]
+Loading checkpoint shards: 100%|██████████| 5/5 [00:12<00:00,  2.54s/it]
+[heavy] Qwen/Qwen2.5-VL-7B-Instruct | transformers 4.52.0 | nf4-llm / bf16-vision | 4-bit layers inside ViT: 0 (expect 0) | pixels 200704-1003520 | HAWK keep None | weights 6.33 GB
+[probe] LoRA {'lora_modules': 112, 'trainable_params': 5046272, 'trainable_share': 0.0006081888031305926, 'adapter_dtype': 'torch.float32'} | GPU 15.9 GB
+Consider using tensor.detach() first. (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\pytorch\torch\csrc\autograd\generated\python_variable_methods.cpp:837.)
+  ok, lv = True, float(loss)
+[probe 0/15 warm-up] row 900 | 3501 tokens (visual 1932) | OK | 6.66s | loss 0.18472912907600403 | peak 8.6 GB (reserved 8.9 / 15.9)
+[probe 1/15] row 1900 | 6962 tokens (visual 5004) | OK | 17.42s | loss 0.31549715995788574 | peak 10.43 GB (reserved 11.2 / 15.9)
+[probe 2/15] row 2618 | 6877 tokens (visual 4988) | OK | 17.23s | loss 0.2155798375606537 | peak 10.38 GB (reserved 11.44 / 15.9)
+[probe 3/15] row 2909 | 6869 tokens (visual 4938) | OK | 16.99s | loss 0.2093173712491989 | peak 10.38 GB (reserved 11.44 / 15.9)
+[probe 4/15] row 2405 | 6825 tokens (visual 4920) | OK | 16.89s | loss 0.11492518335580826 | peak 10.35 GB (reserved 11.44 / 15.9)
+[probe 5/15] row 3056 | 6773 tokens (visual 5088) | OK | 17.17s | loss 0.26503169536590576 | peak 10.33 GB (reserved 11.44 / 15.9)
+[probe 6/15] row 2163 | 6768 tokens (visual 4920) | OK | 16.73s | loss 0.192459836602211 | peak 10.32 GB (reserved 11.44 / 15.9)
+[probe 7/15] row 2460 | 6761 tokens (visual 4920) | OK | 16.78s | loss 0.27526694536209106 | peak 10.32 GB (reserved 11.44 / 15.9)
+[probe 8/15] row 3770 | 6757 tokens (visual 4961) | OK | 17.06s | loss 0.13813526928424835 | peak 10.32 GB (reserved 12.17 / 15.9)
+[probe 9/15] row 2750 | 6735 tokens (visual 4888) | OK | 16.7s | loss 0.029762601479887962 | peak 10.31 GB (reserved 12.17 / 15.9)
+[probe 10/15] row 3062 | 6725 tokens (visual 5084) | OK | 17.22s | loss 0.1878676414489746 | peak 10.3 GB (reserved 12.17 / 15.9)
+[probe 11/15] row 2590 | 2780 tokens (visual 1225) | OK | 4.14s | loss 0.09230557829141617 | peak 8.22 GB (reserved 12.17 / 15.9)
+[probe 12/15] row 3830 | 4075 tokens (visual 2460) | OK | 7.43s | loss 0.14069880545139313 | peak 8.9 GB (reserved 12.17 / 15.9)
+[probe 13/15] row 3593 | 2857 tokens (visual 1248) | OK | 4.23s | loss 0.3283483684062958 | peak 8.26 GB (reserved 12.17 / 15.9)
+[probe 14/15] row 3437 | 4024 tokens (visual 2460) | OK | 7.37s | loss 0.41792964935302734 | peak 8.88 GB (reserved 12.17 / 15.9)
+[probe 15/15] row 564 | 2827 tokens (visual 1230) | OK | 4.2s | loss 0.2120952308177948 | peak 8.24 GB (reserved 12.17 / 15.9)
+[probe] estimate: 1.69 h per epoch -> 3 epochs 5.06 h (+ val head checks ~0.4 h)
+  warnings.warn(
+  [val head probe 3/3] 7.6s/review | left ~0m00s
+[probe val head] row 20: '```json\n{\n  "category": "damage/tear_hole",\n  "part": "spine_binding",\n  "visibility": "localized",\n  "boxes": [\n    {\n      "picture": 1,\n      "'
+[probe val head] row 192: '```json\n{\n  "category": "manufacturing/print",\n  "part": "pages",\n  "visibility": "localized",\n  "boxes": [\n    {\n      "picture": 1,\n      "bbox_2d":'
+[probe val head] row 352: '```json\n{\n  "category": "manufacturing/print",\n  "part": "pages",\n  "visibility": "localized",\n  "boxes": [\n    {\n      "picture": 2,\n      "bbox_2d":'
+[probe] done | all fit: True | max reserved 12.17 / 15.9 GB | saved C:\Users\user\Documents\멀티모달 프로젝트\outputs\lora\_probe\adapter (test it with: python -m cluvi.run_hawk --model heavy --split dev --limit 2 --adapter C:\Users\user\Documents\멀티모달 프로젝트\outputs\lora\_probe\adapter)
+[E3-L chain 11-15 12:13 +4m] 1/5 probe exit code 0
+[E3-L chain 11-15 12:13 +4m] probe OK: all 15 fit, max reserved 12.17 GB | estimate 5.1 h training + val head checks
+[E3-L chain 11-15 12:13 +4m] 2/5 load check start: python -m cluvi.run_hawk --model heavy --split dev --limit 2 --warmup 0 --adapter C:\Users\user\Documents\멀티모달 프로젝트\outputs\lora\_probe\adapter --tag _lora-probe
+[run_hawk] transformers 4.52.0 from C:\Users\user\Documents\멀티모달 프로젝트\HAWK\.runtime\python\transformers
+
+Loading checkpoint shards:   0%|          | 0/5 [00:00<?, ?it/s]
+Loading checkpoint shards:  20%|██        | 1/5 [00:03<00:12,  3.07s/it]
+Loading checkpoint shards:  40%|████      | 2/5 [00:06<00:09,  3.05s/it]
+Loading checkpoint shards:  60%|██████    | 3/5 [00:09<00:06,  3.04s/it]
+Loading checkpoint shards:  80%|████████  | 4/5 [00:12<00:03,  3.04s/it]
+Loading checkpoint shards: 100%|██████████| 5/5 [00:12<00:00,  2.18s/it]
+Loading checkpoint shards: 100%|██████████| 5/5 [00:12<00:00,  2.56s/it]
+[heavy] Qwen/Qwen2.5-VL-7B-Instruct | transformers 4.52.0 | nf4-llm / bf16-vision | 4-bit layers inside ViT: 0 (expect 0) | pixels 200704-1003520 | HAWK keep None | weights 6.35 GB | LoRA C:\Users\user\Documents\멀티모달 프로젝트\outputs\lora\_probe\adapter (112 modules)
+[heavy_lora-probe_dev_smoke] 2 reviews, 0 already done, 2 to run
+[1/2  50.0%] elapsed 0m18s |  18.8s/review | left ~0m18s (done ~12:14) | row 10: damage 18.8s box_out_of_range,box_copied
+[2/2 100.0%] elapsed 0m43s |  21.7s/review | left ~0m00s (done ~12:14) | row 17: manufacturing 24.5s box_whole_picture,box_whole_picture,box_out_of_range,box_copied
+wrote C:\Users\user\Documents\멀티모달 프로젝트\outputs\preds\heavy_lora-probe_dev_smoke.jsonl
+[E3-L chain 11-15 12:14 +6m] 2/5 load check exit code 0
+[E3-L chain 11-15 12:14 +6m] load check OK: 112 LoRA modules attached, 2/2 replies are valid JSON
+[E3-L chain 11-15 12:14 +6m] 3/5 train start: python -m cluvi.train_lora
+[train_lora] transformers 4.52.0 from C:\Users\user\Documents\멀티모달 프로젝트\HAWK\.runtime\python\transformers
+
+Loading checkpoint shards:   0%|          | 0/5 [00:00<?, ?it/s]
+Loading checkpoint shards:  20%|██        | 1/5 [00:02<00:11,  2.93s/it]
+Loading checkpoint shards:  40%|████      | 2/5 [00:05<00:08,  2.98s/it]
+Loading checkpoint shards:  60%|██████    | 3/5 [00:08<00:05,  2.97s/it]
+Loading checkpoint shards:  80%|████████  | 4/5 [00:12<00:03,  3.03s/it]
+Loading checkpoint shards: 100%|██████████| 5/5 [00:12<00:00,  2.16s/it]
+Loading checkpoint shards: 100%|██████████| 5/5 [00:12<00:00,  2.53s/it]
+[heavy] Qwen/Qwen2.5-VL-7B-Instruct | transformers 4.52.0 | nf4-llm / bf16-vision | 4-bit layers inside ViT: 0 (expect 0) | pixels 200704-1003520 | HAWK keep None | weights 6.33 GB
+[e3l] 881 train reviews (239 unsure x0.5), 3 epochs, 111 updates/epoch, 333 updates | LoRA 112 modules, 5,046,272 params (0.061 %)
+[E1 val, same scoring] G6 0.657 | Vis 0.561 | Scope 0.280 | select 0.499 | rec function 0.50 non_visual 0.22 not_visible 0.24 localized 0.87 | valid 1.00 | G6 acc sure 0.786 / unsure 0.533
+Consider using tensor.detach() first. (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\pytorch\torch\csrc\autograd\generated\python_variable_methods.cpp:837.)
+  recent = (recent + [(float(loss), *field_hits(hit, ex["field"]))])[-80:]
+[ep 1/3 | step 1/333   0.3%] loss 0.110 | head acc cat 0.75 part 0.62 vis 0.62 (last 8) | lr 3.0e-06 | grad 0.37 |   54s/step | elapsed 0m53s | left ~5h20m (done ~11-15 17:35) | peak 10.1/15.9 GB
+[ep 1/3 | step 2/333   0.6%] loss 0.126 | head acc cat 0.75 part 0.56 vis 0.56 (last 16) | lr 6.1e-06 | grad 0.37 |   40s/step | elapsed 1m33s | left ~4h41m (done ~11-15 16:57) | peak 10.1/15.9 GB
+[ep 1/3 | step 3/333   0.9%] loss 0.114 | head acc cat 0.71 part 0.58 vis 0.67 (last 24) | lr 9.1e-06 | grad 0.28 |   59s/step | elapsed 2m32s | left ~5h02m (done ~11-15 17:20) | peak 11.3/15.9 GB
+[ep 1/3 | step 4/333   1.2%] loss 0.134 | head acc cat 0.59 part 0.47 vis 0.62 (last 32) | lr 1.2e-05 | grad 0.38 |   57s/step | elapsed 3m29s | left ~5h10m (done ~11-15 17:28) | peak 11.3/15.9 GB
+[ep 1/3 | step 5/333   1.5%] loss 0.129 | head acc cat 0.60 part 0.50 vis 0.68 (last 40) | lr 1.5e-05 | grad 0.26 |   50s/step | elapsed 4m20s | left ~5h07m (done ~11-15 17:26) | peak 11.3/15.9 GB
+[ep 1/3 | step 6/333   1.8%] loss 0.124 | head acc cat 0.60 part 0.56 vis 0.69 (last 48) | lr 1.8e-05 | grad 0.35 |   59s/step | elapsed 5m19s | left ~5h12m (done ~11-15 17:32) | peak 11.3/15.9 GB
+[ep 1/3 | step 7/333   2.1%] loss 0.126 | head acc cat 0.59 part 0.59 vis 0.70 (last 56) | lr 2.1e-05 | grad 0.31 |   41s/step | elapsed 6m00s | left ~5h01m (done ~11-15 17:22) | peak 11.3/15.9 GB
+[ep 1/3 | step 8/333   2.4%] loss 0.130 | head acc cat 0.59 part 0.58 vis 0.70 (last 64) | lr 2.4e-05 | grad 0.23 |   69s/step | elapsed 7m08s | left ~5h12m (done ~11-15 17:34) | peak 11.5/15.9 GB
+[ep 1/3 | step 9/333   2.7%] loss 0.131 | head acc cat 0.58 part 0.58 vis 0.69 (last 72) | lr 2.7e-05 | grad 0.27 |   70s/step | elapsed 8m19s | left ~5h22m (done ~11-15 17:45) | peak 12.3/15.9 GB
+[ep 1/3 | step 10/333   3.0%] loss 0.134 | head acc cat 0.57 part 0.57 vis 0.66 (last 80) | lr 3.0e-05 | grad 0.36 |   49s/step | elapsed 9m08s | left ~5h17m (done ~11-15 17:41) | peak 12.3/15.9 GB
+[ep 1/3 | step 11/333   3.3%] loss 0.135 | head acc cat 0.60 part 0.56 vis 0.65 (last 80) | lr 3.3e-05 | grad 0.27 |   59s/step | elapsed 10m07s | left ~5h18m (done ~11-15 17:43) | peak 12.3/15.9 GB
+[ep 1/3 | step 12/333   3.6%] loss 0.133 | head acc cat 0.59 part 0.59 vis 0.68 (last 80) | lr 3.6e-05 | grad 0.26 |   43s/step | elapsed 10m50s | left ~5h12m (done ~11-15 17:38) | peak 12.3/15.9 GB
+[ep 1/3 | step 13/333   3.9%] loss 0.137 | head acc cat 0.59 part 0.59 vis 0.65 (last 80) | lr 3.9e-05 | grad 0.22 |   62s/step | elapsed 11m52s | left ~5h14m (done ~11-15 17:41) | peak 12.3/15.9 GB
+[ep 1/3 | step 14/333   4.2%] loss 0.130 | head acc cat 0.61 part 0.61 vis 0.65 (last 80) | lr 4.2e-05 | grad 0.30 |   67s/step | elapsed 12m59s | left ~5h18m (done ~11-15 17:46) | peak 12.3/15.9 GB
+[ep 1/3 | step 15/333   4.5%] loss 0.130 | head acc cat 0.62 part 0.61 vis 0.61 (last 80) | lr 4.5e-05 | grad 0.26 |   70s/step | elapsed 14m08s | left ~5h22m (done ~11-15 17:51) | peak 12.3/15.9 GB
+[ep 1/3 | step 16/333   4.8%] loss 0.133 | head acc cat 0.64 part 0.59 vis 0.61 (last 80) | lr 4.8e-05 | grad 0.36 |   34s/step | elapsed 14m43s | left ~5h14m (done ~11-15 17:43) | peak 12.3/15.9 GB
+[ep 1/3 | step 17/333   5.1%] loss 0.130 | head acc cat 0.66 part 0.57 vis 0.59 (last 80) | lr 5.2e-05 | grad 0.31 |   49s/step | elapsed 15m32s | left ~5h11m (done ~11-15 17:41) | peak 12.3/15.9 GB
+[ep 1/3 | step 18/333   5.4%] loss 0.130 | head acc cat 0.66 part 0.56 vis 0.56 (last 80) | lr 5.5e-05 | grad 0.32 |   66s/step | elapsed 16m38s | left ~5h13m (done ~11-15 17:45) | peak 12.3/15.9 GB
+[ep 1/3 | step 19/333   5.7%] loss 0.124 | head acc cat 0.68 part 0.57 vis 0.57 (last 80) | lr 5.8e-05 | grad 0.25 |   56s/step | elapsed 17m34s | left ~5h12m (done ~11-15 17:45) | peak 12.3/15.9 GB
+[ep 1/3 | step 20/333   6.0%] loss 0.120 | head acc cat 0.66 part 0.59 vis 0.61 (last 80) | lr 6.1e-05 | grad 0.32 |   67s/step | elapsed 18m41s | left ~5h14m (done ~11-15 17:48) | peak 12.3/15.9 GB
+  warnings.warn(
+[ep 1/3 | step 21/333   6.3%] loss 0.119 | head acc cat 0.65 part 0.60 vis 0.64 (last 80) | lr 6.4e-05 | grad 0.25 |   52s/step | elapsed 19m33s | left ~5h13m (done ~11-15 17:47) | peak 12.3/15.9 GB
+[ep 1/3 | step 22/333   6.6%] loss 0.118 | head acc cat 0.66 part 0.59 vis 0.61 (last 80) | lr 6.7e-05 | grad 0.37 |   56s/step | elapsed 20m29s | left ~5h12m (done ~11-15 17:47) | peak 12.3/15.9 GB
+[ep 1/3 | step 23/333   6.9%] loss 0.115 | head acc cat 0.65 part 0.61 vis 0.62 (last 80) | lr 7.0e-05 | grad 0.28 |   48s/step | elapsed 21m18s | left ~5h09m (done ~11-15 17:45) | peak 12.3/15.9 GB
+[ep 1/3 | step 24/333   7.2%] loss 0.121 | head acc cat 0.66 part 0.61 vis 0.64 (last 80) | lr 7.3e-05 | grad 0.43 |   66s/step | elapsed 22m23s | left ~5h10m (done ~11-15 17:48) | peak 12.3/15.9 GB
+[ep 1/3 | step 25/333   7.5%] loss 0.123 | head acc cat 0.64 part 0.64 vis 0.64 (last 80) | lr 7.6e-05 | grad 0.39 |   66s/step | elapsed 23m30s | left ~5h12m (done ~11-15 17:50) | peak 12.3/15.9 GB
+[ep 1/3 | step 26/333   7.8%] loss 0.118 | head acc cat 0.62 part 0.66 vis 0.61 (last 80) | lr 7.9e-05 | grad 0.25 |   77s/step | elapsed 24m47s | left ~5h15m (done ~11-15 17:54) | peak 12.3/15.9 GB
+[ep 1/3 | step 27/333   8.1%] loss 0.119 | head acc cat 0.62 part 0.68 vis 0.61 (last 80) | lr 8.2e-05 | grad 0.42 |   50s/step | elapsed 25m37s | left ~5h12m (done ~11-15 17:53) | peak 12.3/15.9 GB
+[ep 1/3 | step 28/333   8.4%] loss 0.117 | head acc cat 0.62 part 0.68 vis 0.60 (last 80) | lr 8.5e-05 | grad 0.42 |   47s/step | elapsed 26m24s | left ~5h10m (done ~11-15 17:51) | peak 12.3/15.9 GB
+[ep 1/3 | step 29/333   8.7%] loss 0.118 | head acc cat 0.64 part 0.65 vis 0.62 (last 80) | lr 8.8e-05 | grad 0.35 |   83s/step | elapsed 27m47s | left ~5h13m (done ~11-15 17:56) | peak 12.3/15.9 GB
+[ep 1/3 | step 30/333   9.0%] loss 0.120 | head acc cat 0.65 part 0.65 vis 0.64 (last 80) | lr 9.1e-05 | grad 0.29 |   55s/step | elapsed 28m42s | left ~5h12m (done ~11-15 17:56) | peak 12.3/15.9 GB
+[ep 1/3 | step 31/333   9.3%] loss 0.113 | head acc cat 0.66 part 0.68 vis 0.62 (last 80) | lr 9.4e-05 | grad 0.22 |   86s/step | elapsed 30m08s | left ~5h16m (done ~11-15 18:01) | peak 12.3/15.9 GB
+[ep 1/3 | step 32/333   9.6%] loss 0.113 | head acc cat 0.66 part 0.70 vis 0.65 (last 80) | lr 9.7e-05 | grad 0.45 |   43s/step | elapsed 30m51s | left ~5h12m (done ~11-15 17:58) | peak 12.3/15.9 GB
+[ep 1/3 | step 33/333   9.9%] loss 0.109 | head acc cat 0.68 part 0.69 vis 0.66 (last 80) | lr 1.0e-04 | grad 0.27 |   47s/step | elapsed 31m38s | left ~5h10m (done ~11-15 17:56) | peak 12.3/15.9 GB
+[ep 1/3 | step 34/333  10.2%] loss 0.096 | head acc cat 0.69 part 0.74 vis 0.69 (last 80) | lr 1.0e-04 | grad 0.27 |   63s/step | elapsed 32m41s | left ~5h10m (done ~11-15 17:57) | peak 12.3/15.9 GB
+[ep 1/3 | step 35/333  10.5%] loss 0.099 | head acc cat 0.68 part 0.72 vis 0.70 (last 80) | lr 1.0e-04 | grad 0.41 |   40s/step | elapsed 33m21s | left ~5h06m (done ~11-15 17:54) | peak 12.3/15.9 GB
+[ep 1/3 | step 36/333  10.8%] loss 0.106 | head acc cat 0.70 part 0.70 vis 0.71 (last 80) | lr 1.0e-04 | grad 0.29 |   57s/step | elapsed 34m18s | left ~5h05m (done ~11-15 17:54) | peak 12.3/15.9 GB
+[ep 1/3 | step 37/333  11.1%] loss 0.098 | head acc cat 0.71 part 0.71 vis 0.76 (last 80) | lr 1.0e-04 | grad 0.18 |   52s/step | elapsed 35m10s | left ~5h03m (done ~11-15 17:53) | peak 12.3/15.9 GB
+[ep 1/3 | step 38/333  11.4%] loss 0.093 | head acc cat 0.74 part 0.72 vis 0.80 (last 80) | lr 1.0e-04 | grad 0.41 |   72s/step | elapsed 36m22s | left ~5h04m (done ~11-15 17:56) | peak 12.3/15.9 GB
+[ep 1/3 | step 39/333  11.7%] loss 0.094 | head acc cat 0.72 part 0.72 vis 0.79 (last 80) | lr 1.0e-04 | grad 0.29 |   68s/step | elapsed 37m30s | left ~5h05m (done ~11-15 17:57) | peak 12.3/15.9 GB
+[ep 1/3 | step 40/333  12.0%] loss 0.087 | head acc cat 0.75 part 0.71 vis 0.80 (last 80) | lr 1.0e-04 | grad 0.38 |   51s/step | elapsed 38m21s | left ~5h03m (done ~11-15 17:56) | peak 12.3/15.9 GB
+[ep 1/3 | step 41/333  12.3%] loss 0.095 | head acc cat 0.69 part 0.70 vis 0.80 (last 80) | lr 1.0e-04 | grad 0.26 |   41s/step | elapsed 39m02s | left ~5h00m (done ~11-15 17:54) | peak 12.3/15.9 GB
+[ep 1/3 | step 42/333  12.6%] loss 0.093 | head acc cat 0.68 part 0.69 vis 0.80 (last 80) | lr 1.0e-04 | grad 0.33 |   43s/step | elapsed 39m44s | left ~4h57m (done ~11-15 17:52) | peak 12.3/15.9 GB
+[ep 1/3 | step 43/333  12.9%] loss 0.101 | head acc cat 0.65 part 0.68 vis 0.80 (last 80) | lr 1.0e-04 | grad 0.34 |   42s/step | elapsed 40m27s | left ~4h55m (done ~11-15 17:50) | peak 12.3/15.9 GB
+[ep 1/3 | step 44/333  13.2%] loss 0.101 | head acc cat 0.68 part 0.66 vis 0.78 (last 80) | lr 1.0e-04 | grad 0.34 |   65s/step | elapsed 41m32s | left ~4h55m (done ~11-15 17:51) | peak 12.3/15.9 GB
+[ep 1/3 | step 45/333  13.5%] loss 0.094 | head acc cat 0.71 part 0.65 vis 0.80 (last 80) | lr 1.0e-04 | grad 0.34 |   47s/step | elapsed 42m19s | left ~4h53m (done ~11-15 17:50) | peak 12.3/15.9 GB
+[ep 1/3 | step 46/333  13.8%] loss 0.085 | head acc cat 0.72 part 0.69 vis 0.81 (last 80) | lr 1.0e-04 | grad 0.27 |   55s/step | elapsed 43m14s | left ~4h52m (done ~11-15 17:50) | peak 12.3/15.9 GB
+[ep 1/3 | step 47/333  14.1%] loss 0.087 | head acc cat 0.71 part 0.70 vis 0.81 (last 80) | lr 9.9e-05 | grad 0.21 |   76s/step | elapsed 44m30s | left ~4h53m (done ~11-15 17:52) | peak 12.3/15.9 GB
+[ep 1/3 | step 48/333  14.4%] loss 0.083 | head acc cat 0.72 part 0.71 vis 0.81 (last 80) | lr 9.9e-05 | grad 0.31 |   50s/step | elapsed 45m20s | left ~4h51m (done ~11-15 17:51) | peak 12.3/15.9 GB
+[ep 1/3 | step 49/333  14.7%] loss 0.080 | head acc cat 0.71 part 0.74 vis 0.80 (last 80) | lr 9.9e-05 | grad 0.38 |   53s/step | elapsed 46m13s | left ~4h50m (done ~11-15 17:51) | peak 12.3/15.9 GB
+[ep 1/3 | step 50/333  15.0%] loss 0.082 | head acc cat 0.71 part 0.79 vis 0.75 (last 80) | lr 9.9e-05 | grad 0.33 |   55s/step | elapsed 47m08s | left ~4h49m (done ~11-15 17:51) | peak 12.3/15.9 GB
+[ep 1/3 | step 51/333  15.3%] loss 0.077 | head acc cat 0.75 part 0.80 vis 0.76 (last 80) | lr 9.9e-05 | grad 0.26 |   47s/step | elapsed 47m56s | left ~4h47m (done ~11-15 17:50) | peak 12.3/15.9 GB
+[ep 1/3 | step 52/333  15.6%] loss 0.081 | head acc cat 0.74 part 0.80 vis 0.72 (last 80) | lr 9.9e-05 | grad 0.34 |   62s/step | elapsed 48m58s | left ~4h47m (done ~11-15 17:50) | peak 12.3/15.9 GB
+[ep 1/3 | step 53/333  15.9%] loss 0.075 | head acc cat 0.76 part 0.81 vis 0.71 (last 80) | lr 9.9e-05 | grad 0.41 |   67s/step | elapsed 50m05s | left ~4h47m (done ~11-15 17:52) | peak 12.3/15.9 GB
+[ep 1/3 | step 54/333  16.2%] loss 0.079 | head acc cat 0.72 part 0.80 vis 0.70 (last 80) | lr 9.9e-05 | grad 0.45 |   40s/step | elapsed 50m45s | left ~4h44m (done ~11-15 17:50) | peak 12.3/15.9 GB
+[ep 1/3 | step 55/333  16.5%] loss 0.079 | head acc cat 0.72 part 0.81 vis 0.65 (last 80) | lr 9.9e-05 | grad 0.25 |   60s/step | elapsed 51m45s | left ~4h44m (done ~11-15 17:50) | peak 12.3/15.9 GB
+[ep 1/3 | step 56/333  16.8%] loss 0.080 | head acc cat 0.71 part 0.78 vis 0.66 (last 80) | lr 9.9e-05 | grad 0.35 |   43s/step | elapsed 52m29s | left ~4h42m (done ~11-15 17:49) | peak 12.3/15.9 GB
+[ep 1/3 | step 57/333  17.1%] loss 0.083 | head acc cat 0.70 part 0.72 vis 0.65 (last 80) | lr 9.8e-05 | grad 0.42 |   57s/step | elapsed 53m26s | left ~4h41m (done ~11-15 17:49) | peak 12.3/15.9 GB
+[ep 1/3 | step 58/333  17.4%] loss 0.087 | head acc cat 0.66 part 0.72 vis 0.60 (last 80) | lr 9.8e-05 | grad 0.29 |   53s/step | elapsed 54m19s | left ~4h40m (done ~11-15 17:49) | peak 12.3/15.9 GB
+[ep 1/3 | step 59/333  17.7%] loss 0.096 | head acc cat 0.65 part 0.74 vis 0.55 (last 80) | lr 9.8e-05 | grad 0.37 |   40s/step | elapsed 54m59s | left ~4h37m (done ~11-15 17:47) | peak 12.3/15.9 GB
+[ep 1/3 | step 60/333  18.0%] loss 0.099 | head acc cat 0.62 part 0.71 vis 0.57 (last 80) | lr 9.8e-05 | grad 0.54 |   37s/step | elapsed 55m36s | left ~4h35m (done ~11-15 17:46) | peak 12.3/15.9 GB
+[ep 1/3 | step 61/333  18.3%] loss 0.104 | head acc cat 0.62 part 0.69 vis 0.55 (last 80) | lr 9.8e-05 | grad 0.36 |   57s/step | elapsed 56m33s | left ~4h34m (done ~11-15 17:46) | peak 12.3/15.9 GB
+[ep 1/3 | step 62/333  18.6%] loss 0.099 | head acc cat 0.61 part 0.71 vis 0.60 (last 80) | lr 9.8e-05 | grad 0.34 |   44s/step | elapsed 57m18s | left ~4h32m (done ~11-15 17:45) | peak 12.3/15.9 GB
+[ep 1/3 | step 63/333  18.9%] loss 0.098 | head acc cat 0.65 part 0.72 vis 0.56 (last 80) | lr 9.8e-05 | grad 0.30 |   71s/step | elapsed 58m29s | left ~4h33m (done ~11-15 17:46) | peak 12.3/15.9 GB
+[ep 1/3 | step 64/333  19.2%] loss 0.095 | head acc cat 0.66 part 0.75 vis 0.61 (last 80) | lr 9.7e-05 | grad 0.22 |   61s/step | elapsed 59m30s | left ~4h32m (done ~11-15 17:46) | peak 12.3/15.9 GB
+[ep 1/3 | step 65/333  19.5%] loss 0.092 | head acc cat 0.68 part 0.76 vis 0.65 (last 80) | lr 9.7e-05 | grad 0.25 |   54s/step | elapsed 1h00m | left ~4h31m (done ~11-15 17:46) | peak 12.3/15.9 GB
+[ep 1/3 | step 66/333  19.8%] loss 0.093 | head acc cat 0.66 part 0.80 vis 0.62 (last 80) | lr 9.7e-05 | grad 0.32 |   56s/step | elapsed 1h01m | left ~4h30m (done ~11-15 17:46) | peak 12.3/15.9 GB
+[ep 1/3 | step 67/333  20.1%] loss 0.092 | head acc cat 0.66 part 0.82 vis 0.62 (last 80) | lr 9.7e-05 | grad 0.41 |   70s/step | elapsed 1h02m | left ~4h30m (done ~11-15 17:48) | peak 12.3/15.9 GB
+[ep 1/3 | step 68/333  20.4%] loss 0.091 | head acc cat 0.66 part 0.85 vis 0.70 (last 80) | lr 9.7e-05 | grad 0.35 |   57s/step | elapsed 1h03m | left ~4h29m (done ~11-15 17:48) | peak 12.3/15.9 GB
+[ep 1/3 | step 69/333  20.7%] loss 0.081 | head acc cat 0.70 part 0.86 vis 0.76 (last 80) | lr 9.6e-05 | grad 0.28 |   53s/step | elapsed 1h04m | left ~4h28m (done ~11-15 17:47) | peak 12.3/15.9 GB
+[ep 1/3 | step 70/333  21.0%] loss 0.079 | head acc cat 0.70 part 0.86 vis 0.74 (last 80) | lr 9.6e-05 | grad 0.45 |   74s/step | elapsed 1h05m | left ~4h28m (done ~11-15 17:49) | peak 12.3/15.9 GB
+[ep 1/3 | step 71/333  21.3%] loss 0.079 | head acc cat 0.70 part 0.86 vis 0.72 (last 80) | lr 9.6e-05 | grad 0.43 |   48s/step | elapsed 1h06m | left ~4h27m (done ~11-15 17:48) | peak 12.3/15.9 GB
+[ep 1/3 | step 72/333  21.6%] loss 0.075 | head acc cat 0.76 part 0.84 vis 0.71 (last 80) | lr 9.6e-05 | grad 0.22 |   44s/step | elapsed 1h07m | left ~4h25m (done ~11-15 17:47) | peak 12.3/15.9 GB
+[ep 1/3 | step 73/333  21.9%] loss 0.075 | head acc cat 0.72 part 0.82 vis 0.76 (last 80) | lr 9.6e-05 | grad 0.36 |   50s/step | elapsed 1h07m | left ~4h24m (done ~11-15 17:47) | peak 12.3/15.9 GB
+[ep 1/3 | step 74/333  22.2%] loss 0.077 | head acc cat 0.71 part 0.79 vis 0.74 (last 80) | lr 9.5e-05 | grad 0.45 |   70s/step | elapsed 1h09m | left ~4h24m (done ~11-15 17:48) | peak 12.3/15.9 GB
+[ep 1/3 | step 75/333  22.5%] loss 0.080 | head acc cat 0.68 part 0.78 vis 0.74 (last 80) | lr 9.5e-05 | grad 0.33 |   58s/step | elapsed 1h10m | left ~4h23m (done ~11-15 17:48) | peak 12.3/15.9 GB
+[ep 1/3 | step 76/333  22.8%] loss 0.082 | head acc cat 0.69 part 0.74 vis 0.74 (last 80) | lr 9.5e-05 | grad 0.32 |   47s/step | elapsed 1h10m | left ~4h22m (done ~11-15 17:47) | peak 12.3/15.9 GB
+[ep 1/3 | step 77/333  23.1%] loss 0.082 | head acc cat 0.70 part 0.74 vis 0.72 (last 80) | lr 9.5e-05 | grad 0.38 |   64s/step | elapsed 1h11m | left ~4h21m (done ~11-15 17:48) | peak 12.3/15.9 GB
+[ep 1/3 | step 78/333  23.4%] loss 0.079 | head acc cat 0.71 part 0.75 vis 0.70 (last 80) | lr 9.5e-05 | grad 0.28 |   55s/step | elapsed 1h12m | left ~4h20m (done ~11-15 17:48) | peak 12.3/15.9 GB
+[ep 1/3 | step 79/333  23.7%] loss 0.084 | head acc cat 0.66 part 0.72 vis 0.70 (last 80) | lr 9.4e-05 | grad 0.30 |   44s/step | elapsed 1h13m | left ~4h19m (done ~11-15 17:47) | peak 12.3/15.9 GB
+[ep 1/3 | step 80/333  24.0%] loss 0.078 | head acc cat 0.68 part 0.74 vis 0.74 (last 80) | lr 9.4e-05 | grad 0.31 |   50s/step | elapsed 1h14m | left ~4h17m (done ~11-15 17:47) | peak 12.3/15.9 GB
+[ep 1/3 | step 81/333  24.3%] loss 0.073 | head acc cat 0.68 part 0.76 vis 0.79 (last 80) | lr 9.4e-05 | grad 0.38 |   57s/step | elapsed 1h15m | left ~4h16m (done ~11-15 17:47) | peak 12.3/15.9 GB
+[ep 1/3 | step 82/333  24.6%] loss 0.082 | head acc cat 0.62 part 0.75 vis 0.78 (last 80) | lr 9.4e-05 | grad 0.55 |   55s/step | elapsed 1h16m | left ~4h15m (done ~11-15 17:47) | peak 12.3/15.9 GB
+[ep 1/3 | step 83/333  24.9%] loss 0.083 | head acc cat 0.65 part 0.72 vis 0.74 (last 80) | lr 9.3e-05 | grad 0.34 |   64s/step | elapsed 1h17m | left ~4h15m (done ~11-15 17:47) | peak 12.3/15.9 GB
+[ep 1/3 | step 84/333  25.2%] loss 0.080 | head acc cat 0.68 part 0.76 vis 0.72 (last 80) | lr 9.3e-05 | grad 0.33 |   59s/step | elapsed 1h18m | left ~4h14m (done ~11-15 17:47) | peak 12.3/15.9 GB
+[ep 1/3 | step 85/333  25.5%] loss 0.077 | head acc cat 0.71 part 0.79 vis 0.71 (last 80) | lr 9.3e-05 | grad 0.33 |   48s/step | elapsed 1h19m | left ~4h13m (done ~11-15 17:47) | peak 12.3/15.9 GB
+[ep 1/3 | step 86/333  25.8%] loss 0.074 | head acc cat 0.70 part 0.79 vis 0.71 (last 80) | lr 9.2e-05 | grad 0.29 |   71s/step | elapsed 1h20m | left ~4h13m (done ~11-15 17:48) | peak 12.3/15.9 GB
+[ep 1/3 | step 87/333  26.1%] loss 0.074 | head acc cat 0.70 part 0.80 vis 0.69 (last 80) | lr 9.2e-05 | grad 0.34 |   48s/step | elapsed 1h21m | left ~4h11m (done ~11-15 17:47) | peak 12.3/15.9 GB
+[ep 1/3 | step 88/333  26.4%] loss 0.079 | head acc cat 0.70 part 0.75 vis 0.66 (last 80) | lr 9.2e-05 | grad 0.40 |   59s/step | elapsed 1h22m | left ~4h10m (done ~11-15 17:47) | peak 12.3/15.9 GB
+[ep 1/3 | step 89/333  26.7%] loss 0.075 | head acc cat 0.75 part 0.75 vis 0.66 (last 80) | lr 9.2e-05 | grad 0.24 |   61s/step | elapsed 1h23m | left ~4h10m (done ~11-15 17:48) | peak 12.3/15.9 GB
+[ep 1/3 | step 90/333  27.0%] loss 0.075 | head acc cat 0.76 part 0.72 vis 0.64 (last 80) | lr 9.1e-05 | grad 0.38 |   59s/step | elapsed 1h24m | left ~4h09m (done ~11-15 17:48) | peak 12.3/15.9 GB
+[ep 1/3 | step 91/333  27.3%] loss 0.086 | head acc cat 0.72 part 0.66 vis 0.64 (last 80) | lr 9.1e-05 | grad 0.57 |   50s/step | elapsed 1h24m | left ~4h08m (done ~11-15 17:48) | peak 12.3/15.9 GB
+[ep 1/3 | step 92/333  27.6%] loss 0.077 | head acc cat 0.76 part 0.68 vis 0.66 (last 80) | lr 9.1e-05 | grad 0.35 |   51s/step | elapsed 1h25m | left ~4h07m (done ~11-15 17:47) | peak 12.3/15.9 GB
+[ep 1/3 | step 93/333  27.9%] loss 0.076 | head acc cat 0.74 part 0.72 vis 0.70 (last 80) | lr 9.0e-05 | grad 0.26 |   54s/step | elapsed 1h26m | left ~4h06m (done ~11-15 17:47) | peak 12.3/15.9 GB
+[ep 1/3 | step 94/333  28.2%] loss 0.080 | head acc cat 0.71 part 0.72 vis 0.72 (last 80) | lr 9.0e-05 | grad 0.50 |   62s/step | elapsed 1h27m | left ~4h05m (done ~11-15 17:47) | peak 12.3/15.9 GB
+[ep 1/3 | step 95/333  28.5%] loss 0.085 | head acc cat 0.66 part 0.69 vis 0.75 (last 80) | lr 9.0e-05 | grad 0.47 |   47s/step | elapsed 1h28m | left ~4h04m (done ~11-15 17:47) | peak 12.3/15.9 GB
+[ep 1/3 | step 96/333  28.8%] loss 0.092 | head acc cat 0.64 part 0.70 vis 0.75 (last 80) | lr 9.0e-05 | grad 0.50 |   53s/step | elapsed 1h29m | left ~4h03m (done ~11-15 17:47) | peak 12.3/15.9 GB
+[ep 1/3 | step 97/333  29.1%] loss 0.092 | head acc cat 0.61 part 0.70 vis 0.78 (last 80) | lr 8.9e-05 | grad 0.27 |   53s/step | elapsed 1h30m | left ~4h02m (done ~11-15 17:47) | peak 12.3/15.9 GB
+[ep 1/3 | step 98/333  29.4%] loss 0.089 | head acc cat 0.59 part 0.72 vis 0.81 (last 80) | lr 8.9e-05 | grad 0.45 |   52s/step | elapsed 1h31m | left ~4h00m (done ~11-15 17:46) | peak 12.3/15.9 GB
+[ep 1/3 | step 99/333  29.7%] loss 0.088 | head acc cat 0.56 part 0.74 vis 0.82 (last 80) | lr 8.9e-05 | grad 0.38 |   47s/step | elapsed 1h31m | left ~3h59m (done ~11-15 17:46) | peak 12.3/15.9 GB
+[ep 1/3 | step 100/333  30.0%] loss 0.091 | head acc cat 0.55 part 0.75 vis 0.85 (last 80) | lr 8.8e-05 | grad 0.34 |   43s/step | elapsed 1h32m | left ~3h58m (done ~11-15 17:45) | peak 12.3/15.9 GB
+[ep 1/3 | step 101/333  30.3%] loss 0.085 | head acc cat 0.56 part 0.79 vis 0.85 (last 80) | lr 8.8e-05 | grad 0.52 |   46s/step | elapsed 1h33m | left ~3h56m (done ~11-15 17:45) | peak 12.3/15.9 GB
+[ep 1/3 | step 102/333  30.6%] loss 0.083 | head acc cat 0.55 part 0.81 vis 0.85 (last 80) | lr 8.8e-05 | grad 0.28 |   60s/step | elapsed 1h34m | left ~3h56m (done ~11-15 17:45) | peak 12.3/15.9 GB
+[ep 1/3 | step 103/333  30.9%] loss 0.086 | head acc cat 0.57 part 0.79 vis 0.82 (last 80) | lr 8.7e-05 | grad 0.44 |   64s/step | elapsed 1h35m | left ~3h55m (done ~11-15 17:45) | peak 12.3/15.9 GB
+[ep 1/3 | step 104/333  31.2%] loss 0.083 | head acc cat 0.60 part 0.78 vis 0.82 (last 80) | lr 8.7e-05 | grad 0.31 |   43s/step | elapsed 1h36m | left ~3h54m (done ~11-15 17:45) | peak 12.3/15.9 GB
+[ep 1/3 | step 105/333  31.5%] loss 0.076 | head acc cat 0.65 part 0.79 vis 0.84 (last 80) | lr 8.6e-05 | grad 0.29 |   43s/step | elapsed 1h36m | left ~3h52m (done ~11-15 17:44) | peak 12.3/15.9 GB
+[ep 1/3 | step 106/333  31.8%] loss 0.067 | head acc cat 0.70 part 0.79 vis 0.86 (last 80) | lr 8.6e-05 | grad 0.33 |   58s/step | elapsed 1h37m | left ~3h52m (done ~11-15 17:44) | peak 13.0/15.9 GB
+[ep 1/3 | step 107/333  32.1%] loss 0.067 | head acc cat 0.69 part 0.79 vis 0.88 (last 80) | lr 8.6e-05 | grad 0.34 |   53s/step | elapsed 1h38m | left ~3h51m (done ~11-15 17:44) | peak 13.0/15.9 GB
+[ep 1/3 | step 108/333  32.4%] loss 0.073 | head acc cat 0.69 part 0.78 vis 0.88 (last 80) | lr 8.5e-05 | grad 0.53 |   46s/step | elapsed 1h39m | left ~3h49m (done ~11-15 17:44) | peak 13.0/15.9 GB
+[ep 1/3 | step 109/333  32.7%] loss 0.073 | head acc cat 0.71 part 0.76 vis 0.86 (last 80) | lr 8.5e-05 | grad 0.43 |   53s/step | elapsed 1h40m | left ~3h48m (done ~11-15 17:43) | peak 13.0/15.9 GB
+[ep 1/3 | step 110/333  33.0%] loss 0.074 | head acc cat 0.69 part 0.78 vis 0.86 (last 80) | lr 8.5e-05 | grad 0.42 |   57s/step | elapsed 1h41m | left ~3h47m (done ~11-15 17:44) | peak 13.0/15.9 GB
+[ep 1/3 | step 111/333  33.3%] loss 0.074 | head acc cat 0.69 part 0.78 vis 0.86 (last 80) | lr 8.4e-05 | grad 0.39 |    4s/step | elapsed 1h41m | left ~3h46m (done ~11-15 17:43) | peak 13.0/15.9 GB
+[e3l] epoch 1 done -> C:\Users\user\Documents\멀티모달 프로젝트\outputs\lora\e3l\epoch1
+  [val head epoch1 20/100] 6.5s/review | left ~8m41s
+  [val head epoch1 40/100] 6.0s/review | left ~5m58s
+  [val head epoch1 60/100] 6.3s/review | left ~4m10s
+  [val head epoch1 80/100] 6.4s/review | left ~2m07s
+  [val head epoch1 100/100] 6.3s/review | left ~0m00s
+[val head epoch 1] G6 0.819 | Vis 0.745 | Scope 0.478 | select 0.681 | rec function 0.95 non_visual 0.78 not_visible 0.92 localized 0.67 | valid 1.00 | G6 acc sure 0.943 / unsure 0.600
+[val head E1     ] G6 0.657 | Vis 0.561 | Scope 0.280 | select 0.499 | rec function 0.50 non_visual 0.22 not_visible 0.24 localized 0.87 | valid 1.00 | G6 acc sure 0.786 / unsure 0.533
+  warnings.warn(
+[ep 2/3 | step 112/333  33.6%] loss 0.070 | head acc cat 0.72 part 0.80 vis 0.85 (last 80) | lr 8.4e-05 | grad 0.27 |   71s/step | elapsed 1h53m | left ~3h45m (done ~11-15 17:52) | peak 10.8/15.9 GB
+[ep 2/3 | step 113/333  33.9%] loss 0.074 | head acc cat 0.71 part 0.78 vis 0.82 (last 80) | lr 8.3e-05 | grad 0.46 |   49s/step | elapsed 1h53m | left ~3h43m (done ~11-15 17:52) | peak 10.8/15.9 GB
+[ep 2/3 | step 114/333  34.2%] loss 0.069 | head acc cat 0.71 part 0.80 vis 0.84 (last 80) | lr 8.3e-05 | grad 0.25 |   56s/step | elapsed 1h54m | left ~3h42m (done ~11-15 17:52) | peak 10.8/15.9 GB
+[ep 2/3 | step 115/333  34.5%] loss 0.067 | head acc cat 0.72 part 0.80 vis 0.82 (last 80) | lr 8.3e-05 | grad 0.23 |   69s/step | elapsed 1h55m | left ~3h42m (done ~11-15 17:53) | peak 11.0/15.9 GB
+[ep 2/3 | step 116/333  34.8%] loss 0.069 | head acc cat 0.70 part 0.81 vis 0.82 (last 80) | lr 8.2e-05 | grad 0.22 |   52s/step | elapsed 1h56m | left ~3h41m (done ~11-15 17:53) | peak 11.0/15.9 GB
+[ep 2/3 | step 117/333  35.1%] loss 0.070 | head acc cat 0.68 part 0.81 vis 0.80 (last 80) | lr 8.2e-05 | grad 0.42 |   49s/step | elapsed 1h57m | left ~3h40m (done ~11-15 17:52) | peak 11.0/15.9 GB
+[ep 2/3 | step 118/333  35.4%] loss 0.065 | head acc cat 0.72 part 0.81 vis 0.80 (last 80) | lr 8.1e-05 | grad 0.38 |   60s/step | elapsed 1h58m | left ~3h39m (done ~11-15 17:53) | peak 11.0/15.9 GB
+[ep 2/3 | step 119/333  35.7%] loss 0.063 | head acc cat 0.74 part 0.85 vis 0.75 (last 80) | lr 8.1e-05 | grad 0.36 |   56s/step | elapsed 1h59m | left ~3h38m (done ~11-15 17:53) | peak 11.0/15.9 GB
+[ep 2/3 | step 120/333  36.0%] loss 0.060 | head acc cat 0.75 part 0.88 vis 0.76 (last 80) | lr 8.1e-05 | grad 0.21 |   50s/step | elapsed 2h00m | left ~3h37m (done ~11-15 17:52) | peak 11.0/15.9 GB
+[ep 2/3 | step 121/333  36.3%] loss 0.057 | head acc cat 0.79 part 0.88 vis 0.75 (last 80) | lr 8.0e-05 | grad 0.25 |   68s/step | elapsed 2h01m | left ~3h37m (done ~11-15 17:53) | peak 11.0/15.9 GB
+[ep 2/3 | step 122/333  36.6%] loss 0.061 | head acc cat 0.76 part 0.85 vis 0.78 (last 80) | lr 8.0e-05 | grad 0.39 |   58s/step | elapsed 2h02m | left ~3h36m (done ~11-15 17:53) | peak 11.0/15.9 GB
+[ep 2/3 | step 123/333  36.9%] loss 0.061 | head acc cat 0.78 part 0.85 vis 0.76 (last 80) | lr 7.9e-05 | grad 0.37 |   63s/step | elapsed 2h03m | left ~3h35m (done ~11-15 17:53) | peak 11.0/15.9 GB
+[ep 2/3 | step 124/333  37.2%] loss 0.064 | head acc cat 0.74 part 0.82 vis 0.78 (last 80) | lr 7.9e-05 | grad 0.38 |   52s/step | elapsed 2h04m | left ~3h34m (done ~11-15 17:53) | peak 11.0/15.9 GB
+[ep 2/3 | step 125/333  37.5%] loss 0.068 | head acc cat 0.72 part 0.84 vis 0.75 (last 80) | lr 7.9e-05 | grad 0.43 |   43s/step | elapsed 2h05m | left ~3h33m (done ~11-15 17:53) | peak 11.0/15.9 GB
+[ep 2/3 | step 126/333  37.8%] loss 0.067 | head acc cat 0.74 part 0.85 vis 0.74 (last 80) | lr 7.8e-05 | grad 0.29 |   48s/step | elapsed 2h05m | left ~3h32m (done ~11-15 17:52) | peak 11.0/15.9 GB
+[ep 2/3 | step 127/333  38.1%] loss 0.068 | head acc cat 0.74 part 0.85 vis 0.78 (last 80) | lr 7.8e-05 | grad 0.30 |   49s/step | elapsed 2h06m | left ~3h30m (done ~11-15 17:52) | peak 11.0/15.9 GB
+[ep 2/3 | step 128/333  38.4%] loss 0.070 | head acc cat 0.72 part 0.82 vis 0.79 (last 80) | lr 7.7e-05 | grad 0.55 |   68s/step | elapsed 2h07m | left ~3h30m (done ~11-15 17:53) | peak 11.0/15.9 GB
+[ep 2/3 | step 129/333  38.7%] loss 0.068 | head acc cat 0.75 part 0.79 vis 0.81 (last 80) | lr 7.7e-05 | grad 0.38 |   47s/step | elapsed 2h08m | left ~3h29m (done ~11-15 17:52) | peak 11.0/15.9 GB
+[ep 2/3 | step 130/333  39.0%] loss 0.078 | head acc cat 0.71 part 0.72 vis 0.76 (last 80) | lr 7.6e-05 | grad 0.67 |   37s/step | elapsed 2h09m | left ~3h27m (done ~11-15 17:52) | peak 11.0/15.9 GB
+[ep 2/3 | step 131/333  39.3%] loss 0.074 | head acc cat 0.74 part 0.74 vis 0.79 (last 80) | lr 7.6e-05 | grad 0.22 |   56s/step | elapsed 2h10m | left ~3h26m (done ~11-15 17:52) | peak 11.0/15.9 GB
+[ep 2/3 | step 132/333  39.6%] loss 0.067 | head acc cat 0.76 part 0.78 vis 0.79 (last 80) | lr 7.5e-05 | grad 0.22 |   64s/step | elapsed 2h11m | left ~3h26m (done ~11-15 17:52) | peak 11.0/15.9 GB
+[ep 2/3 | step 133/333  39.9%] loss 0.066 | head acc cat 0.76 part 0.79 vis 0.82 (last 80) | lr 7.5e-05 | grad 0.33 |   37s/step | elapsed 2h11m | left ~3h24m (done ~11-15 17:51) | peak 11.0/15.9 GB
+[ep 2/3 | step 134/333  40.2%] loss 0.066 | head acc cat 0.79 part 0.80 vis 0.82 (last 80) | lr 7.5e-05 | grad 0.44 |   73s/step | elapsed 2h13m | left ~3h24m (done ~11-15 17:52) | peak 11.0/15.9 GB
+[ep 2/3 | step 135/333  40.5%] loss 0.067 | head acc cat 0.74 part 0.78 vis 0.82 (last 80) | lr 7.4e-05 | grad 0.37 |   65s/step | elapsed 2h14m | left ~3h23m (done ~11-15 17:52) | peak 11.0/15.9 GB
+[ep 2/3 | step 136/333  40.8%] loss 0.074 | head acc cat 0.72 part 0.74 vis 0.78 (last 80) | lr 7.4e-05 | grad 0.57 |   71s/step | elapsed 2h15m | left ~3h23m (done ~11-15 17:53) | peak 11.0/15.9 GB
+[ep 2/3 | step 137/333  41.1%] loss 0.070 | head acc cat 0.75 part 0.76 vis 0.78 (last 80) | lr 7.3e-05 | grad 0.26 |   49s/step | elapsed 2h16m | left ~3h22m (done ~11-15 17:53) | peak 11.0/15.9 GB
+[ep 2/3 | step 138/333  41.4%] loss 0.065 | head acc cat 0.79 part 0.79 vis 0.78 (last 80) | lr 7.3e-05 | grad 0.26 |   62s/step | elapsed 2h17m | left ~3h21m (done ~11-15 17:53) | peak 11.0/15.9 GB
+[ep 2/3 | step 139/333  41.7%] loss 0.064 | head acc cat 0.76 part 0.81 vis 0.78 (last 80) | lr 7.2e-05 | grad 0.47 |   74s/step | elapsed 2h18m | left ~3h20m (done ~11-15 17:54) | peak 11.0/15.9 GB
+[ep 2/3 | step 140/333  42.0%] loss 0.061 | head acc cat 0.76 part 0.82 vis 0.81 (last 80) | lr 7.2e-05 | grad 0.46 |   53s/step | elapsed 2h19m | left ~3h19m (done ~11-15 17:54) | peak 11.0/15.9 GB
+[ep 2/3 | step 141/333  42.3%] loss 0.064 | head acc cat 0.74 part 0.81 vis 0.80 (last 80) | lr 7.1e-05 | grad 0.36 |   58s/step | elapsed 2h20m | left ~3h18m (done ~11-15 17:54) | peak 11.0/15.9 GB
+[ep 2/3 | step 142/333  42.6%] loss 0.064 | head acc cat 0.74 part 0.81 vis 0.80 (last 80) | lr 7.1e-05 | grad 0.26 |   46s/step | elapsed 2h21m | left ~3h17m (done ~11-15 17:53) | peak 11.0/15.9 GB
+[ep 2/3 | step 143/333  42.9%] loss 0.064 | head acc cat 0.71 part 0.82 vis 0.78 (last 80) | lr 7.0e-05 | grad 0.45 |   53s/step | elapsed 2h22m | left ~3h16m (done ~11-15 17:53) | peak 11.0/15.9 GB
+[ep 2/3 | step 144/333  43.2%] loss 0.060 | head acc cat 0.71 part 0.84 vis 0.78 (last 80) | lr 7.0e-05 | grad 0.49 |   43s/step | elapsed 2h22m | left ~3h15m (done ~11-15 17:53) | peak 11.0/15.9 GB
+[ep 2/3 | step 145/333  43.5%] loss 0.055 | head acc cat 0.75 part 0.85 vis 0.82 (last 80) | lr 6.9e-05 | grad 0.43 |   48s/step | elapsed 2h23m | left ~3h14m (done ~11-15 17:52) | peak 11.0/15.9 GB
+[ep 2/3 | step 146/333  43.8%] loss 0.052 | head acc cat 0.75 part 0.85 vis 0.86 (last 80) | lr 6.9e-05 | grad 0.32 |   56s/step | elapsed 2h24m | left ~3h13m (done ~11-15 17:52) | peak 11.0/15.9 GB
+[ep 2/3 | step 147/333  44.1%] loss 0.055 | head acc cat 0.72 part 0.84 vis 0.84 (last 80) | lr 6.8e-05 | grad 0.32 |   48s/step | elapsed 2h25m | left ~3h12m (done ~11-15 17:52) | peak 11.0/15.9 GB
+[ep 2/3 | step 148/333  44.4%] loss 0.055 | head acc cat 0.72 part 0.82 vis 0.84 (last 80) | lr 6.8e-05 | grad 0.35 |   49s/step | elapsed 2h26m | left ~3h11m (done ~11-15 17:52) | peak 11.0/15.9 GB
+[ep 2/3 | step 149/333  44.7%] loss 0.056 | head acc cat 0.71 part 0.84 vis 0.82 (last 80) | lr 6.7e-05 | grad 0.36 |   52s/step | elapsed 2h26m | left ~3h10m (done ~11-15 17:52) | peak 11.0/15.9 GB
+[ep 2/3 | step 150/333  45.0%] loss 0.049 | head acc cat 0.76 part 0.88 vis 0.84 (last 80) | lr 6.7e-05 | grad 0.24 |   45s/step | elapsed 2h27m | left ~3h09m (done ~11-15 17:51) | peak 11.0/15.9 GB
+[ep 2/3 | step 151/333  45.3%] loss 0.051 | head acc cat 0.76 part 0.89 vis 0.79 (last 80) | lr 6.6e-05 | grad 0.61 |   44s/step | elapsed 2h28m | left ~3h08m (done ~11-15 17:51) | peak 11.0/15.9 GB
+[ep 2/3 | step 152/333  45.6%] loss 0.052 | head acc cat 0.76 part 0.89 vis 0.79 (last 80) | lr 6.6e-05 | grad 0.31 |   36s/step | elapsed 2h29m | left ~3h06m (done ~11-15 17:50) | peak 11.0/15.9 GB
+[ep 2/3 | step 153/333  45.9%] loss 0.048 | head acc cat 0.80 part 0.89 vis 0.81 (last 80) | lr 6.5e-05 | grad 0.32 |   48s/step | elapsed 2h29m | left ~3h05m (done ~11-15 17:50) | peak 11.0/15.9 GB
+[ep 2/3 | step 154/333  46.2%] loss 0.049 | head acc cat 0.80 part 0.89 vis 0.78 (last 80) | lr 6.5e-05 | grad 0.31 |   53s/step | elapsed 2h30m | left ~3h04m (done ~11-15 17:50) | peak 11.0/15.9 GB
+[ep 2/3 | step 155/333  46.5%] loss 0.048 | head acc cat 0.82 part 0.86 vis 0.78 (last 80) | lr 6.4e-05 | grad 0.39 |   60s/step | elapsed 2h31m | left ~3h04m (done ~11-15 17:50) | peak 11.0/15.9 GB
+[ep 2/3 | step 156/333  46.8%] loss 0.045 | head acc cat 0.85 part 0.88 vis 0.79 (last 80) | lr 6.4e-05 | grad 0.40 |   44s/step | elapsed 2h32m | left ~3h02m (done ~11-15 17:50) | peak 11.0/15.9 GB
+[ep 2/3 | step 157/333  47.1%] loss 0.045 | head acc cat 0.84 part 0.89 vis 0.81 (last 80) | lr 6.3e-05 | grad 0.33 |   78s/step | elapsed 2h33m | left ~3h02m (done ~11-15 17:51) | peak 11.0/15.9 GB
+[ep 2/3 | step 158/333  47.4%] loss 0.048 | head acc cat 0.81 part 0.89 vis 0.79 (last 80) | lr 6.3e-05 | grad 0.50 |   49s/step | elapsed 2h34m | left ~3h01m (done ~11-15 17:50) | peak 11.0/15.9 GB
+[ep 2/3 | step 159/333  47.7%] loss 0.045 | head acc cat 0.82 part 0.89 vis 0.82 (last 80) | lr 6.2e-05 | grad 0.34 |   49s/step | elapsed 2h35m | left ~3h00m (done ~11-15 17:50) | peak 11.0/15.9 GB
+[ep 2/3 | step 160/333  48.0%] loss 0.047 | head acc cat 0.80 part 0.90 vis 0.80 (last 80) | lr 6.2e-05 | grad 0.33 |   50s/step | elapsed 2h36m | left ~2h59m (done ~11-15 17:50) | peak 11.0/15.9 GB
+[ep 2/3 | step 161/333  48.3%] loss 0.046 | head acc cat 0.80 part 0.88 vis 0.85 (last 80) | lr 6.1e-05 | grad 0.33 |   50s/step | elapsed 2h37m | left ~2h58m (done ~11-15 17:50) | peak 11.0/15.9 GB
+[ep 2/3 | step 162/333  48.6%] loss 0.049 | head acc cat 0.78 part 0.84 vis 0.85 (last 80) | lr 6.1e-05 | grad 0.39 |   61s/step | elapsed 2h38m | left ~2h57m (done ~11-15 17:50) | peak 11.0/15.9 GB
+[ep 2/3 | step 163/333  48.9%] loss 0.054 | head acc cat 0.76 part 0.81 vis 0.82 (last 80) | lr 6.0e-05 | grad 0.51 |   52s/step | elapsed 2h38m | left ~2h56m (done ~11-15 17:50) | peak 11.0/15.9 GB
+[ep 2/3 | step 164/333  49.2%] loss 0.054 | head acc cat 0.78 part 0.80 vis 0.86 (last 80) | lr 6.0e-05 | grad 0.72 |   42s/step | elapsed 2h39m | left ~2h55m (done ~11-15 17:49) | peak 11.0/15.9 GB
+[ep 2/3 | step 165/333  49.5%] loss 0.060 | head acc cat 0.74 part 0.82 vis 0.82 (last 80) | lr 5.9e-05 | grad 0.35 |   66s/step | elapsed 2h40m | left ~2h54m (done ~11-15 17:50) | peak 11.0/15.9 GB
+[ep 2/3 | step 166/333  49.8%] loss 0.060 | head acc cat 0.74 part 0.82 vis 0.80 (last 80) | lr 5.9e-05 | grad 0.39 |   47s/step | elapsed 2h41m | left ~2h53m (done ~11-15 17:50) | peak 11.0/15.9 GB
+[ep 2/3 | step 167/333  50.2%] loss 0.058 | head acc cat 0.74 part 0.82 vis 0.78 (last 80) | lr 5.8e-05 | grad 0.36 |   54s/step | elapsed 2h42m | left ~2h52m (done ~11-15 17:50) | peak 11.0/15.9 GB
+[ep 2/3 | step 168/333  50.5%] loss 0.057 | head acc cat 0.76 part 0.84 vis 0.80 (last 80) | lr 5.8e-05 | grad 0.28 |   57s/step | elapsed 2h43m | left ~2h51m (done ~11-15 17:50) | peak 11.0/15.9 GB
+[ep 2/3 | step 169/333  50.8%] loss 0.059 | head acc cat 0.75 part 0.84 vis 0.79 (last 80) | lr 5.7e-05 | grad 0.48 |   65s/step | elapsed 2h44m | left ~2h51m (done ~11-15 17:50) | peak 11.0/15.9 GB
+[ep 2/3 | step 170/333  51.1%] loss 0.059 | head acc cat 0.76 part 0.81 vis 0.80 (last 80) | lr 5.7e-05 | grad 0.59 |   45s/step | elapsed 2h45m | left ~2h50m (done ~11-15 17:50) | peak 11.0/15.9 GB
+[ep 2/3 | step 171/333  51.4%] loss 0.058 | head acc cat 0.79 part 0.81 vis 0.78 (last 80) | lr 5.6e-05 | grad 0.43 |   57s/step | elapsed 2h46m | left ~2h49m (done ~11-15 17:50) | peak 11.0/15.9 GB
+[ep 2/3 | step 172/333  51.7%] loss 0.055 | head acc cat 0.82 part 0.84 vis 0.75 (last 80) | lr 5.6e-05 | grad 0.37 |   66s/step | elapsed 2h47m | left ~2h48m (done ~11-15 17:50) | peak 11.0/15.9 GB
+[ep 2/3 | step 173/333  52.0%] loss 0.052 | head acc cat 0.82 part 0.84 vis 0.78 (last 80) | lr 5.5e-05 | grad 0.33 |   66s/step | elapsed 2h48m | left ~2h47m (done ~11-15 17:50) | peak 11.0/15.9 GB
+[ep 2/3 | step 174/333  52.3%] loss 0.054 | head acc cat 0.80 part 0.84 vis 0.78 (last 80) | lr 5.5e-05 | grad 0.51 |   69s/step | elapsed 2h49m | left ~2h47m (done ~11-15 17:51) | peak 11.0/15.9 GB
+[ep 2/3 | step 175/333  52.6%] loss 0.051 | head acc cat 0.82 part 0.85 vis 0.80 (last 80) | lr 5.4e-05 | grad 0.69 |   67s/step | elapsed 2h50m | left ~2h46m (done ~11-15 17:51) | peak 11.0/15.9 GB
+[ep 2/3 | step 176/333  52.9%] loss 0.053 | head acc cat 0.80 part 0.85 vis 0.81 (last 80) | lr 5.4e-05 | grad 0.59 |   62s/step | elapsed 2h51m | left ~2h45m (done ~11-15 17:52) | peak 11.0/15.9 GB
+[ep 2/3 | step 177/333  53.2%] loss 0.054 | head acc cat 0.84 part 0.81 vis 0.81 (last 80) | lr 5.3e-05 | grad 0.55 |   69s/step | elapsed 2h52m | left ~2h44m (done ~11-15 17:52) | peak 11.0/15.9 GB
+[ep 2/3 | step 178/333  53.5%] loss 0.057 | head acc cat 0.79 part 0.81 vis 0.81 (last 80) | lr 5.3e-05 | grad 0.31 |   51s/step | elapsed 2h53m | left ~2h43m (done ~11-15 17:52) | peak 11.0/15.9 GB
+[ep 2/3 | step 179/333  53.8%] loss 0.058 | head acc cat 0.80 part 0.79 vis 0.80 (last 80) | lr 5.2e-05 | grad 0.47 |   63s/step | elapsed 2h54m | left ~2h42m (done ~11-15 17:52) | peak 11.0/15.9 GB
+[ep 2/3 | step 180/333  54.1%] loss 0.059 | head acc cat 0.80 part 0.80 vis 0.80 (last 80) | lr 5.2e-05 | grad 0.34 |   57s/step | elapsed 2h55m | left ~2h42m (done ~11-15 17:52) | peak 11.2/15.9 GB
+[ep 2/3 | step 181/333  54.4%] loss 0.058 | head acc cat 0.78 part 0.81 vis 0.82 (last 80) | lr 5.1e-05 | grad 0.38 |   41s/step | elapsed 2h56m | left ~2h40m (done ~11-15 17:52) | peak 11.2/15.9 GB
+[ep 2/3 | step 182/333  54.7%] loss 0.060 | head acc cat 0.76 part 0.81 vis 0.84 (last 80) | lr 5.1e-05 | grad 0.38 |   72s/step | elapsed 2h57m | left ~2h40m (done ~11-15 17:52) | peak 11.2/15.9 GB
+[ep 2/3 | step 183/333  55.0%] loss 0.062 | head acc cat 0.75 part 0.84 vis 0.82 (last 80) | lr 5.0e-05 | grad 0.54 |   55s/step | elapsed 2h58m | left ~2h39m (done ~11-15 17:52) | peak 11.2/15.9 GB
+[ep 2/3 | step 184/333  55.3%] loss 0.058 | head acc cat 0.79 part 0.86 vis 0.84 (last 80) | lr 4.9e-05 | grad 0.26 |   66s/step | elapsed 2h59m | left ~2h38m (done ~11-15 17:52) | peak 11.2/15.9 GB
+[ep 2/3 | step 185/333  55.6%] loss 0.056 | head acc cat 0.79 part 0.85 vis 0.81 (last 80) | lr 4.9e-05 | grad 0.39 |   58s/step | elapsed 3h00m | left ~2h37m (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 2/3 | step 186/333  55.9%] loss 0.055 | head acc cat 0.78 part 0.86 vis 0.82 (last 80) | lr 4.8e-05 | grad 0.42 |   50s/step | elapsed 3h01m | left ~2h36m (done ~11-15 17:52) | peak 11.2/15.9 GB
+[ep 2/3 | step 187/333  56.2%] loss 0.054 | head acc cat 0.75 part 0.90 vis 0.84 (last 80) | lr 4.8e-05 | grad 0.34 |   53s/step | elapsed 3h02m | left ~2h35m (done ~11-15 17:52) | peak 11.2/15.9 GB
+[ep 2/3 | step 188/333  56.5%] loss 0.050 | head acc cat 0.78 part 0.91 vis 0.84 (last 80) | lr 4.7e-05 | grad 0.39 |   65s/step | elapsed 3h03m | left ~2h34m (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 2/3 | step 189/333  56.8%] loss 0.051 | head acc cat 0.78 part 0.93 vis 0.84 (last 80) | lr 4.7e-05 | grad 0.42 |   47s/step | elapsed 3h04m | left ~2h33m (done ~11-15 17:52) | peak 11.2/15.9 GB
+[ep 2/3 | step 190/333  57.1%] loss 0.051 | head acc cat 0.76 part 0.94 vis 0.84 (last 80) | lr 4.6e-05 | grad 0.34 |   57s/step | elapsed 3h05m | left ~2h32m (done ~11-15 17:52) | peak 11.2/15.9 GB
+[ep 2/3 | step 191/333  57.4%] loss 0.050 | head acc cat 0.78 part 0.93 vis 0.85 (last 80) | lr 4.6e-05 | grad 0.29 |   43s/step | elapsed 3h05m | left ~2h31m (done ~11-15 17:52) | peak 11.2/15.9 GB
+[ep 2/3 | step 192/333  57.7%] loss 0.051 | head acc cat 0.76 part 0.91 vis 0.88 (last 80) | lr 4.5e-05 | grad 0.38 |   46s/step | elapsed 3h06m | left ~2h30m (done ~11-15 17:52) | peak 11.2/15.9 GB
+[ep 2/3 | step 193/333  58.0%] loss 0.048 | head acc cat 0.79 part 0.90 vis 0.84 (last 80) | lr 4.5e-05 | grad 0.31 |   69s/step | elapsed 3h07m | left ~2h30m (done ~11-15 17:52) | peak 11.2/15.9 GB
+[ep 2/3 | step 194/333  58.3%] loss 0.050 | head acc cat 0.75 part 0.86 vis 0.81 (last 80) | lr 4.4e-05 | grad 0.43 |   57s/step | elapsed 3h08m | left ~2h29m (done ~11-15 17:52) | peak 11.2/15.9 GB
+[ep 2/3 | step 195/333  58.6%] loss 0.051 | head acc cat 0.74 part 0.84 vis 0.82 (last 80) | lr 4.4e-05 | grad 0.34 |   51s/step | elapsed 3h09m | left ~2h28m (done ~11-15 17:52) | peak 11.2/15.9 GB
+[ep 2/3 | step 196/333  58.9%] loss 0.060 | head acc cat 0.75 part 0.84 vis 0.80 (last 80) | lr 4.3e-05 | grad 0.47 |   62s/step | elapsed 3h10m | left ~2h27m (done ~11-15 17:52) | peak 11.2/15.9 GB
+[ep 2/3 | step 197/333  59.2%] loss 0.065 | head acc cat 0.74 part 0.81 vis 0.78 (last 80) | lr 4.3e-05 | grad 0.44 |   55s/step | elapsed 3h11m | left ~2h26m (done ~11-15 17:52) | peak 11.2/15.9 GB
+[ep 2/3 | step 198/333  59.5%] loss 0.065 | head acc cat 0.76 part 0.80 vis 0.78 (last 80) | lr 4.2e-05 | grad 0.33 |   43s/step | elapsed 3h12m | left ~2h25m (done ~11-15 17:52) | peak 11.2/15.9 GB
+[ep 2/3 | step 199/333  59.8%] loss 0.062 | head acc cat 0.78 part 0.80 vis 0.76 (last 80) | lr 4.2e-05 | grad 0.32 |   63s/step | elapsed 3h13m | left ~2h24m (done ~11-15 17:52) | peak 11.2/15.9 GB
+[ep 2/3 | step 200/333  60.1%] loss 0.066 | head acc cat 0.76 part 0.76 vis 0.75 (last 80) | lr 4.1e-05 | grad 0.36 |   40s/step | elapsed 3h13m | left ~2h23m (done ~11-15 17:52) | peak 11.2/15.9 GB
+[ep 2/3 | step 201/333  60.4%] loss 0.070 | head acc cat 0.74 part 0.78 vis 0.72 (last 80) | lr 4.1e-05 | grad 0.44 |   54s/step | elapsed 3h14m | left ~2h22m (done ~11-15 17:52) | peak 11.2/15.9 GB
+[ep 2/3 | step 202/333  60.7%] loss 0.067 | head acc cat 0.74 part 0.80 vis 0.71 (last 80) | lr 4.0e-05 | grad 0.34 |   70s/step | elapsed 3h15m | left ~2h21m (done ~11-15 17:52) | peak 11.2/15.9 GB
+[ep 2/3 | step 203/333  61.0%] loss 0.067 | head acc cat 0.72 part 0.81 vis 0.75 (last 80) | lr 4.0e-05 | grad 0.22 |   54s/step | elapsed 3h16m | left ~2h20m (done ~11-15 17:52) | peak 11.2/15.9 GB
+[ep 2/3 | step 204/333  61.3%] loss 0.066 | head acc cat 0.74 part 0.84 vis 0.75 (last 80) | lr 3.9e-05 | grad 0.37 |   68s/step | elapsed 3h17m | left ~2h20m (done ~11-15 17:52) | peak 11.2/15.9 GB
+[ep 2/3 | step 205/333  61.6%] loss 0.062 | head acc cat 0.75 part 0.88 vis 0.78 (last 80) | lr 3.9e-05 | grad 0.31 |   68s/step | elapsed 3h19m | left ~2h19m (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 2/3 | step 206/333  61.9%] loss 0.059 | head acc cat 0.75 part 0.85 vis 0.79 (last 80) | lr 3.8e-05 | grad 0.46 |   81s/step | elapsed 3h20m | left ~2h18m (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 2/3 | step 207/333  62.2%] loss 0.055 | head acc cat 0.76 part 0.86 vis 0.81 (last 80) | lr 3.8e-05 | grad 0.39 |   88s/step | elapsed 3h21m | left ~2h18m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 2/3 | step 208/333  62.5%] loss 0.061 | head acc cat 0.74 part 0.84 vis 0.79 (last 80) | lr 3.7e-05 | grad 0.46 |   70s/step | elapsed 3h23m | left ~2h17m (done ~11-15 17:55) | peak 11.2/15.9 GB
+[ep 2/3 | step 209/333  62.8%] loss 0.062 | head acc cat 0.72 part 0.82 vis 0.82 (last 80) | lr 3.7e-05 | grad 0.34 |   41s/step | elapsed 3h23m | left ~2h16m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 2/3 | step 210/333  63.1%] loss 0.059 | head acc cat 0.74 part 0.84 vis 0.85 (last 80) | lr 3.6e-05 | grad 0.41 |   43s/step | elapsed 3h24m | left ~2h15m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 2/3 | step 211/333  63.4%] loss 0.055 | head acc cat 0.76 part 0.85 vis 0.86 (last 80) | lr 3.6e-05 | grad 0.31 |   70s/step | elapsed 3h25m | left ~2h14m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 2/3 | step 212/333  63.7%] loss 0.055 | head acc cat 0.76 part 0.82 vis 0.86 (last 80) | lr 3.5e-05 | grad 0.28 |   56s/step | elapsed 3h26m | left ~2h13m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 2/3 | step 213/333  64.0%] loss 0.055 | head acc cat 0.78 part 0.82 vis 0.86 (last 80) | lr 3.5e-05 | grad 0.35 |   58s/step | elapsed 3h27m | left ~2h12m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 2/3 | step 214/333  64.3%] loss 0.054 | head acc cat 0.78 part 0.84 vis 0.86 (last 80) | lr 3.4e-05 | grad 0.39 |   40s/step | elapsed 3h28m | left ~2h11m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 2/3 | step 215/333  64.6%] loss 0.057 | head acc cat 0.76 part 0.82 vis 0.82 (last 80) | lr 3.4e-05 | grad 0.38 |   46s/step | elapsed 3h28m | left ~2h10m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 2/3 | step 216/333  64.9%] loss 0.055 | head acc cat 0.74 part 0.85 vis 0.82 (last 80) | lr 3.3e-05 | grad 0.80 |   48s/step | elapsed 3h29m | left ~2h09m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 2/3 | step 217/333  65.2%] loss 0.054 | head acc cat 0.75 part 0.85 vis 0.82 (last 80) | lr 3.3e-05 | grad 0.28 |   61s/step | elapsed 3h30m | left ~2h08m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 2/3 | step 218/333  65.5%] loss 0.047 | head acc cat 0.78 part 0.89 vis 0.85 (last 80) | lr 3.2e-05 | grad 0.25 |   44s/step | elapsed 3h31m | left ~2h07m (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 2/3 | step 219/333  65.8%] loss 0.054 | head acc cat 0.72 part 0.90 vis 0.85 (last 80) | lr 3.2e-05 | grad 0.55 |   43s/step | elapsed 3h32m | left ~2h06m (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 2/3 | step 220/333  66.1%] loss 0.052 | head acc cat 0.74 part 0.93 vis 0.84 (last 80) | lr 3.1e-05 | grad 0.27 |   92s/step | elapsed 3h33m | left ~2h05m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 2/3 | step 221/333  66.4%] loss 0.053 | head acc cat 0.74 part 0.90 vis 0.84 (last 80) | lr 3.1e-05 | grad 0.21 |   54s/step | elapsed 3h34m | left ~2h04m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 2/3 | step 222/333  66.7%] loss 0.052 | head acc cat 0.74 part 0.91 vis 0.84 (last 80) | lr 3.0e-05 | grad 0.14 |    6s/step | elapsed 3h34m | left ~2h03m (done ~11-15 17:53) | peak 11.2/15.9 GB
+[e3l] epoch 2 done -> C:\Users\user\Documents\멀티모달 프로젝트\outputs\lora\e3l\epoch2
+  [val head epoch2 20/100] 6.4s/review | left ~8m34s
+  [val head epoch2 40/100] 5.9s/review | left ~5m54s
+  [val head epoch2 60/100] 6.2s/review | left ~4m07s
+  [val head epoch2 80/100] 6.3s/review | left ~2m06s
+  [val head epoch2 100/100] 6.2s/review | left ~0m00s
+[val head epoch 2] G6 0.822 | Vis 0.730 | Scope 0.552 | select 0.702 | rec function 0.95 non_visual 0.78 not_visible 0.84 localized 0.71 | valid 1.00 | G6 acc sure 0.943 / unsure 0.600
+[val head E1     ] G6 0.657 | Vis 0.561 | Scope 0.280 | select 0.499 | rec function 0.50 non_visual 0.22 not_visible 0.24 localized 0.87 | valid 1.00 | G6 acc sure 0.786 / unsure 0.533
+  warnings.warn(
+[ep 3/3 | step 223/333  67.0%] loss 0.053 | head acc cat 0.74 part 0.93 vis 0.85 (last 80) | lr 3.0e-05 | grad 0.33 |   63s/step | elapsed 3h46m | left ~1h52m (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 224/333  67.3%] loss 0.057 | head acc cat 0.71 part 0.91 vis 0.84 (last 80) | lr 2.9e-05 | grad 0.44 |   48s/step | elapsed 3h47m | left ~1h51m (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 225/333  67.6%] loss 0.058 | head acc cat 0.72 part 0.90 vis 0.86 (last 80) | lr 2.9e-05 | grad 0.25 |   57s/step | elapsed 3h48m | left ~1h50m (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 226/333  67.9%] loss 0.056 | head acc cat 0.71 part 0.91 vis 0.91 (last 80) | lr 2.8e-05 | grad 0.32 |   82s/step | elapsed 3h49m | left ~1h49m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 3/3 | step 227/333  68.2%] loss 0.051 | head acc cat 0.76 part 0.91 vis 0.93 (last 80) | lr 2.8e-05 | grad 0.20 |   49s/step | elapsed 3h50m | left ~1h48m (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 228/333  68.5%] loss 0.050 | head acc cat 0.76 part 0.93 vis 0.93 (last 80) | lr 2.7e-05 | grad 0.40 |   71s/step | elapsed 3h51m | left ~1h48m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 3/3 | step 229/333  68.8%] loss 0.052 | head acc cat 0.75 part 0.91 vis 0.93 (last 80) | lr 2.7e-05 | grad 0.28 |   41s/step | elapsed 3h52m | left ~1h47m (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 230/333  69.1%] loss 0.043 | head acc cat 0.81 part 0.91 vis 0.93 (last 80) | lr 2.6e-05 | grad 0.37 |   68s/step | elapsed 3h53m | left ~1h46m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 3/3 | step 231/333  69.4%] loss 0.043 | head acc cat 0.81 part 0.91 vis 0.93 (last 80) | lr 2.6e-05 | grad 0.25 |   64s/step | elapsed 3h54m | left ~1h45m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 3/3 | step 232/333  69.7%] loss 0.045 | head acc cat 0.79 part 0.91 vis 0.93 (last 80) | lr 2.5e-05 | grad 0.33 |   40s/step | elapsed 3h54m | left ~1h44m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 3/3 | step 233/333  70.0%] loss 0.044 | head acc cat 0.80 part 0.91 vis 0.90 (last 80) | lr 2.5e-05 | grad 0.20 |   61s/step | elapsed 3h55m | left ~1h43m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 3/3 | step 234/333  70.3%] loss 0.039 | head acc cat 0.84 part 0.93 vis 0.93 (last 80) | lr 2.5e-05 | grad 0.29 |   61s/step | elapsed 3h56m | left ~1h42m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 3/3 | step 235/333  70.6%] loss 0.040 | head acc cat 0.84 part 0.90 vis 0.90 (last 80) | lr 2.4e-05 | grad 0.44 |   71s/step | elapsed 3h58m | left ~1h41m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 3/3 | step 236/333  70.9%] loss 0.041 | head acc cat 0.85 part 0.89 vis 0.88 (last 80) | lr 2.4e-05 | grad 0.50 |   56s/step | elapsed 3h59m | left ~1h40m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 3/3 | step 237/333  71.2%] loss 0.041 | head acc cat 0.84 part 0.89 vis 0.86 (last 80) | lr 2.3e-05 | grad 0.30 |   66s/step | elapsed 4h00m | left ~1h39m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 3/3 | step 238/333  71.5%] loss 0.042 | head acc cat 0.82 part 0.88 vis 0.86 (last 80) | lr 2.3e-05 | grad 0.34 |   58s/step | elapsed 4h01m | left ~1h38m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 3/3 | step 239/333  71.8%] loss 0.040 | head acc cat 0.85 part 0.89 vis 0.85 (last 80) | lr 2.2e-05 | grad 0.29 |   59s/step | elapsed 4h02m | left ~1h38m (done ~11-15 17:55) | peak 11.2/15.9 GB
+[ep 3/3 | step 240/333  72.1%] loss 0.043 | head acc cat 0.85 part 0.89 vis 0.81 (last 80) | lr 2.2e-05 | grad 0.39 |   59s/step | elapsed 4h03m | left ~1h37m (done ~11-15 17:55) | peak 11.2/15.9 GB
+[ep 3/3 | step 241/333  72.4%] loss 0.045 | head acc cat 0.84 part 0.85 vis 0.82 (last 80) | lr 2.1e-05 | grad 0.43 |   56s/step | elapsed 4h04m | left ~1h36m (done ~11-15 17:55) | peak 11.2/15.9 GB
+[ep 3/3 | step 242/333  72.7%] loss 0.044 | head acc cat 0.86 part 0.85 vis 0.82 (last 80) | lr 2.1e-05 | grad 0.38 |   55s/step | elapsed 4h04m | left ~1h35m (done ~11-15 17:55) | peak 11.2/15.9 GB
+[ep 3/3 | step 243/333  73.0%] loss 0.050 | head acc cat 0.86 part 0.82 vis 0.84 (last 80) | lr 2.1e-05 | grad 0.40 |   37s/step | elapsed 4h05m | left ~1h34m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 3/3 | step 244/333  73.3%] loss 0.049 | head acc cat 0.86 part 0.82 vis 0.82 (last 80) | lr 2.0e-05 | grad 0.34 |   56s/step | elapsed 4h06m | left ~1h33m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 3/3 | step 245/333  73.6%] loss 0.047 | head acc cat 0.86 part 0.86 vis 0.84 (last 80) | lr 2.0e-05 | grad 0.29 |   75s/step | elapsed 4h07m | left ~1h32m (done ~11-15 17:55) | peak 11.2/15.9 GB
+[ep 3/3 | step 246/333  73.9%] loss 0.045 | head acc cat 0.84 part 0.88 vis 0.86 (last 80) | lr 1.9e-05 | grad 0.33 |   43s/step | elapsed 4h08m | left ~1h31m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 3/3 | step 247/333  74.2%] loss 0.046 | head acc cat 0.84 part 0.89 vis 0.86 (last 80) | lr 1.9e-05 | grad 0.26 |   64s/step | elapsed 4h09m | left ~1h30m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 3/3 | step 248/333  74.5%] loss 0.045 | head acc cat 0.84 part 0.90 vis 0.85 (last 80) | lr 1.9e-05 | grad 0.27 |   81s/step | elapsed 4h10m | left ~1h29m (done ~11-15 17:55) | peak 11.2/15.9 GB
+[ep 3/3 | step 249/333  74.8%] loss 0.047 | head acc cat 0.80 part 0.90 vis 0.85 (last 80) | lr 1.8e-05 | grad 0.31 |   41s/step | elapsed 4h11m | left ~1h28m (done ~11-15 17:55) | peak 11.2/15.9 GB
+[ep 3/3 | step 250/333  75.1%] loss 0.042 | head acc cat 0.79 part 0.91 vis 0.88 (last 80) | lr 1.8e-05 | grad 0.32 |   40s/step | elapsed 4h12m | left ~1h27m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 3/3 | step 251/333  75.4%] loss 0.047 | head acc cat 0.78 part 0.93 vis 0.86 (last 80) | lr 1.7e-05 | grad 0.53 |   69s/step | elapsed 4h13m | left ~1h26m (done ~11-15 17:55) | peak 11.2/15.9 GB
+[ep 3/3 | step 252/333  75.7%] loss 0.045 | head acc cat 0.78 part 0.95 vis 0.88 (last 80) | lr 1.7e-05 | grad 0.26 |   62s/step | elapsed 4h14m | left ~1h25m (done ~11-15 17:55) | peak 11.2/15.9 GB
+[ep 3/3 | step 253/333  76.0%] loss 0.037 | head acc cat 0.78 part 0.96 vis 0.88 (last 80) | lr 1.7e-05 | grad 0.28 |   41s/step | elapsed 4h15m | left ~1h24m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 3/3 | step 254/333  76.3%] loss 0.040 | head acc cat 0.76 part 0.94 vis 0.85 (last 80) | lr 1.6e-05 | grad 0.53 |   47s/step | elapsed 4h15m | left ~1h23m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 3/3 | step 255/333  76.6%] loss 0.042 | head acc cat 0.78 part 0.91 vis 0.85 (last 80) | lr 1.6e-05 | grad 0.32 |   57s/step | elapsed 4h16m | left ~1h23m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 3/3 | step 256/333  76.9%] loss 0.042 | head acc cat 0.80 part 0.90 vis 0.84 (last 80) | lr 1.5e-05 | grad 0.40 |   41s/step | elapsed 4h17m | left ~1h22m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 3/3 | step 257/333  77.2%] loss 0.044 | head acc cat 0.80 part 0.88 vis 0.82 (last 80) | lr 1.5e-05 | grad 0.43 |   39s/step | elapsed 4h18m | left ~1h21m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 3/3 | step 258/333  77.5%] loss 0.043 | head acc cat 0.80 part 0.86 vis 0.84 (last 80) | lr 1.5e-05 | grad 0.48 |   58s/step | elapsed 4h19m | left ~1h20m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 3/3 | step 259/333  77.8%] loss 0.045 | head acc cat 0.82 part 0.85 vis 0.82 (last 80) | lr 1.4e-05 | grad 0.32 |   75s/step | elapsed 4h20m | left ~1h19m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 3/3 | step 260/333  78.1%] loss 0.047 | head acc cat 0.84 part 0.81 vis 0.84 (last 80) | lr 1.4e-05 | grad 0.36 |   49s/step | elapsed 4h21m | left ~1h18m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 3/3 | step 261/333  78.4%] loss 0.041 | head acc cat 0.85 part 0.84 vis 0.82 (last 80) | lr 1.4e-05 | grad 0.38 |   56s/step | elapsed 4h22m | left ~1h17m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 3/3 | step 262/333  78.7%] loss 0.041 | head acc cat 0.85 part 0.82 vis 0.81 (last 80) | lr 1.3e-05 | grad 0.49 |   40s/step | elapsed 4h22m | left ~1h16m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 3/3 | step 263/333  79.0%] loss 0.042 | head acc cat 0.86 part 0.82 vis 0.82 (last 80) | lr 1.3e-05 | grad 0.30 |   58s/step | elapsed 4h23m | left ~1h15m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 3/3 | step 264/333  79.3%] loss 0.041 | head acc cat 0.88 part 0.85 vis 0.85 (last 80) | lr 1.2e-05 | grad 0.26 |   51s/step | elapsed 4h24m | left ~1h14m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 3/3 | step 265/333  79.6%] loss 0.038 | head acc cat 0.86 part 0.88 vis 0.86 (last 80) | lr 1.2e-05 | grad 0.18 |   59s/step | elapsed 4h25m | left ~1h13m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 3/3 | step 266/333  79.9%] loss 0.037 | head acc cat 0.88 part 0.89 vis 0.86 (last 80) | lr 1.2e-05 | grad 0.30 |   37s/step | elapsed 4h26m | left ~1h12m (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 267/333  80.2%] loss 0.039 | head acc cat 0.86 part 0.90 vis 0.86 (last 80) | lr 1.1e-05 | grad 0.44 |   59s/step | elapsed 4h27m | left ~1h11m (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 268/333  80.5%] loss 0.041 | head acc cat 0.89 part 0.90 vis 0.85 (last 80) | lr 1.1e-05 | grad 0.48 |   57s/step | elapsed 4h28m | left ~1h10m (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 269/333  80.8%] loss 0.039 | head acc cat 0.89 part 0.90 vis 0.86 (last 80) | lr 1.1e-05 | grad 0.36 |   54s/step | elapsed 4h29m | left ~1h09m (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 270/333  81.1%] loss 0.038 | head acc cat 0.88 part 0.94 vis 0.85 (last 80) | lr 1.0e-05 | grad 0.42 |   64s/step | elapsed 4h30m | left ~1h08m (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 271/333  81.4%] loss 0.041 | head acc cat 0.85 part 0.93 vis 0.84 (last 80) | lr 1.0e-05 | grad 0.44 |   46s/step | elapsed 4h30m | left ~1h07m (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 272/333  81.7%] loss 0.047 | head acc cat 0.84 part 0.90 vis 0.82 (last 80) | lr 9.9e-06 | grad 0.70 |   45s/step | elapsed 4h31m | left ~1h07m (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 273/333  82.0%] loss 0.047 | head acc cat 0.82 part 0.90 vis 0.81 (last 80) | lr 9.5e-06 | grad 0.41 |   49s/step | elapsed 4h32m | left ~1h06m (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 274/333  82.3%] loss 0.046 | head acc cat 0.82 part 0.90 vis 0.82 (last 80) | lr 9.2e-06 | grad 0.30 |   44s/step | elapsed 4h33m | left ~1h05m (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 275/333  82.6%] loss 0.046 | head acc cat 0.82 part 0.90 vis 0.82 (last 80) | lr 8.9e-06 | grad 0.27 |   83s/step | elapsed 4h34m | left ~1h04m (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 276/333  82.9%] loss 0.047 | head acc cat 0.81 part 0.90 vis 0.80 (last 80) | lr 8.6e-06 | grad 0.43 |   68s/step | elapsed 4h35m | left ~1h03m (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 277/333  83.2%] loss 0.046 | head acc cat 0.82 part 0.88 vis 0.80 (last 80) | lr 8.4e-06 | grad 0.43 |   50s/step | elapsed 4h36m | left ~1h02m (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 278/333  83.5%] loss 0.043 | head acc cat 0.81 part 0.89 vis 0.82 (last 80) | lr 8.1e-06 | grad 0.25 |   46s/step | elapsed 4h37m | left ~1h01m (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 279/333  83.8%] loss 0.043 | head acc cat 0.81 part 0.90 vis 0.81 (last 80) | lr 7.8e-06 | grad 0.59 |   87s/step | elapsed 4h38m | left ~1h00m (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 3/3 | step 280/333  84.1%] loss 0.042 | head acc cat 0.82 part 0.90 vis 0.81 (last 80) | lr 7.5e-06 | grad 0.38 |   49s/step | elapsed 4h39m | left ~59m41s (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 3/3 | step 281/333  84.4%] loss 0.040 | head acc cat 0.84 part 0.89 vis 0.85 (last 80) | lr 7.2e-06 | grad 0.62 |   60s/step | elapsed 4h40m | left ~58m46s (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 3/3 | step 282/333  84.7%] loss 0.035 | head acc cat 0.84 part 0.93 vis 0.88 (last 80) | lr 7.0e-06 | grad 0.28 |   45s/step | elapsed 4h41m | left ~57m48s (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 3/3 | step 283/333  85.0%] loss 0.034 | head acc cat 0.84 part 0.93 vis 0.89 (last 80) | lr 6.7e-06 | grad 0.33 |   56s/step | elapsed 4h42m | left ~56m52s (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 3/3 | step 284/333  85.3%] loss 0.039 | head acc cat 0.82 part 0.88 vis 0.88 (last 80) | lr 6.4e-06 | grad 0.57 |   43s/step | elapsed 4h43m | left ~55m54s (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 285/333  85.6%] loss 0.039 | head acc cat 0.84 part 0.88 vis 0.86 (last 80) | lr 6.2e-06 | grad 0.25 |   41s/step | elapsed 4h43m | left ~54m56s (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 286/333  85.9%] loss 0.038 | head acc cat 0.84 part 0.86 vis 0.90 (last 80) | lr 5.9e-06 | grad 0.30 |   46s/step | elapsed 4h44m | left ~53m59s (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 287/333  86.2%] loss 0.034 | head acc cat 0.85 part 0.89 vis 0.91 (last 80) | lr 5.7e-06 | grad 0.36 |   62s/step | elapsed 4h45m | left ~53m04s (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 288/333  86.5%] loss 0.035 | head acc cat 0.84 part 0.89 vis 0.90 (last 80) | lr 5.4e-06 | grad 0.27 |   41s/step | elapsed 4h46m | left ~52m06s (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 289/333  86.8%] loss 0.032 | head acc cat 0.84 part 0.89 vis 0.94 (last 80) | lr 5.2e-06 | grad 0.29 |   60s/step | elapsed 4h47m | left ~51m11s (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 290/333  87.1%] loss 0.034 | head acc cat 0.84 part 0.88 vis 0.94 (last 80) | lr 5.0e-06 | grad 0.35 |   51s/step | elapsed 4h48m | left ~50m15s (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 291/333  87.4%] loss 0.032 | head acc cat 0.84 part 0.90 vis 0.93 (last 80) | lr 4.8e-06 | grad 0.30 |   36s/step | elapsed 4h48m | left ~49m16s (done ~11-15 17:52) | peak 11.2/15.9 GB
+[ep 3/3 | step 292/333  87.7%] loss 0.029 | head acc cat 0.86 part 0.90 vis 0.93 (last 80) | lr 4.5e-06 | grad 0.15 |   52s/step | elapsed 4h49m | left ~48m20s (done ~11-15 17:52) | peak 11.2/15.9 GB
+[ep 3/3 | step 293/333  88.0%] loss 0.031 | head acc cat 0.85 part 0.90 vis 0.91 (last 80) | lr 4.3e-06 | grad 0.44 |   47s/step | elapsed 4h50m | left ~47m24s (done ~11-15 17:52) | peak 11.2/15.9 GB
+[ep 3/3 | step 294/333  88.3%] loss 0.026 | head acc cat 0.88 part 0.95 vis 0.90 (last 80) | lr 4.1e-06 | grad 0.46 |   53s/step | elapsed 4h51m | left ~46m28s (done ~11-15 17:52) | peak 11.2/15.9 GB
+[ep 3/3 | step 295/333  88.6%] loss 0.030 | head acc cat 0.84 part 0.94 vis 0.90 (last 80) | lr 3.9e-06 | grad 0.49 |   63s/step | elapsed 4h52m | left ~45m33s (done ~11-15 17:52) | peak 11.2/15.9 GB
+[ep 3/3 | step 296/333  88.9%] loss 0.030 | head acc cat 0.86 part 0.93 vis 0.90 (last 80) | lr 3.7e-06 | grad 0.43 |   43s/step | elapsed 4h52m | left ~44m36s (done ~11-15 17:52) | peak 11.2/15.9 GB
+[ep 3/3 | step 297/333  89.2%] loss 0.033 | head acc cat 0.84 part 0.91 vis 0.90 (last 80) | lr 3.5e-06 | grad 0.59 |   55s/step | elapsed 4h53m | left ~43m41s (done ~11-15 17:52) | peak 11.2/15.9 GB
+[ep 3/3 | step 298/333  89.5%] loss 0.037 | head acc cat 0.84 part 0.90 vis 0.91 (last 80) | lr 3.3e-06 | grad 0.32 |   75s/step | elapsed 4h55m | left ~42m48s (done ~11-15 17:52) | peak 11.2/15.9 GB
+[ep 3/3 | step 299/333  89.8%] loss 0.036 | head acc cat 0.85 part 0.90 vis 0.90 (last 80) | lr 3.1e-06 | grad 0.20 |   68s/step | elapsed 4h56m | left ~41m53s (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 300/333  90.1%] loss 0.037 | head acc cat 0.84 part 0.89 vis 0.90 (last 80) | lr 3.0e-06 | grad 0.39 |   61s/step | elapsed 4h57m | left ~40m58s (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 301/333  90.4%] loss 0.036 | head acc cat 0.85 part 0.89 vis 0.91 (last 80) | lr 2.8e-06 | grad 0.27 |   60s/step | elapsed 4h58m | left ~40m03s (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 302/333  90.7%] loss 0.040 | head acc cat 0.84 part 0.88 vis 0.86 (last 80) | lr 2.6e-06 | grad 0.43 |   69s/step | elapsed 4h59m | left ~39m09s (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 303/333  91.0%] loss 0.039 | head acc cat 0.84 part 0.89 vis 0.88 (last 80) | lr 2.4e-06 | grad 0.34 |   53s/step | elapsed 5h00m | left ~38m13s (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 304/333  91.3%] loss 0.041 | head acc cat 0.81 part 0.86 vis 0.89 (last 80) | lr 2.3e-06 | grad 0.36 |   61s/step | elapsed 5h01m | left ~37m18s (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 305/333  91.6%] loss 0.037 | head acc cat 0.84 part 0.88 vis 0.89 (last 80) | lr 2.1e-06 | grad 0.30 |   52s/step | elapsed 5h02m | left ~36m22s (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 306/333  91.9%] loss 0.040 | head acc cat 0.82 part 0.90 vis 0.84 (last 80) | lr 2.0e-06 | grad 0.65 |   54s/step | elapsed 5h03m | left ~35m26s (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 307/333  92.2%] loss 0.037 | head acc cat 0.82 part 0.93 vis 0.84 (last 80) | lr 1.8e-06 | grad 0.34 |   61s/step | elapsed 5h04m | left ~34m31s (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 308/333  92.5%] loss 0.034 | head acc cat 0.82 part 0.93 vis 0.84 (last 80) | lr 1.7e-06 | grad 0.45 |   60s/step | elapsed 5h05m | left ~33m36s (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 309/333  92.8%] loss 0.038 | head acc cat 0.81 part 0.90 vis 0.85 (last 80) | lr 1.6e-06 | grad 0.44 |   45s/step | elapsed 5h05m | left ~32m39s (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 310/333  93.1%] loss 0.040 | head acc cat 0.82 part 0.91 vis 0.81 (last 80) | lr 1.4e-06 | grad 0.48 |   43s/step | elapsed 5h06m | left ~31m43s (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 311/333  93.4%] loss 0.047 | head acc cat 0.80 part 0.88 vis 0.78 (last 80) | lr 1.3e-06 | grad 0.63 |   50s/step | elapsed 5h07m | left ~30m47s (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 312/333  93.7%] loss 0.048 | head acc cat 0.79 part 0.86 vis 0.80 (last 80) | lr 1.2e-06 | grad 0.62 |   76s/step | elapsed 5h08m | left ~29m53s (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 313/333  94.0%] loss 0.048 | head acc cat 0.79 part 0.84 vis 0.79 (last 80) | lr 1.1e-06 | grad 0.37 |   47s/step | elapsed 5h09m | left ~28m56s (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 314/333  94.3%] loss 0.047 | head acc cat 0.81 part 0.86 vis 0.79 (last 80) | lr 9.9e-07 | grad 0.40 |   79s/step | elapsed 5h10m | left ~28m02s (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 315/333  94.6%] loss 0.047 | head acc cat 0.82 part 0.86 vis 0.80 (last 80) | lr 8.9e-07 | grad 0.25 |   57s/step | elapsed 5h11m | left ~27m07s (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 316/333  94.9%] loss 0.042 | head acc cat 0.84 part 0.86 vis 0.82 (last 80) | lr 7.9e-07 | grad 0.48 |   42s/step | elapsed 5h12m | left ~26m10s (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 317/333  95.2%] loss 0.042 | head acc cat 0.85 part 0.85 vis 0.82 (last 80) | lr 7.0e-07 | grad 0.35 |   54s/step | elapsed 5h13m | left ~25m14s (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 318/333  95.5%] loss 0.040 | head acc cat 0.86 part 0.86 vis 0.81 (last 80) | lr 6.2e-07 | grad 0.18 |   56s/step | elapsed 5h14m | left ~24m19s (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 319/333  95.8%] loss 0.039 | head acc cat 0.86 part 0.89 vis 0.79 (last 80) | lr 5.4e-07 | grad 0.44 |   59s/step | elapsed 5h15m | left ~23m23s (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 320/333  96.1%] loss 0.035 | head acc cat 0.88 part 0.90 vis 0.81 (last 80) | lr 4.6e-07 | grad 0.30 |   52s/step | elapsed 5h16m | left ~22m27s (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 321/333  96.4%] loss 0.033 | head acc cat 0.90 part 0.91 vis 0.84 (last 80) | lr 3.9e-07 | grad 0.51 |   45s/step | elapsed 5h16m | left ~21m31s (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 322/333  96.7%] loss 0.034 | head acc cat 0.90 part 0.90 vis 0.86 (last 80) | lr 3.3e-07 | grad 0.58 |   52s/step | elapsed 5h17m | left ~20m36s (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 323/333  97.0%] loss 0.035 | head acc cat 0.89 part 0.91 vis 0.88 (last 80) | lr 2.7e-07 | grad 0.36 |   64s/step | elapsed 5h18m | left ~19m40s (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 324/333  97.3%] loss 0.036 | head acc cat 0.89 part 0.89 vis 0.86 (last 80) | lr 2.2e-07 | grad 0.59 |   66s/step | elapsed 5h19m | left ~18m45s (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 325/333  97.6%] loss 0.037 | head acc cat 0.89 part 0.89 vis 0.85 (last 80) | lr 1.8e-07 | grad 0.37 |   71s/step | elapsed 5h21m | left ~17m50s (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 326/333  97.9%] loss 0.041 | head acc cat 0.84 part 0.86 vis 0.84 (last 80) | lr 1.3e-07 | grad 0.32 |   54s/step | elapsed 5h21m | left ~16m54s (done ~11-15 17:53) | peak 11.2/15.9 GB
+[ep 3/3 | step 327/333  98.2%] loss 0.042 | head acc cat 0.82 part 0.85 vis 0.84 (last 80) | lr 9.9e-08 | grad 0.40 |   77s/step | elapsed 5h23m | left ~15m59s (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 3/3 | step 328/333  98.5%] loss 0.042 | head acc cat 0.82 part 0.85 vis 0.85 (last 80) | lr 6.9e-08 | grad 0.28 |   57s/step | elapsed 5h24m | left ~15m03s (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 3/3 | step 329/333  98.8%] loss 0.047 | head acc cat 0.81 part 0.82 vis 0.88 (last 80) | lr 4.4e-08 | grad 0.52 |   78s/step | elapsed 5h25m | left ~14m07s (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 3/3 | step 330/333  99.1%] loss 0.048 | head acc cat 0.80 part 0.80 vis 0.88 (last 80) | lr 2.5e-08 | grad 0.42 |   71s/step | elapsed 5h26m | left ~13m12s (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 3/3 | step 331/333  99.4%] loss 0.045 | head acc cat 0.80 part 0.81 vis 0.88 (last 80) | lr 1.1e-08 | grad 0.33 |   56s/step | elapsed 5h27m | left ~12m16s (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 3/3 | step 332/333  99.7%] loss 0.048 | head acc cat 0.76 part 0.84 vis 0.86 (last 80) | lr 2.7e-09 | grad 0.63 |   57s/step | elapsed 5h28m | left ~11m20s (done ~11-15 17:54) | peak 11.2/15.9 GB
+[ep 3/3 | step 333/333 100.0%] loss 0.048 | head acc cat 0.78 part 0.84 vis 0.85 (last 80) | lr 0.0e+00 | grad 2.41 |    4s/step | elapsed 5h28m | left ~10m24s (done ~11-15 17:53) | peak 11.2/15.9 GB
+[e3l] epoch 3 done -> C:\Users\user\Documents\멀티모달 프로젝트\outputs\lora\e3l\epoch3
+  [val head epoch3 20/100] 6.7s/review | left ~8m53s
+  [val head epoch3 40/100] 6.2s/review | left ~6m09s
+  [val head epoch3 60/100] 6.4s/review | left ~4m17s
+  [val head epoch3 80/100] 6.5s/review | left ~2m10s
+  [val head epoch3 100/100] 6.4s/review | left ~0m00s
+[val head epoch 3] G6 0.830 | Vis 0.740 | Scope 0.543 | select 0.704 | rec function 0.95 non_visual 0.78 not_visible 0.84 localized 0.71 | valid 1.00 | G6 acc sure 0.957 / unsure 0.600
+[val head E1     ] G6 0.657 | Vis 0.561 | Scope 0.280 | select 0.499 | rec function 0.50 non_visual 0.22 not_visible 0.24 localized 0.87 | valid 1.00 | G6 acc sure 0.786 / unsure 0.533
+  warnings.warn(
+[e3l] finished in 5h39m | skipped none | chosen epoch (rule): 3 -> next: python -m cluvi.run_hawk --model heavy --split val --adapter C:\Users\user\Documents\멀티모달 프로젝트\outputs\lora\e3l\epoch3
+[E3-L chain 11-15 17:54 +345m] 3/5 train exit code 0
+[E3-L chain 11-15 17:54 +345m] epoch 1 val head: G6 0.819 Vis 0.745 Scope 0.478 -> mean 0.681
+[E3-L chain 11-15 17:54 +345m] epoch 2 val head: G6 0.822 Vis 0.730 Scope 0.552 -> mean 0.702
+[E3-L chain 11-15 17:54 +345m] epoch 3 val head: G6 0.830 Vis 0.740 Scope 0.543 -> mean 0.704   <- chosen (rule: highest mean, tie -> earlier)
+[E3-L chain 11-15 17:54 +345m] 4/5 val start: python -m cluvi.run_hawk --model heavy --split val --adapter C:\Users\user\Documents\멀티모달 프로젝트\outputs\lora\e3l\epoch3
+[run_hawk] transformers 4.52.0 from C:\Users\user\Documents\멀티모달 프로젝트\HAWK\.runtime\python\transformers
+
+Loading checkpoint shards:   0%|          | 0/5 [00:00<?, ?it/s]
+Loading checkpoint shards:  20%|██        | 1/5 [00:02<00:11,  2.92s/it]
+Loading checkpoint shards:  40%|████      | 2/5 [00:06<00:09,  3.06s/it]
+Loading checkpoint shards:  60%|██████    | 3/5 [00:09<00:06,  3.25s/it]
+Loading checkpoint shards:  80%|████████  | 4/5 [00:12<00:03,  3.20s/it]
+Loading checkpoint shards: 100%|██████████| 5/5 [00:13<00:00,  2.28s/it]
+Loading checkpoint shards: 100%|██████████| 5/5 [00:13<00:00,  2.66s/it]
+[heavy] Qwen/Qwen2.5-VL-7B-Instruct | transformers 4.52.0 | nf4-llm / bf16-vision | 4-bit layers inside ViT: 0 (expect 0) | pixels 200704-1003520 | HAWK keep None | weights 6.35 GB | LoRA C:\Users\user\Documents\멀티모달 프로젝트\outputs\lora\e3l\epoch3 (112 modules)
+[warm-up 1/2] row 20 (not saved)
+[warm-up 2/2] row 192 (not saved)
+[heavy_lora-e3l-epoch3_val] 100 reviews, 0 already done, 100 to run
+[1/100   1.0%] elapsed 0m19s |  19.2s/review | left ~31m41s (done ~18:27) | row 20: damage 19.2s box_copied
+[2/100   2.0%] elapsed 0m39s |  19.5s/review | left ~31m52s (done ~18:28) | row 192: non_visual 19.8s
+[3/100   3.0%] elapsed 0m53s |  17.8s/review | left ~28m47s (done ~18:25) | row 352: manufacturing 14.4s
+[4/100   4.0%] elapsed 1m13s |  18.5s/review | left ~29m33s (done ~18:26) | row 405: damage 20.5s box_out_of_range
+[5/100   5.0%] elapsed 1m26s |  17.3s/review | left ~27m28s (done ~18:24) | row 410: manufacturing 12.8s
+[6/100   6.0%] elapsed 1m40s |  16.8s/review | left ~26m21s (done ~18:23) | row 461: not_as_described 14.2s
+[7/100   7.0%] elapsed 1m51s |  15.9s/review | left ~24m35s (done ~18:22) | row 479: not_as_described 10.2s
+[8/100   8.0%] elapsed 2m25s |  18.2s/review | left ~27m55s (done ~18:26) | row 681: manufacturing 34.6s box_copied
+[9/100   9.0%] elapsed 2m41s |  17.9s/review | left ~27m09s (done ~18:25) | row 707: damage 15.4s
+[10/100  10.0%] elapsed 3m02s |  18.2s/review | left ~27m20s (done ~18:26) | row 758: manufacturing 21.1s box_but_not_localized
+[11/100  11.0%] elapsed 3m12s |  17.5s/review | left ~26m00s (done ~18:24) | row 768: manufacturing 10.6s review_span_not_verbatim
+[12/100  12.0%] elapsed 3m22s |  16.9s/review | left ~24m43s (done ~18:23) | row 774: not_as_described 9.4s
+[13/100  13.0%] elapsed 3m37s |  16.8s/review | left ~24m17s (done ~18:23) | row 776: damage 15.5s
+[14/100  14.0%] elapsed 3m50s |  16.4s/review | left ~23m34s (done ~18:23) | row 848: not_as_described 12.4s
+[15/100  15.0%] elapsed 4m01s |  16.1s/review | left ~22m47s (done ~18:22) | row 869: manufacturing 11.1s
+[16/100  16.0%] elapsed 4m14s |  15.9s/review | left ~22m18s (done ~18:22) | row 963: manufacturing 13.6s
+[17/100  17.0%] elapsed 4m26s |  15.7s/review | left ~21m42s (done ~18:21) | row 1156: not_as_described 11.9s
+[18/100  18.0%] elapsed 4m39s |  15.5s/review | left ~21m13s (done ~18:21) | row 1204: manufacturing 12.8s
+[19/100  19.0%] elapsed 4m50s |  15.3s/review | left ~20m39s (done ~18:21) | row 1212: manufacturing 11.2s
+[20/100  20.0%] elapsed 5m16s |  15.8s/review | left ~21m05s (done ~18:22) | row 1219: manufacturing 25.6s box_copied
+[21/100  21.0%] elapsed 5m41s |  16.3s/review | left ~21m25s (done ~18:22) | row 1227: not_as_described 25.4s
+[22/100  22.0%] elapsed 5m53s |  16.1s/review | left ~20m54s (done ~18:22) | row 1300: function 12.1s review_span_not_verbatim
+[23/100  23.0%] elapsed 6m06s |  15.9s/review | left ~20m25s (done ~18:22) | row 1303: damage 12.1s
+[24/100  24.0%] elapsed 6m24s |  16.0s/review | left ~20m16s (done ~18:22) | row 1309: damage 18.2s
+[25/100  25.0%] elapsed 6m35s |  15.8s/review | left ~19m46s (done ~18:22) | row 1313: damage 11.3s
+[26/100  26.0%] elapsed 6m48s |  15.7s/review | left ~19m21s (done ~18:21) | row 1354: manufacturing 12.6s review_span_not_verbatim
+[27/100  27.0%] elapsed 6m57s |  15.5s/review | left ~18m48s (done ~18:21) | row 1407: not_as_described 9.4s
+[28/100  28.0%] elapsed 7m06s |  15.2s/review | left ~18m15s (done ~18:21) | row 1413: manufacturing 8.6s
+[29/100  29.0%] elapsed 7m16s |  15.1s/review | left ~17m49s (done ~18:20) | row 1420: non_visual 10.8s
+[30/100  30.0%] elapsed 7m28s |  14.9s/review | left ~17m25s (done ~18:20) | row 1449: not_as_described 11.3s
+[31/100  31.0%] elapsed 7m46s |  15.1s/review | left ~17m19s (done ~18:20) | row 1472: not_as_described 18.7s
+[32/100  32.0%] elapsed 7m58s |  14.9s/review | left ~16m56s (done ~18:20) | row 1499: manufacturing 11.4s review_span_not_verbatim
+[33/100  33.0%] elapsed 8m09s |  14.8s/review | left ~16m34s (done ~18:20) | row 1558: not_as_described 11.3s
+[34/100  34.0%] elapsed 8m23s |  14.8s/review | left ~16m16s (done ~18:20) | row 1573: damage 13.6s
+[35/100  35.0%] elapsed 8m42s |  14.9s/review | left ~16m09s (done ~18:20) | row 1666: damage 19.1s box_copied
+[36/100  36.0%] elapsed 8m56s |  14.9s/review | left ~15m53s (done ~18:20) | row 1733: manufacturing 13.9s
+[37/100  37.0%] elapsed 9m07s |  14.8s/review | left ~15m32s (done ~18:20) | row 1811: non_visual 11.7s
+[38/100  38.0%] elapsed 9m17s |  14.7s/review | left ~15m09s (done ~18:20) | row 1903: function 9.5s
+[39/100  39.0%] elapsed 9m38s |  14.8s/review | left ~15m05s (done ~18:20) | row 1912: function 21.2s
+[40/100  40.0%] elapsed 9m55s |  14.9s/review | left ~14m52s (done ~18:20) | row 1952: function 16.6s
+[41/100  41.0%] elapsed 10m24s |  15.2s/review | left ~14m59s (done ~18:21) | row 1988: damage 29.6s box_whole_picture,box_whole_picture,box_whole_picture,box_copied
+[42/100  42.0%] elapsed 10m36s |  15.1s/review | left ~14m38s (done ~18:20) | row 2010: not_as_described 11.2s
+[43/100  43.0%] elapsed 11m06s |  15.5s/review | left ~14m43s (done ~18:21) | row 2055: contamination 30.1s box_copied
+[44/100  44.0%] elapsed 11m24s |  15.5s/review | left ~14m30s (done ~18:21) | row 2071: damage 17.9s
+[45/100  45.0%] elapsed 11m37s |  15.5s/review | left ~14m12s (done ~18:21) | row 2086: not_as_described 13.1s
+[46/100  46.0%] elapsed 11m56s |  15.6s/review | left ~14m01s (done ~18:21) | row 2101: manufacturing 19.7s box_copied
+[47/100  47.0%] elapsed 12m09s |  15.5s/review | left ~13m42s (done ~18:21) | row 2105: damage 12.4s
+[48/100  48.0%] elapsed 12m27s |  15.6s/review | left ~13m29s (done ~18:21) | row 2131: function 17.8s box_but_not_localized
+[49/100  49.0%] elapsed 12m37s |  15.5s/review | left ~13m08s (done ~18:21) | row 2135: not_as_described 10.5s review_span_not_verbatim
+[50/100  50.0%] elapsed 12m47s |  15.4s/review | left ~12m47s (done ~18:21) | row 2141: function 9.9s
+[51/100  51.0%] elapsed 13m03s |  15.4s/review | left ~12m32s (done ~18:21) | row 2153: function 15.8s
+[52/100  52.0%] elapsed 13m25s |  15.5s/review | left ~12m23s (done ~18:21) | row 2165: damage 22.2s box_whole_picture
+[53/100  53.0%] elapsed 13m40s |  15.5s/review | left ~12m07s (done ~18:21) | row 2167: damage 14.5s
+[54/100  54.0%] elapsed 13m50s |  15.4s/review | left ~11m47s (done ~18:21) | row 2169: non_visual 10.9s
+[55/100  55.0%] elapsed 14m00s |  15.3s/review | left ~11m27s (done ~18:21) | row 2199: function 9.3s
+[56/100  56.0%] elapsed 14m15s |  15.3s/review | left ~11m12s (done ~18:21) | row 2201: function 15.1s
+[57/100  57.0%] elapsed 14m31s |  15.3s/review | left ~10m57s (done ~18:21) | row 2205: function 16.2s review_span_not_verbatim
+[58/100  58.0%] elapsed 14m44s |  15.2s/review | left ~10m40s (done ~18:21) | row 2220: non_visual 12.9s
+[59/100  59.0%] elapsed 14m57s |  15.2s/review | left ~10m23s (done ~18:21) | row 2230: function 13.0s review_span_not_verbatim
+[60/100  60.0%] elapsed 15m20s |  15.3s/review | left ~10m13s (done ~18:21) | row 2249: damage 22.7s
+[61/100  61.0%] elapsed 15m31s |  15.3s/review | left ~9m55s (done ~18:21) | row 2322: function 11.8s
+[62/100  62.0%] elapsed 15m49s |  15.3s/review | left ~9m42s (done ~18:21) | row 2343: function 17.9s review_span_not_verbatim
+[63/100  63.0%] elapsed 16m08s |  15.4s/review | left ~9m28s (done ~18:21) | row 2359: not_as_described 18.8s
+[64/100  64.0%] elapsed 16m33s |  15.5s/review | left ~9m18s (done ~18:21) | row 2447: function 24.7s
+[65/100  65.0%] elapsed 16m44s |  15.4s/review | left ~9m00s (done ~18:21) | row 2509: function 10.6s
+[66/100  66.0%] elapsed 16m58s |  15.4s/review | left ~8m44s (done ~18:21) | row 2551: damage 14.7s
+[67/100  67.0%] elapsed 17m15s |  15.5s/review | left ~8m29s (done ~18:21) | row 2579: function 16.4s
+[68/100  68.0%] elapsed 17m34s |  15.5s/review | left ~8m16s (done ~18:21) | row 2584: function 19.2s box_copied
+[69/100  69.0%] elapsed 17m49s |  15.5s/review | left ~8m00s (done ~18:21) | row 2604: non_visual 14.7s
+[70/100  70.0%] elapsed 17m59s |  15.4s/review | left ~7m42s (done ~18:21) | row 2626: function 10.8s
+[71/100  71.0%] elapsed 18m10s |  15.4s/review | left ~7m25s (done ~18:21) | row 2695: contamination 10.4s
+[72/100  72.0%] elapsed 18m22s |  15.3s/review | left ~7m08s (done ~18:21) | row 2706: damage 12.5s
+[73/100  73.0%] elapsed 18m49s |  15.5s/review | left ~6m57s (done ~18:21) | row 2711: contamination 27.1s box_copied
+[74/100  74.0%] elapsed 19m10s |  15.6s/review | left ~6m44s (done ~18:21) | row 2716: contamination 21.1s
+[75/100  75.0%] elapsed 19m25s |  15.5s/review | left ~6m28s (done ~18:21) | row 2780: not_as_described 14.2s
+[76/100  76.0%] elapsed 19m37s |  15.5s/review | left ~6m11s (done ~18:21) | row 2790: non_visual 12.0s
+[77/100  77.0%] elapsed 19m52s |  15.5s/review | left ~5m56s (done ~18:21) | row 2797: damage 15.1s box_whole_picture,box_but_not_localized
+[78/100  78.0%] elapsed 20m06s |  15.5s/review | left ~5m40s (done ~18:21) | row 2868: function 13.8s
+[79/100  79.0%] elapsed 20m18s |  15.4s/review | left ~5m23s (done ~18:21) | row 2926: function 11.9s
+[80/100  80.0%] elapsed 20m38s |  15.5s/review | left ~5m09s (done ~18:21) | row 2930: damage 20.9s box_whole_picture
+[81/100  81.0%] elapsed 21m01s |  15.6s/review | left ~4m55s (done ~18:21) | row 2962: non_visual 22.9s
+[82/100  82.0%] elapsed 21m16s |  15.6s/review | left ~4m40s (done ~18:21) | row 3012: function 14.2s
+[83/100  83.0%] elapsed 21m41s |  15.7s/review | left ~4m26s (done ~18:21) | row 3043: function 25.8s
+[84/100  84.0%] elapsed 21m53s |  15.6s/review | left ~4m10s (done ~18:21) | row 3083: function 11.8s
+[85/100  85.0%] elapsed 22m13s |  15.7s/review | left ~3m55s (done ~18:21) | row 3110: manufacturing 19.7s box_but_not_localized
+[86/100  86.0%] elapsed 22m22s |  15.6s/review | left ~3m38s (done ~18:21) | row 3144: not_as_described 9.2s
+[87/100  87.0%] elapsed 22m36s |  15.6s/review | left ~3m22s (done ~18:21) | row 3281: function 14.3s
+[88/100  88.0%] elapsed 22m46s |  15.5s/review | left ~3m06s (done ~18:21) | row 3357: not_as_described 9.8s
+[89/100  89.0%] elapsed 22m58s |  15.5s/review | left ~2m50s (done ~18:21) | row 3378: not_as_described 11.6s
+[90/100  90.0%] elapsed 23m14s |  15.5s/review | left ~2m34s (done ~18:21) | row 3425: function 15.8s
+[91/100  91.0%] elapsed 23m25s |  15.4s/review | left ~2m19s (done ~18:21) | row 3465: damage 11.5s
+[92/100  92.0%] elapsed 23m38s |  15.4s/review | left ~2m03s (done ~18:21) | row 3469: damage 12.3s box_but_not_localized
+[93/100  93.0%] elapsed 23m49s |  15.4s/review | left ~1m47s (done ~18:21) | row 3474: damage 11.3s
+[94/100  94.0%] elapsed 24m00s |  15.3s/review | left ~1m31s (done ~18:21) | row 3475: damage 11.2s box_but_not_localized
+[95/100  95.0%] elapsed 24m17s |  15.3s/review | left ~1m16s (done ~18:21) | row 3502: damage 16.7s
+[96/100  96.0%] elapsed 24m28s |  15.3s/review | left ~1m01s (done ~18:21) | row 3605: non_visual 10.9s
+[97/100  97.0%] elapsed 24m54s |  15.4s/review | left ~0m46s (done ~18:21) | row 3643: not_as_described 26.3s box_whole_picture,box_whole_picture,box_out_of_range,box_copied,box_but_not_localized
+[98/100  98.0%] elapsed 25m12s |  15.4s/review | left ~0m30s (done ~18:21) | row 3717: not_as_described 17.7s box_copied
+[99/100  99.0%] elapsed 25m26s |  15.4s/review | left ~0m15s (done ~18:21) | row 3726: not_as_described 14.3s review_span_not_verbatim
+[100/100 100.0%] elapsed 25m37s |  15.4s/review | left ~0m00s (done ~18:21) | row 3776: non_visual 10.5s
+wrote C:\Users\user\Documents\멀티모달 프로젝트\outputs\preds\heavy_lora-e3l-epoch3_val.jsonl
+[E3-L chain 11-15 18:21 +372m] 4/5 val exit code 0
+[E3-L chain 11-15 18:21 +372m] 5/5 verdict start: python -m cluvi.judge_e3 C:\Users\user\Documents\멀티모달 프로젝트\outputs\preds\heavy_lora-e3l-epoch3_val.jsonl
+
+E3-L val verdict (heavy_lora-e3l-epoch3_val vs heavy_val, n=100)
+criterion                        E1     E3-L   threshold               pass
+Group6 Macro-F1               0.657    0.830   >= 0.707 (E1 +0.05)     PASS
+function recall               0.500    0.955   >= 0.65                 PASS
+non_visual recall             0.222    0.778   >= 0.45                 PASS
+Visibility Macro-F1           0.561    0.740   >= 0.69                 PASS
+not_visible recall            0.237    0.842   >= 0.60                 PASS
+Scope Macro-F1                0.280    0.543   >= 0.395                PASS
+valid rate                    1.000    1.000   >= 0.95                 PASS
+review_span verbatim          0.920    0.910   >= 0.90                 PASS
+reviews with box problem         33       20   <= 33 (E1)              PASS
+-> 9/9 criteria met
+sure    (n= 70): G6 acc 0.786 -> 0.957 | G6 F1 0.697 -> 0.928 | Vis F1 0.544 -> 0.754
+unsure  (n= 30): G6 acc 0.533 -> 0.600 | G6 F1 0.469 -> 0.581 | Vis F1 0.589 -> 0.689
+sure-row gain +0.171, unsure-row gain +0.067 -> ok (gain not only on unsure rows)
+paired Group6 Macro-F1 +0.173 [95% CI +0.063, +0.297], label flip rate 28.0%
+watch: localized recall 0.867 -> 0.711 | Pointing 0.178 -> 0.178 | box issues {'box_copied': 17, 'box_out_of_range': 11, 'box_but_not_localized': 16, 'box_whole_picture': 13, 'bad_box': 1} -> {'box_copied': 11, 'box_out_of_range': 2, 'box_but_not_localized': 7, 'box_whole_picture': 8} | E2E median 10574.150 -> 13881.200 ms
+predicted group6 E1 {'damage': 23, 'manufacturing': 30, 'not_as_described': 29, 'function': 13, 'non_visual': 2, 'contamination': 3}
+               E3 {'damage': 24, 'non_visual': 10, 'manufacturing': 16, 'not_as_described': 21, 'function': 25, 'contamination': 4}
+wrote C:\Users\user\Documents\멀티모달 프로젝트\outputs\eval\e3l_val_judge.json
+[E3-L chain 11-15 18:21 +372m] 5/5 verdict exit code 0
+[E3-L chain 11-15 18:21 +372m] done. test 185 is NOT run: it waits for the user's go after the val verdict. (next: python -m cluvi.run_hawk --model heavy --split test --adapter C:\Users\user\Documents\멀티모달 프로젝트\outputs\lora\e3l\epoch3)
