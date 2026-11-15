@@ -61,7 +61,8 @@ def attach_lora(vlm, a):
         sys.exit(f"non-LoRA parameters are trainable: {[n for n, _ in trainable if 'lora_' not in n][:3]}")
     vlm.model.gradient_checkpointing_enable(gradient_checkpointing_kwargs={"use_reentrant": False})
     vlm.visual.gradient_checkpointing = False    # frozen ViT builds no graph; checkpointing would only re-run it
-    total = sum(p.numel() for p in vlm.model.parameters())
+    # 4-bit weights are stored two per uint8 byte, so their numel() is half the real parameter count
+    total = sum(p.numel() * (2 if p.dtype == torch.uint8 else 1) for p in vlm.model.parameters())
     n_train = sum(p.numel() for _, p in trainable)
     return peft_model, {"lora_modules": len(names), "trainable_params": n_train, "trainable_share": n_train / total,
                         "adapter_dtype": str(trainable[0][1].dtype)}
@@ -194,6 +195,9 @@ def probe(a, vlm, peft_model, info):
     rnd = random.Random(1).sample(rest, 6)
     total_gb = torch.cuda.get_device_properties(0).total_memory / 2**30
     print(f"[probe] LoRA {info} | GPU {total_gb:.1f} GB", flush=True)
+    # QwenVLM loads the model in eval mode; gradient checkpointing (and LoRA dropout) only work in train mode.
+    # Without this line every activation is kept and even a 3,500-token review runs out of memory.
+    peft_model.train()
     rows = []
     for k, s in enumerate(rnd[:1] + longest + rnd[1:]):
         ex = encode_example(vlm.proc, s, a.prompt)

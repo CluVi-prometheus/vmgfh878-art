@@ -128,7 +128,7 @@ def paired_diff(cards_a, cards_b, samples, short="group6", reps=2000, seed=0):
 ENV_KEYS = ("model", "quant", "max_images", "add_vision_id", "system_prompt", "decoding", "batch_size",
             "attn_implementation", "gpu", "torch", "transformers", "qwen_vl_utils", "bitsandbytes", "hawk_runtime", "split")
 KNOBS = {"hawk": ("hawk_keep_ratio", "hawk_commit"), "prompt": ("prompt_version", "prompt_sha1"),
-         "pixels": ("min_pixels", "max_pixels")}
+         "pixels": ("min_pixels", "max_pixels"), "adapter": ("adapter", "adapter_sha1")}   # E3: LoRA adapter on/off
 
 
 def pair_check(cfg_a, cfg_b):
