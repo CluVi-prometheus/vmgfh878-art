@@ -11,12 +11,15 @@ Sample ──▶ [ 분석기 하나 ]  ──▶ Card ──▶ Agent (Planner �
 
 | 파일 | 역할 | 주로 손댈 사람 |
 |---|---|---|
-| `common.py` | 경로, 라벨 체계, `load_split` (`gold` = test 118 + test_blind 53), `Card`, 프롬프트 채우기·파싱 | 공통 (리뷰 필수) |
-| `prompts/vlm-v0.2.txt` | Heavy 제로샷 프롬프트 원문 (버전 = 파일 이름) | 공통 |
-| `models.py` | `text` (TF-IDF+LR), `light` (Qwen2.5-VL-3B), `heavy` (Qwen2.5-VL-7B, LLM 4bit · ViT bf16), `mock` | 모델 담당 |
+| `common.py` | 경로, 라벨 체계, `load_split` (train 881 · val 100 · test 185 · dev 88), `Card`, 프롬프트 채우기·파싱 | 공통 (리뷰 필수) |
+| `prompts/vlm-v0.3.3.txt` | Heavy 제로샷 프롬프트 원문 (버전 = 파일 이름). E0에서 고정한 판. 이전 판은 비교용으로 남김 | 공통 |
+| `models.py` | `text` (TF-IDF+LR), `light` (Qwen2.5-VL-3B), `heavy` (Qwen2.5-VL-7B, LLM 4bit · ViT bf16, `--adapter`로 LoRA 얹기), `mock` | 모델 담당 |
 | `run_hawk.py` | HAWK 런타임(transformers 4.52.0 패치본)을 앞에 두고 predict 실행 (HAWK `run.sh`의 파이썬판) | — |
 | `predict.py` | 모델 × split을 **한 번만** 돌려 `outputs/preds/{모델}_{split}.jsonl` + 설정 `_config.json` 저장 | — |
-| `evaluate.py` | 지표 13개를 같은 표로 (Macro-F1 6종, Mean IoU · IoU@0.5 · Pointing, 토큰 유지율, Prefill · E2E 지연, Peak VRAM) + 신뢰구간 | 공통 |
+| `evaluate.py` | 지표 13개를 같은 표로 (Macro-F1 6종, Mean IoU · IoU@0.5 · Pointing, 토큰 유지율, Prefill · E2E 지연, Peak VRAM) + 신뢰구간 + 짝 비교 | 공통 |
+| `lora_data.py` | E3-L 학습 데이터: E1과 같은 입력 + 답의 앞머리(category · part · visibility)만 loss 마스크 | E3 |
+| `train_lora.py` | E3-L QLoRA 학습 (`--probe` GPU 점검, `--resume`, 에폭마다 val 앞머리 점검) | E3 |
+| `judge_e3.py` | E3-L val 판정: 제안서의 성공 기준을 E1과 비교 | E3 |
 | `cascade.py` | 저장된 예측으로 cascade를 **오프라인 시뮬레이션** (모델 재실행 없음) | cascade 담당 |
 | `agent.py` | mock 주문·정책 도구 + 에이전트 루프 + 근거 검증 | 에이전트 담당 |
 | `demo.py` | 민원 1건을 처음부터 끝까지 | — |
@@ -24,14 +27,16 @@ Sample ──▶ [ 분석기 하나 ]  ──▶ Card ──▶ Agent (Planner �
 ## 실행 순서
 
 ```bash
-python -m cluvi.demo --model mock                              # GPU 없이 전체 흐름 확인
-python -m cluvi.predict --model text  --split gold             # Light Text (CPU, 몇 초)
-python -m cluvi.run_hawk --model heavy --split dev --limit 5      # E0 GPU 점검 (HAWK 런타임 = transformers 4.52.0)
-python -m cluvi.run_hawk --model heavy --split gold                # E1 Qwen 제로샷 (171건)
-python -m cluvi.run_hawk --model heavy --split train --ids diag200  # E1 진단용 silver 200건 (E3 결정용)
-python -m cluvi.run_hawk --model heavy --split gold --hawk-keep 0.20   # E2 = E1 + HAWK 원본 코드
-python -m cluvi.evaluate outputs/preds/heavy_gold.jsonl outputs/preds/heavy_hawk200_gold.jsonl --base heavy_gold --format
-python -m cluvi.cascade --stages text heavy            # 2-stage
+python -m cluvi.demo --model mock                                     # GPU 없이 전체 흐름 확인
+python -m cluvi.predict --model text --split test                     # R0 글만 (CPU, 몇 초)
+python -m cluvi.run_hawk --model heavy --split dev --limit 30          # E0 형식 점검 (정답 안 봄)
+python -m cluvi.run_hawk --model heavy --split val                     # E1 Qwen 제로샷 (val 100 → test 185 순서)
+python -m cluvi.run_hawk --model heavy --split test --hawk-keep 0.20   # E2 = E1 + HAWK 원본 코드
+python -m cluvi.train_lora                                            # E3-L 학습 → outputs/lora/e3l/epoch{1,2,3}/
+python -m cluvi.run_hawk --model heavy --split val --adapter outputs/lora/e3l/epoch3   # E3-L (고른 에폭)
+python -m cluvi.judge_e3 outputs/preds/heavy_lora-e3l-epoch3_val.jsonl                # E3-L val 판정
+python -m cluvi.evaluate outputs/preds/text_test.jsonl outputs/preds/heavy_test.jsonl outputs/preds/heavy_hawk200_test.jsonl outputs/preds/heavy_lora-e3l-epoch3_test.jsonl --base heavy_test --format
+python -m cluvi.cascade --stages text heavy                           # 2-stage
 python -m cluvi.demo --model heavy --row 3 --question "교환 가능해?"
 ```
 
@@ -44,7 +49,7 @@ python -m cluvi.demo --model heavy --row 3 --question "교환 가능해?"
 | ③ Heavy Full | `--model heavy` |
 | 해상도(시각 토큰) | `--model heavy --max-pixels 200704 --tag _px256` (사진당 최대 256토큰) |
 | ④ Token Selection | `models.py`에 `heavy_ts20` 추가 → `--model heavy_ts20` (유지율 20% = HAWK의 80% 제거) |
-| LoRA 튜닝 | `models.py`에 어댑터 로드 옵션 추가 → `--tag _lora1` |
+| LoRA 튜닝 (E3-L) | `train_lora.py`로 어댑터 학습 → `--adapter outputs/lora/e3l/epoch3` (파일 이름 `heavy_lora-e3l-epoch3_{split}`) |
 | Cascade | 위 파일들을 `cascade.py --stages …`로 조합 (GPU 안 씀) |
 
 ## Cascade 한 줄 정의
