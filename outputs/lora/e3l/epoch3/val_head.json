@@ -1,0 +1,694 @@
+{
+ "epoch": 3,
+ "metrics": {
+  "all": {
+   "n": 100,
+   "valid_rate": 1.0,
+   "group6_f1": 0.8301186511877007,
+   "visibility_f1": 0.7399109953326821,
+   "scope_f1": 0.543082745741289,
+   "part_f1": 0.6064802103458318,
+   "group6_acc": 0.85,
+   "rec_function": 0.9545454545454546,
+   "rec_non_visual": 0.7777777777777778,
+   "rec_not_visible": 0.8421052631578947,
+   "rec_localized": 0.7111111111111111,
+   "select": 0.7043707974205574
+  },
+  "sure": {
+   "n": 70,
+   "valid_rate": 1.0,
+   "group6_f1": 0.9275296388199613,
+   "visibility_f1": 0.7544963036522123,
+   "scope_f1": 0.7703216374269006,
+   "part_f1": 0.6266383345651638,
+   "group6_acc": 0.9571428571428572,
+   "rec_function": 1.0,
+   "rec_non_visual": 1.0,
+   "rec_not_visible": 0.8,
+   "rec_localized": 0.7741935483870968,
+   "select": 0.8174491932996913
+  },
+  "unsure": {
+   "n": 30,
+   "valid_rate": 1.0,
+   "group6_f1": 0.5808441558441558,
+   "visibility_f1": 0.6890269151138716,
+   "scope_f1": 0.3514285714285714,
+   "part_f1": 0.590625,
+   "group6_acc": 0.6,
+   "rec_function": 0.8571428571428571,
+   "rec_non_visual": 0.3333333333333333,
+   "rec_not_visible": 0.9230769230769231,
+   "rec_localized": 0.5714285714285714,
+   "select": 0.5404332141288662
+  },
+  "seconds": 642.4
+ },
+ "e1_metrics": {
+  "all": {
+   "n": 100,
+   "valid_rate": 1.0,
+   "group6_f1": 0.6570490822591663,
+   "visibility_f1": 0.5609929078014183,
+   "scope_f1": 0.2798086124401914,
+   "part_f1": 0.36496894409937886,
+   "group6_acc": 0.71,
+   "rec_function": 0.5,
+   "rec_non_visual": 0.2222222222222222,
+   "rec_not_visible": 0.23684210526315788,
+   "rec_localized": 0.8666666666666667,
+   "select": 0.49928353416692534
+  },
+  "sure": {
+   "n": 70,
+   "valid_rate": 1.0,
+   "group6_f1": 0.6969496021220158,
+   "visibility_f1": 0.544031647746818,
+   "scope_f1": 0.36268472906403937,
+   "part_f1": 0.39098400270649075,
+   "group6_acc": 0.7857142857142857,
+   "rec_function": 0.5333333333333333,
+   "rec_non_visual": 0.3333333333333333,
+   "rec_not_visible": 0.2,
+   "rec_localized": 0.8709677419354839,
+   "select": 0.5345553263109577
+  },
+  "unsure": {
+   "n": 30,
+   "valid_rate": 1.0,
+   "group6_f1": 0.46868686868686865,
+   "visibility_f1": 0.5886809269162211,
+   "scope_f1": 0.25142857142857145,
+   "part_f1": 0.2915854978354978,
+   "group6_acc": 0.5333333333333333,
+   "rec_function": 0.42857142857142855,
+   "rec_non_visual": 0.0,
+   "rec_not_visible": 0.3076923076923077,
+   "rec_localized": 0.8571428571428571,
+   "select": 0.43626545567722036
+  }
+ },
+ "preds": {
+  "20": {
+   "group6": "damage",
+   "part": "spine_binding",
+   "visibility": "localized",
+   "raw": "```json\n{\n  \"category\": \"damage/tear_hole\",\n  \"part\": \"spine_binding\",\n  \"visibility\": \"localized\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n      \""
+  },
+  "192": {
+   "group6": "non_visual",
+   "part": "whole",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"non_visual/content\",\n  \"part\": \"whole\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \"고객은"
+  },
+  "352": {
+   "group6": "manufacturing",
+   "part": "print_surface",
+   "visibility": "localized",
+   "raw": "```json\n{\n  \"category\": \"manufacturing/print\",\n  \"part\": \"print_surface\",\n  \"visibility\": \"localized\",\n  \"boxes\": [\n    {\n      \"picture\": 2,\n      \"bbox_2d"
+  },
+  "405": {
+   "group6": "damage",
+   "part": "pages",
+   "visibility": "localized",
+   "raw": "```json\n{\n  \"category\": \"damage/tear_hole\",\n  \"part\": \"pages\",\n  \"visibility\": \"localized\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n      \"bbox_"
+  },
+  "410": {
+   "group6": "manufacturing",
+   "part": "pages",
+   "visibility": "diffuse",
+   "raw": "```json\n{\n  \"category\": \"manufacturing/material\",\n  \"part\": \"pages\",\n  \"visibility\": \"diffuse\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \"고객은"
+  },
+  "461": {
+   "group6": "not_as_described",
+   "part": "whole",
+   "visibility": "diffuse",
+   "raw": "```json\n{\n  \"category\": \"not_as_described/counterfeit_wrong\",\n  \"part\": \"whole\",\n  \"visibility\": \"diffuse\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim"
+  },
+  "479": {
+   "group6": "not_as_described",
+   "part": "pages",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"not_as_described/missing\",\n  \"part\": \"pages\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \""
+  },
+  "681": {
+   "group6": "manufacturing",
+   "part": "print_surface",
+   "visibility": "localized",
+   "raw": "```json\n{\n  \"category\": \"manufacturing/print\",\n  \"part\": \"print_surface\",\n  \"visibility\": \"localized\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n      \"bbox_2d"
+  },
+  "707": {
+   "group6": "damage",
+   "part": "body_fabric",
+   "visibility": "localized",
+   "raw": "```json\n{\n  \"category\": \"damage/tear_hole\",\n  \"part\": \"body_fabric\",\n  \"visibility\": \"localized\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n      \""
+  },
+  "758": {
+   "group6": "manufacturing",
+   "part": "lining",
+   "visibility": "diffuse",
+   "raw": "```json\n{\n  \"category\": \"manufacturing/material\",\n  \"part\": \"lining\",\n  \"visibility\": \"diffuse\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n      \"bbox_2d"
+  },
+  "768": {
+   "group6": "manufacturing",
+   "part": "body_fabric",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"manufacturing/material\",\n  \"part\": \"body_fabric\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \"고"
+  },
+  "774": {
+   "group6": "not_as_described",
+   "part": "whole",
+   "visibility": "diffuse",
+   "raw": "```json\n{\n  \"category\": \"not_as_described/counterfeit_wrong\",\n  \"part\": \"whole\",\n  \"visibility\": \"diffuse\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim"
+  },
+  "776": {
+   "group6": "damage",
+   "part": "body_fabric",
+   "visibility": "localized",
+   "raw": "```json\n{\n  \"category\": \"damage/tear_hole\",\n  \"part\": \"body_fabric\",\n  \"visibility\": \"localized\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n      \""
+  },
+  "848": {
+   "group6": "not_as_described",
+   "part": "whole",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"not_as_described/counterfeit_wrong\",\n  \"part\": \"whole\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim"
+  },
+  "869": {
+   "group6": "manufacturing",
+   "part": "whole",
+   "visibility": "diffuse",
+   "raw": "```json\n{\n  \"category\": \"manufacturing/color\",\n  \"part\": \"whole\",\n  \"visibility\": \"diffuse\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \"색상이"
+  },
+  "963": {
+   "group6": "manufacturing",
+   "part": "body_fabric",
+   "visibility": "diffuse",
+   "raw": "```json\n{\n  \"category\": \"manufacturing/material\",\n  \"part\": \"body_fabric\",\n  \"visibility\": \"diffuse\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \"고"
+  },
+  "1156": {
+   "group6": "not_as_described",
+   "part": "whole",
+   "visibility": "diffuse",
+   "raw": "```json\n{\n  \"category\": \"not_as_described/counterfeit_wrong\",\n  \"part\": \"whole\",\n  \"visibility\": \"diffuse\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim"
+  },
+  "1204": {
+   "group6": "manufacturing",
+   "part": "seam",
+   "visibility": "localized",
+   "raw": "```json\n{\n  \"category\": \"manufacturing/stitching\",\n  \"part\": \"seam\",\n  \"visibility\": \"localized\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n      \"bbox_"
+  },
+  "1212": {
+   "group6": "manufacturing",
+   "part": "body_fabric",
+   "visibility": "diffuse",
+   "raw": "```json\n{\n  \"category\": \"manufacturing/material\",\n  \"part\": \"body_fabric\",\n  \"visibility\": \"diffuse\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \"고"
+  },
+  "1219": {
+   "group6": "manufacturing",
+   "part": "seam",
+   "visibility": "localized",
+   "raw": "```json\n{\n  \"category\": \"manufacturing/stitching\",\n  \"part\": \"seam\",\n  \"visibility\": \"localized\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n      \"bbox_"
+  },
+  "1227": {
+   "group6": "not_as_described",
+   "part": "whole",
+   "visibility": "localized",
+   "raw": "```json\n{\n  \"category\": \"not_as_described/counterfeit_wrong\",\n  \"part\": \"whole\",\n  \"visibility\": \"localized\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n      \""
+  },
+  "1300": {
+   "group6": "function",
+   "part": "other",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"function/malfunction\",\n  \"part\": \"other\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \"고객"
+  },
+  "1303": {
+   "group6": "damage",
+   "part": "seal",
+   "visibility": "localized",
+   "raw": "```json\n{\n  \"category\": \"damage/crush_break\",\n  \"part\": \"seal\",\n  \"visibility\": \"localized\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n      \"bbox_2"
+  },
+  "1309": {
+   "group6": "damage",
+   "part": "other",
+   "visibility": "localized",
+   "raw": "```json\n{\n  \"category\": \"damage/crush_break\",\n  \"part\": \"other\",\n  \"visibility\": \"localized\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n      \"bbox_2d"
+  },
+  "1313": {
+   "group6": "damage",
+   "part": "product_package",
+   "visibility": "localized",
+   "raw": "```json\n{\n  \"category\": \"damage/crush_break\",\n  \"part\": \"product_package\",\n  \"visibility\": \"localized\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n      \"bbox_2"
+  },
+  "1354": {
+   "group6": "manufacturing",
+   "part": "seam",
+   "visibility": "localized",
+   "raw": "```json\n{\n  \"category\": \"manufacturing/stitching\",\n  \"part\": \"seam\",\n  \"visibility\": \"localized\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n      \"bbox_"
+  },
+  "1407": {
+   "group6": "not_as_described",
+   "part": "whole",
+   "visibility": "diffuse",
+   "raw": "```json\n{\n  \"category\": \"not_as_described/counterfeit_wrong\",\n  \"part\": \"whole\",\n  \"visibility\": \"diffuse\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim"
+  },
+  "1413": {
+   "group6": "manufacturing",
+   "part": "whole",
+   "visibility": "diffuse",
+   "raw": "```json\n{\n  \"category\": \"manufacturing/color\",\n  \"part\": \"whole\",\n  \"visibility\": \"diffuse\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \"색상이"
+  },
+  "1420": {
+   "group6": "non_visual",
+   "part": "none",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"non_visual/price\",\n  \"part\": \"none\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \"고객"
+  },
+  "1449": {
+   "group6": "not_as_described",
+   "part": "fastener",
+   "visibility": "localized",
+   "raw": "```json\n{\n  \"category\": \"not_as_described/missing\",\n  \"part\": \"fastener\",\n  \"visibility\": \"localized\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n      \"bbox"
+  },
+  "1472": {
+   "group6": "not_as_described",
+   "part": "whole",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"not_as_described/counterfeit_wrong\",\n  \"part\": \"whole\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim"
+  },
+  "1499": {
+   "group6": "manufacturing",
+   "part": "body_fabric",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"manufacturing/material\",\n  \"part\": \"body_fabric\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \"고"
+  },
+  "1558": {
+   "group6": "not_as_described",
+   "part": "whole",
+   "visibility": "diffuse",
+   "raw": "```json\n{\n  \"category\": \"not_as_described/counterfeit_wrong\",\n  \"part\": \"whole\",\n  \"visibility\": \"diffuse\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim"
+  },
+  "1573": {
+   "group6": "damage",
+   "part": "body_fabric",
+   "visibility": "localized",
+   "raw": "```json\n{\n  \"category\": \"damage/tear_hole\",\n  \"part\": \"body_fabric\",\n  \"visibility\": \"localized\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n      \""
+  },
+  "1666": {
+   "group6": "damage",
+   "part": "body_fabric",
+   "visibility": "localized",
+   "raw": "```json\n{\n  \"category\": \"damage/tear_hole\",\n  \"part\": \"body_fabric\",\n  \"visibility\": \"localized\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n      \""
+  },
+  "1733": {
+   "group6": "manufacturing",
+   "part": "body_fabric",
+   "visibility": "diffuse",
+   "raw": "```json\n{\n  \"category\": \"manufacturing/material\",\n  \"part\": \"body_fabric\",\n  \"visibility\": \"diffuse\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \"고"
+  },
+  "1811": {
+   "group6": "non_visual",
+   "part": "none",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"non_visual/service\",\n  \"part\": \"none\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \"고객은"
+  },
+  "1903": {
+   "group6": "function",
+   "part": "whole",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"function/malfunction\",\n  \"part\": \"whole\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \"고객"
+  },
+  "1912": {
+   "group6": "function",
+   "part": "camera",
+   "visibility": "localized",
+   "raw": "```json\n{\n  \"category\": \"function/malfunction\",\n  \"part\": \"camera\",\n  \"visibility\": \"localized\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n      \"bbox_2d"
+  },
+  "1952": {
+   "group6": "function",
+   "part": "whole",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"function/malfunction\",\n  \"part\": \"whole\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \"고객"
+  },
+  "1988": {
+   "group6": "damage",
+   "part": "product_package",
+   "visibility": "localized",
+   "raw": "```json\n{\n  \"category\": \"damage/opened_tampered\",\n  \"part\": \"product_package\",\n  \"visibility\": \"localized\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n      \"bbox"
+  },
+  "2010": {
+   "group6": "not_as_described",
+   "part": "contents",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"not_as_described/counterfeit_wrong\",\n  \"part\": \"contents\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim"
+  },
+  "2055": {
+   "group6": "contamination",
+   "part": "contents",
+   "visibility": "localized",
+   "raw": "```json\n{\n  \"category\": \"contamination/pest\",\n  \"part\": \"contents\",\n  \"visibility\": \"localized\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n      \"bbox_2d"
+  },
+  "2071": {
+   "group6": "damage",
+   "part": "product_package",
+   "visibility": "localized",
+   "raw": "```json\n{\n  \"category\": \"damage/crush_break\",\n  \"part\": \"product_package\",\n  \"visibility\": \"localized\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n      \"bbox_2"
+  },
+  "2086": {
+   "group6": "not_as_described",
+   "part": "contents",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"not_as_described/counterfeit_wrong\",\n  \"part\": \"contents\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim"
+  },
+  "2101": {
+   "group6": "manufacturing",
+   "part": "housing",
+   "visibility": "localized",
+   "raw": "```json\n{\n  \"category\": \"manufacturing/material\",\n  \"part\": \"housing\",\n  \"visibility\": \"localized\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n      \"bbox_2d\":"
+  },
+  "2105": {
+   "group6": "damage",
+   "part": "product_package",
+   "visibility": "localized",
+   "raw": "```json\n{\n  \"category\": \"damage/tear_hole\",\n  \"part\": \"product_package\",\n  \"visibility\": \"localized\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n      \"bbox"
+  },
+  "2131": {
+   "group6": "function",
+   "part": "whole",
+   "visibility": "diffuse",
+   "raw": "```json\n{\n  \"category\": \"function/fit_size\",\n  \"part\": \"whole\",\n  \"visibility\": \"diffuse\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n      \"bbox_2"
+  },
+  "2135": {
+   "group6": "not_as_described",
+   "part": "whole",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"not_as_described/counterfeit_wrong\",\n  \"part\": \"whole\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim"
+  },
+  "2141": {
+   "group6": "function",
+   "part": "whole",
+   "visibility": "diffuse",
+   "raw": "```json\n{\n  \"category\": \"function/fit_size\",\n  \"part\": \"whole\",\n  \"visibility\": \"diffuse\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \"고객"
+  },
+  "2153": {
+   "group6": "function",
+   "part": "whole",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"function/performance\",\n  \"part\": \"whole\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \"고객은"
+  },
+  "2165": {
+   "group6": "damage",
+   "part": "product_package",
+   "visibility": "localized",
+   "raw": "```json\n{\n  \"category\": \"damage/tear_hole\",\n  \"part\": \"product_package\",\n  \"visibility\": \"localized\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n      \"bbox"
+  },
+  "2167": {
+   "group6": "damage",
+   "part": "product_package",
+   "visibility": "localized",
+   "raw": "```json\n{\n  \"category\": \"damage/tear_hole\",\n  \"part\": \"product_package\",\n  \"visibility\": \"localized\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n      \"bbox"
+  },
+  "2169": {
+   "group6": "non_visual",
+   "part": "contents",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"non_visual/taste_smell\",\n  \"part\": \"contents\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \""
+  },
+  "2199": {
+   "group6": "function",
+   "part": "software",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"function/design_usability\",\n  \"part\": \"software\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \"제품"
+  },
+  "2201": {
+   "group6": "function",
+   "part": "software",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"function/malfunction\",\n  \"part\": \"software\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \"고객"
+  },
+  "2205": {
+   "group6": "function",
+   "part": "camera",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"function/performance\",\n  \"part\": \"camera\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \"고객은"
+  },
+  "2220": {
+   "group6": "non_visual",
+   "part": "none",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"non_visual/price\",\n  \"part\": \"none\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \"고객"
+  },
+  "2230": {
+   "group6": "function",
+   "part": "battery",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"function/performance\",\n  \"part\": \"battery\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \"Realme "
+  },
+  "2249": {
+   "group6": "damage",
+   "part": "seal",
+   "visibility": "localized",
+   "raw": "```json\n{\n  \"category\": \"damage/opened_tampered\",\n  \"part\": \"seal\",\n  \"visibility\": \"localized\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n      \"bbox"
+  },
+  "2322": {
+   "group6": "function",
+   "part": "software",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"function/design_usability\",\n  \"part\": \"software\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \"고객"
+  },
+  "2343": {
+   "group6": "function",
+   "part": "internal",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"function/performance\",\n  \"part\": \"internal\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \"Exynos processor"
+  },
+  "2359": {
+   "group6": "not_as_described",
+   "part": "product_package",
+   "visibility": "diffuse",
+   "raw": "```json\n{\n  \"category\": \"not_as_described/counterfeit_wrong\",\n  \"part\": \"product_package\",\n  \"visibility\": \"diffuse\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer"
+  },
+  "2447": {
+   "group6": "function",
+   "part": "whole",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"function/performance\",\n  \"part\": \"whole\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \"고객은"
+  },
+  "2509": {
+   "group6": "function",
+   "part": "software",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"function/malfunction\",\n  \"part\": \"software\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \"고객"
+  },
+  "2551": {
+   "group6": "damage",
+   "part": "product_package",
+   "visibility": "localized",
+   "raw": "```json\n{\n  \"category\": \"damage/opened_tampered\",\n  \"part\": \"product_package\",\n  \"visibility\": \"localized\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n      \"bbox"
+  },
+  "2579": {
+   "group6": "function",
+   "part": "display",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"function/performance\",\n  \"part\": \"display\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \"디스플"
+  },
+  "2584": {
+   "group6": "function",
+   "part": "software",
+   "visibility": "localized",
+   "raw": "```json\n{\n  \"category\": \"function/malfunction\",\n  \"part\": \"software\",\n  \"visibility\": \"localized\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n      \"bbox_2d"
+  },
+  "2604": {
+   "group6": "non_visual",
+   "part": "none",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"non_visual/service\",\n  \"part\": \"none\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \"고객은"
+  },
+  "2626": {
+   "group6": "function",
+   "part": "audio",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"function/performance\",\n  \"part\": \"audio\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \"고객은"
+  },
+  "2695": {
+   "group6": "contamination",
+   "part": "contents",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"contamination/pest\",\n  \"part\": \"contents\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \"고객"
+  },
+  "2706": {
+   "group6": "damage",
+   "part": "product_package",
+   "visibility": "localized",
+   "raw": "```json\n{\n  \"category\": \"damage/tear_hole\",\n  \"part\": \"product_package\",\n  \"visibility\": \"localized\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n      \"bbox"
+  },
+  "2711": {
+   "group6": "contamination",
+   "part": "contents",
+   "visibility": "localized",
+   "raw": "```json\n{\n  \"category\": \"contamination/pest\",\n  \"part\": \"contents\",\n  \"visibility\": \"localized\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n      \"bbox_2d"
+  },
+  "2716": {
+   "group6": "contamination",
+   "part": "contents",
+   "visibility": "localized",
+   "raw": "```json\n{\n  \"category\": \"contamination/pest\",\n  \"part\": \"contents\",\n  \"visibility\": \"localized\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n      \"bbox_2d"
+  },
+  "2780": {
+   "group6": "not_as_described",
+   "part": "contents",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"not_as_described/counterfeit_wrong\",\n  \"part\": \"contents\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim"
+  },
+  "2790": {
+   "group6": "non_visual",
+   "part": "contents",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"non_visual/taste_smell\",\n  \"part\": \"contents\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \""
+  },
+  "2797": {
+   "group6": "damage",
+   "part": "contents",
+   "visibility": "diffuse",
+   "raw": "```json\n{\n  \"category\": \"damage/crush_break\",\n  \"part\": \"contents\",\n  \"visibility\": \"diffuse\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n      \"bbox_2"
+  },
+  "2868": {
+   "group6": "function",
+   "part": "whole",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"function/performance\",\n  \"part\": \"whole\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \"고객은"
+  },
+  "2926": {
+   "group6": "function",
+   "part": "button",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"function/malfunction\",\n  \"part\": \"button\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \"고객"
+  },
+  "2930": {
+   "group6": "damage",
+   "part": "product_package",
+   "visibility": "localized",
+   "raw": "```json\n{\n  \"category\": \"damage/crush_break\",\n  \"part\": \"product_package\",\n  \"visibility\": \"localized\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n      \"bbox_2"
+  },
+  "2962": {
+   "group6": "non_visual",
+   "part": "contents",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"non_visual/taste_smell\",\n  \"part\": \"contents\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \""
+  },
+  "3012": {
+   "group6": "function",
+   "part": "internal",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"function/malfunction\",\n  \"part\": \"internal\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \"고객"
+  },
+  "3043": {
+   "group6": "function",
+   "part": "camera",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"function/performance\",\n  \"part\": \"camera\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \"고객은"
+  },
+  "3083": {
+   "group6": "function",
+   "part": "audio",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"function/performance\",\n  \"part\": \"audio\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \"고객은"
+  },
+  "3110": {
+   "group6": "manufacturing",
+   "part": "display",
+   "visibility": "diffuse",
+   "raw": "```json\n{\n  \"category\": \"manufacturing/display\",\n  \"part\": \"display\",\n  \"visibility\": \"diffuse\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n      \"bbox_2d"
+  },
+  "3144": {
+   "group6": "not_as_described",
+   "part": "port",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"not_as_described/missing\",\n  \"part\": \"port\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \""
+  },
+  "3281": {
+   "group6": "function",
+   "part": "audio",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"function/performance\",\n  \"part\": \"audio\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \"고객은"
+  },
+  "3357": {
+   "group6": "not_as_described",
+   "part": "whole",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"not_as_described/counterfeit_wrong\",\n  \"part\": \"whole\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim"
+  },
+  "3378": {
+   "group6": "not_as_described",
+   "part": "whole",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"not_as_described/counterfeit_wrong\",\n  \"part\": \"whole\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim"
+  },
+  "3425": {
+   "group6": "function",
+   "part": "whole",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"function/malfunction\",\n  \"part\": \"whole\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \"고객"
+  },
+  "3465": {
+   "group6": "damage",
+   "part": "contents",
+   "visibility": "localized",
+   "raw": "```json\n{\n  \"category\": \"damage/crush_break\",\n  \"part\": \"contents\",\n  \"visibility\": \"localized\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n      \"bbox_2d"
+  },
+  "3469": {
+   "group6": "damage",
+   "part": "contents",
+   "visibility": "diffuse",
+   "raw": "```json\n{\n  \"category\": \"damage/crush_break\",\n  \"part\": \"contents\",\n  \"visibility\": \"diffuse\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n      \"bbox_2"
+  },
+  "3474": {
+   "group6": "damage",
+   "part": "product_package",
+   "visibility": "localized",
+   "raw": "```json\n{\n  \"category\": \"damage/tear_hole\",\n  \"part\": \"product_package\",\n  \"visibility\": \"localized\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n      \"bbox"
+  },
+  "3475": {
+   "group6": "damage",
+   "part": "contents",
+   "visibility": "diffuse",
+   "raw": "```json\n{\n  \"category\": \"damage/crush_break\",\n  \"part\": \"contents\",\n  \"visibility\": \"diffuse\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n      \"bbox_2"
+  },
+  "3502": {
+   "group6": "damage",
+   "part": "product_package",
+   "visibility": "localized",
+   "raw": "```json\n{\n  \"category\": \"damage/opened_tampered\",\n  \"part\": \"product_package\",\n  \"visibility\": \"localized\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n      \"bbox"
+  },
+  "3605": {
+   "group6": "non_visual",
+   "part": "none",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"non_visual/price\",\n  \"part\": \"none\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \"고객"
+  },
+  "3643": {
+   "group6": "not_as_described",
+   "part": "whole",
+   "visibility": "diffuse",
+   "raw": "```json\n{\n  \"category\": \"not_as_described/counterfeit_wrong\",\n  \"part\": \"whole\",\n  \"visibility\": \"diffuse\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n     "
+  },
+  "3717": {
+   "group6": "not_as_described",
+   "part": "port",
+   "visibility": "localized",
+   "raw": "```json\n{\n  \"category\": \"not_as_described/counterfeit_wrong\",\n  \"part\": \"port\",\n  \"visibility\": \"localized\",\n  \"boxes\": [\n    {\n      \"picture\": 1,\n      \""
+  },
+  "3726": {
+   "group6": "not_as_described",
+   "part": "port",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"not_as_described/counterfeit_wrong\",\n  \"part\": \"port\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim"
+  },
+  "3776": {
+   "group6": "non_visual",
+   "part": "none",
+   "visibility": "not_visible",
+   "raw": "```json\n{\n  \"category\": \"non_visual/price\",\n  \"part\": \"none\",\n  \"visibility\": \"not_visible\",\n  \"boxes\": [],\n  \"evidence\": {\n    \"customer_claim\": \"고객"
+  }
+ }
+}

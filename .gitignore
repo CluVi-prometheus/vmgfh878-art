@@ -9,17 +9,24 @@
 !/reports/
 !/outputs/
 !/scripts/
+!/model_cards/
 
-# reports: 문서만 (하위 폴더, 고객 사진이 박힌 결과 페이지는 제외)
+# reports: 문서만 (하위 폴더는 공부 노트만, 고객 사진이 박힌 결과 페이지는 제외)
 /reports/*/
+!/reports/공부/
 /reports/Qwen_베이스라인_실험결과.html
 
-# outputs: 예측 결과 jsonl + 설정 파일만
+# outputs: 예측 결과 jsonl + 설정, 지표 json, LoRA 학습 설정 · 로그 (가중치 · 체크포인트 · PEFT 자동 README는 제외)
 /outputs/*
 !/outputs/preds/
 /outputs/preds/_old/
+!/outputs/eval/
+!/outputs/lora/
+/outputs/lora/*/last/
+/outputs/lora/_probe/adapter/
+/outputs/lora/**/README.md
 
-# scripts: 데이터 구축 · 라벨링만
+# scripts: 실행 체인 · 데이터 구축 · 라벨링
 /scripts/_common/
 
 # 어디에 있든 안 올림
